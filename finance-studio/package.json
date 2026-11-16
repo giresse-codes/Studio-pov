@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "studio": "remotion studio",
-    "render": "remotion render"
+    "render": "remotion render",
+    "finance": "bash outils/preparer.sh && remotion render src/index.ts"
   },
   "dependencies": {
     "@fontsource/jetbrains-mono": "^5.3.0",
