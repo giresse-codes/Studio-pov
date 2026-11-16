@@ -1,6 +1,57 @@
 # Studio POV — règles du studio
 
-Tu es le studio vidéo de mes 3 chaînes TikTok / YouTube Shorts francophones (public : France). Ces règles s'appliquent à CHAQUE vidéo. Le dépôt repart de zéro.
+## ⚠️ Branche studio-finance : chaîne Finance (À LIRE EN PREMIER)
+
+Sur cette branche, il y a une 4e chaîne, **Finance**, avec son PROPRE style. Pour les commandes `#finance N`, applique UNIQUEMENT les règles de cette section. Ignore tout le reste du fichier : pas de vue subjective, pas de 3D, pas de Max ni de Bobo, pas d'écran « TU FERAIS QUOI ? », pas de partie 1/partie 2. Les règles POV plus bas ne concernent que `#devsteach`, `#astuce` et `#survie`.
+
+### Concept
+
+Vidéos « business qui semblent nuls mais rapportent » et bases de l'argent. Public : francophones (France). Un seul narrateur à la 2e personne, ton direct, un peu d'humour. Les 48 scripts (voix off, prompt spécifique, légende, hashtags) sont dans `finance/README.md`, sous les titres `### Script N — titre`. Les règles générales du style sont dans la section 3 du même fichier.
+
+### Style Finance (obligatoire)
+
+- **Format** : 1080x1920, 30 fps, MP4 H.264. La durée suit la voix, en visant 70 à 110 s (minimum 60 s pour la monétisation).
+- **Moteur** : Remotion en 2D, avec des visuels 100 % en code (formes, icônes SVG, chiffres animés). Aucune image générée ou externe. Pas de @remotion/three pour cette chaîne. Les composants vont dans `src/finance/`.
+- **Identité** :
+  - fond en dégradé bleu nuit `#0B1F3A` → noir `#0A0A0A` ;
+  - accent or `#F5C542` pour les chiffres et les mots-clés, texte blanc ;
+  - nom de la chaîne discret en bas à gauche, en permanence. Texte provisoire : `FINANCE`, tant que le nom n'est pas choisi.
+- **Luminosité** : la luminosité moyenne de l'image doit être d'au moins 35 %. Les éléments principaux restent toujours bien contrastés. C'est le défaut principal de la vidéo de référence : l'image était trop sombre.
+- **Rythme** : une nouvelle scène toutes les 3 à 5 s maximum, calée sur les phrases de la voix. Chaque changement de scène se fait par une coupe franche ou un zoom rapide (0,3 s), jamais par un fondu lent. Sur les éléments statiques, garder un micro-mouvement constant (Ken Burns 3 à 5 %).
+- **Sous-titres** :
+  - majuscules, police grasse (Montserrat ExtraBold ou équivalent), contour noir ;
+  - 3 à 5 mots à l'écran, apparition mot à mot synchronisée avec la voix ;
+  - mots-clés et chiffres en or ; centrés dans le tiers inférieur ;
+  - jamais d'emoji dans les sous-titres ;
+  - ne JAMAIS afficher les balises entre crochets (`[direct]`, `[pause]`, `[rire]`…).
+- **Visuel explicatif** : le visuel suit exactement la voix.
+  - Chiffre, prix, pourcentage ou durée → compteur animé en gros au centre.
+  - Comparaison → split-screen gauche/droite.
+  - Processus → timeline ou flèches animées.
+  - Le « Prompt spécifique » de chaque script indique les visuels clés.
+- **Humour** : sur `[rire]` ou `[ironique]`, ajouter une courte réaction visuelle (icône qui tremble, zoom comique, effet « boing »).
+- **Structure** :
+  - 0 à 3 s : hook en texte géant plein écran, avec un son d'impact ;
+  - le corps de la vidéo ;
+  - 5 dernières secondes : carte de fin « ENREGISTRE + ABONNE-TOI », avec en teaser le titre du script suivant.
+- **Son** : réutilise `sons/`. Mixage : voix 100 %, whoosh sur les coupes à 40-60 %, musique lo-fi ou cinématique à 10-15 % avec ducking. S'il manque un son, ajoute-le à `sons/LISTE.md` et dis-le-moi.
+
+### Commande `#finance N` (ex : `#finance 1`, `#finance 12`)
+
+`NN` = N sur 2 chiffres.
+
+1. Lis le `### Script N` dans `finance/README.md` : voix off, prompt spécifique, légende et hashtags.
+2. Récupère la voix déposée dans `videos/finance-NN/voix.wav` (ou `.mp3`). Si elle est absente, arrête-toi et dis-le-moi.
+3. Calcule le timing mot à mot de la voix : avec whisper s'il est disponible, sinon par alignement avec le texte du script, sans les balises entre crochets.
+4. Découpe en scènes selon les règles ci-dessus. Réutilise les composants de `src/finance/` et crée ceux qui manquent.
+5. Rends `out/finance-NN.mp4`. Écris `videos/finance-NN/legende.txt` avec : le hook (1 ligne), la légende prête à publier et les hashtags du script.
+6. Vérifie le rendu sur des captures d'images clés : luminosité, sous-titres lisibles, aucune balise affichée, synchronisation. Corrige ce qui ne va pas, puis fais le commit et le push sur la branche `studio-finance`.
+
+Lors de la toute première commande `#finance`, commence par installer Remotion s'il n'est pas déjà installé, puis crée les composants de base dans `src/finance/` : fond, sous-titres, compteur animé, split-screen, carte de fin.
+
+---
+
+Tu es le studio vidéo de mes 3 chaînes TikTok / YouTube Shorts francophones (public : France). Ces règles s'appliquent à CHAQUE vidéo de ces 3 chaînes. Le dépôt repart de zéro.
 
 ## Les 3 chaînes
 
