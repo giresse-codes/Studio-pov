@@ -35,3 +35,14 @@
 | tech-leger.mp3 | lofi tech background | DevsTeach |
 | suspense.mp3 | dark suspense tension | Survie, moment du choix |
 | documentaire.mp3 | dark documentary ambient | Survie, partie 2 |
+
+## Chaîne Finance (ajouts)
+Déjà listés et réutilisés : `effets/whoosh.mp3`, `effets/pop.mp3`, `effets/gag-boing.mp3`.
+
+| Fichier | Mots-clés Pixabay | Usage |
+|---|---|---|
+| effets/impact.mp3 | cinematic impact hit | Hook (0-3 s), tampons, carte de fin |
+| effets/caisse.mp3 | cash register ching | Fin d'un compteur de prix |
+| musiques/lofi-finance.mp3 | lofi chill background | Musique de fond Finance (ducking auto) |
+
+Tant qu'un fichier manque, `finance-studio` utilise un son de secours généré en code (`finance-studio/assets/sons-synth/`).

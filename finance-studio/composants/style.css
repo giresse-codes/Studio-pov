@@ -1,0 +1,71 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0B1F3A; }
+#root { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: 'Montserrat', sans-serif; color: #fff; }
+.clip { position: absolute; inset: 0; }
+.scene { overflow: hidden; z-index: 5; }
+.kb { position: absolute; inset: 0; transform-origin: 50% 38%; }
+.pos { position: absolute; transform: translate(-50%, -50%); display: flex; justify-content: center; align-items: center; }
+.a { display: flex; flex-direction: column; align-items: center; justify-content: center; will-change: transform; }
+
+/* ---- Fond ---- */
+.fond { position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 110% 70% at 50% 40%, rgba(120,180,255,.95) 0%, rgba(64,124,204,.9) 32%, rgba(26,72,140,.75) 58%, rgba(11,31,58,0) 82%),
+    linear-gradient(180deg, #0B1F3A 0%, #1C4B88 22%, #24599E 50%, #1A447E 76%, #0B1F3A 92%, #0A0A0A 100%); }
+.fond .halo { position: absolute; left: 50%; top: 36%; width: 1300px; height: 1300px; margin: -650px 0 0 -650px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(170,210,255,.55) 0%, rgba(120,170,240,.25) 40%, rgba(0,0,0,0) 70%); }
+.fond .grille { position: absolute; inset: -200px; opacity: .16;
+  background-image: linear-gradient(rgba(255,255,255,.7) 2px, transparent 2px), linear-gradient(90deg, rgba(255,255,255,.7) 2px, transparent 2px);
+  background-size: 120px 120px; }
+.fond .anneau { position: absolute; border-radius: 50%; border: 6px dashed rgba(245,197,66,.45); }
+.fond .particule { position: absolute; border-radius: 50%; background: #F5C542; box-shadow: 0 0 18px rgba(245,197,66,.9); }
+.fond .rayon { position: absolute; left: 50%; top: 36%; width: 2600px; height: 2600px; margin: -1300px 0 0 -1300px;
+  background: repeating-conic-gradient(rgba(255,255,255,.10) 0deg 7deg, rgba(255,255,255,0) 7deg 22deg); border-radius: 50%; }
+
+/* ---- Logo ---- */
+.logo { position: absolute; left: 44px; bottom: 44px; z-index: 50; font-weight: 900; font-size: 30px; letter-spacing: 6px; color: rgba(255,255,255,.75);
+  padding: 8px 16px 8px 14px; border-left: 6px solid #F5C542; background: rgba(11,31,58,.45); border-radius: 4px; }
+
+/* ---- Textes ---- */
+.txt { font-weight: 900; text-transform: uppercase; text-align: center; line-height: 1.02; color: #fff;
+  -webkit-text-stroke: 12px #0A0A0A; paint-order: stroke fill; text-shadow: 0 10px 0 rgba(0,0,0,.35); white-space: nowrap; }
+.or { color: #F5C542; }
+.rouge { color: #FF4D5A; }
+.vert { color: #2ED47A; }
+.chiffre { font-weight: 900; color: #F5C542; -webkit-text-stroke: 16px #0A0A0A; paint-order: stroke fill; text-shadow: 0 14px 0 rgba(0,0,0,.35); line-height: 1; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.etiq { font-weight: 900; font-size: 46px; text-transform: uppercase; color: #0B1F3A; background: #F5C542; border: 6px solid #0A0A0A; border-radius: 18px; padding: 10px 26px; white-space: nowrap; box-shadow: 0 10px 0 rgba(0,0,0,.35); }
+.etiq.blanc { background: #fff; }
+.etiq.rouge { background: #FF4D5A; color: #fff; }
+.etiq.vert { background: #2ED47A; color: #0B1F3A; }
+.carte { background: #F4F8FF; border: 8px solid #0A0A0A; border-radius: 44px; box-shadow: 0 18px 0 rgba(0,0,0,.35); }
+
+/* ---- Sous-titres ---- */
+.st { z-index: 40; pointer-events: none; }
+.st .ligne { position: absolute; left: 60px; right: 60px; top: 1300px; height: 260px; display: flex; flex-wrap: wrap; align-content: center; justify-content: center; gap: 0 40px; }
+.st .m { display: inline-block; font-weight: 800; font-size: 86px; line-height: 1.12; text-transform: uppercase; color: #fff;
+  -webkit-text-stroke: 14px #000; paint-order: stroke fill; text-shadow: 0 8px 0 rgba(0,0,0,.55); }
+.st .m.or { color: #F5C542; }
+
+/* ---- Split-screen ---- */
+.split { position: absolute; left: 0; right: 0; top: 150px; height: 1110px; display: flex; }
+.split .cote { flex: 1; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; }
+.split .cote.g { background: linear-gradient(180deg, rgba(255,77,90,.35), rgba(255,77,90,.12)); border-right: 8px solid #0A0A0A; }
+.split .cote.d { background: linear-gradient(180deg, rgba(46,212,122,.38), rgba(46,212,122,.14)); }
+.split .vs { position: absolute; left: 50%; top: 50%; width: 150px; height: 150px; margin: -75px 0 0 -75px; border-radius: 50%; background: #F5C542; border: 8px solid #0A0A0A;
+  display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 54px; color: #0B1F3A; z-index: 3; }
+
+/* ---- Hook ---- */
+.hook { z-index: 30; background: radial-gradient(ellipse at 50% 42%, #8CC0FF 0%, #4B8AD6 35%, #23599E 70%, #0B1F3A 100%); }
+.hook .hk { position: absolute; left: 40px; right: 40px; top: 330px; bottom: 520px; display: flex; flex-wrap: wrap; align-content: center; justify-content: center; gap: 10px 34px; }
+.hook .hk span { font-weight: 900; font-size: 168px; line-height: 1.0; text-transform: uppercase; color: #fff; -webkit-text-stroke: 18px #0A0A0A; paint-order: stroke fill; text-shadow: 0 16px 0 rgba(0,0,0,.4); display: inline-block; }
+.hook .hk span.or { color: #F5C542; }
+
+/* ---- Carte de fin ---- */
+.fin { z-index: 45; background: radial-gradient(ellipse at 50% 40%, #FFE08A 0%, #F5C542 35%, #C9961F 75%, #8A6410 100%); }
+.fin .bouton { font-weight: 900; font-size: 82px; color: #fff; background: #FF4D5A; border: 9px solid #0A0A0A; border-radius: 30px; padding: 26px 50px; box-shadow: 0 16px 0 #0A0A0A; white-space: nowrap; }
+.fin .bouton.bleu { background: #0B1F3A; color: #F5C542; }
+.fin .teaser { width: 900px; background: #0B1F3A; color: #fff; border: 8px solid #0A0A0A; border-radius: 34px; padding: 30px 40px; text-align: center; box-shadow: 0 14px 0 rgba(0,0,0,.4); }
+.fin .teaser .k { font-weight: 800; font-size: 36px; letter-spacing: 4px; color: #F5C542; }
+.fin .teaser .v { font-weight: 900; font-size: 58px; line-height: 1.08; margin-top: 10px; text-transform: uppercase; }
+
+.flash { background: #fff; z-index: 60; pointer-events: none; }
