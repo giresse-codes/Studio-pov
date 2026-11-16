@@ -6,35 +6,49 @@ Sur cette branche, il y a une 4e chaîne, **Finance**, avec son PROPRE style. Po
 
 ### Concept
 
-Vidéos « business qui semblent nuls mais rapportent » et bases de l'argent. Public : francophones (France). Un seul narrateur à la 2e personne, ton direct, un peu d'humour. Les 48 scripts (voix off, prompt spécifique, légende, hashtags) sont dans `finance/README.md`, sous les titres `### Script N — titre`. Les règles générales du style sont dans la section 3 du même fichier.
+Vidéos « business qui semblent nuls mais rapportent » et bases de l'argent. Public : francophones (France). Un seul narrateur à la 2e personne. Les 48 scripts (voix off, prompt spécifique, légende, hashtags) sont dans `finance/README.md`, sous les titres `### Script N — titre`. **Les sections 2 et 3 de `finance/README.md` sont obsolètes : ignore-les.** Seul le style décrit ici compte.
 
-### Style Finance (obligatoire)
+### Référence visuelle : à reproduire le plus fidèlement possible
 
-- **Format** : 1080x1920, 30 fps, MP4 H.264. La durée suit la voix, en visant 70 à 110 s (minimum 60 s pour la monétisation).
-- **Moteur** : **HyperFrames**, et non Remotion, pour cette chaîne. Remotion reste réservé aux 3 chaînes POV. Les visuels sont 100 % en code : formes, icônes SVG, typographie animée, chiffres animés. Aucune image générée ou externe. Le motion design doit être riche et fluide, jamais basique : textes qui rebondissent, icônes qui entrent avec du mouvement, éléments décoratifs animés en arrière-plan. Le projet Finance va dans `finance-studio/`, avec ses composants réutilisables, séparé du projet Remotion.
-- **Identité** :
-  - fond en dégradé bleu nuit `#0B1F3A` → noir `#0A0A0A` ;
-  - accent or `#F5C542` pour les chiffres et les mots-clés, texte blanc ;
-  - nom de la chaîne discret en bas à gauche, en permanence. Texte provisoire : `FINANCE`, tant que le nom n'est pas choisi.
-- **Luminosité** : la luminosité moyenne de l'image doit être d'au moins 35 %. Les éléments principaux restent toujours bien contrastés. C'est le défaut principal de la vidéo de référence : l'image était trop sombre.
-- **Rythme** : une nouvelle scène toutes les 3 à 5 s maximum, calée sur les phrases de la voix. Chaque changement de scène se fait par une coupe franche ou un zoom rapide (0,3 s), jamais par un fondu lent. Sur les éléments statiques, garder un micro-mouvement constant (Ken Burns 3 à 5 %).
-- **Sous-titres** :
-  - majuscules, police grasse (Montserrat ExtraBold ou équivalent), contour noir ;
-  - 3 à 5 mots à l'écran, apparition mot à mot synchronisée avec la voix ;
-  - mots-clés et chiffres en or ; centrés dans le tiers inférieur ;
-  - jamais d'emoji dans les sous-titres ;
-  - ne JAMAIS afficher les balises entre crochets (`[direct]`, `[pause]`, `[rire]`…).
-- **Visuel explicatif** : le visuel suit exactement la voix.
-  - Chiffre, prix, pourcentage ou durée → compteur animé en gros au centre.
-  - Comparaison → split-screen gauche/droite.
-  - Processus → timeline ou flèches animées.
-  - Le « Prompt spécifique » de chaque script indique les visuels clés.
-- **Humour** : sur `[rire]` ou `[ironique]`, ajouter une courte réaction visuelle (icône qui tremble, zoom comique, effet « boing »).
-- **Structure** :
-  - 0 à 3 s : hook en texte géant plein écran, avec un son d'impact ;
-  - le corps de la vidéo ;
-  - 5 dernières secondes : carte de fin « ENREGISTRE + ABONNE-TOI », avec en teaser le titre du script suivant.
-- **Son** : réutilise `sons/`. Mixage : voix 100 %, whoosh sur les coupes à 40-60 %, musique lo-fi ou cinématique à 10-15 % avec ducking. S'il manque un son, ajoute-le à `sons/LISTE.md` et dis-le-moi.
+La référence est `finance/reference.mp4`, accompagnée de ses planches `finance/reference-planches-1.png` et `finance/reference-planches-2.png`. **Avant de construire quoi que ce soit, regarde ces planches et des captures de la vidéo.** L'objectif est simple : qu'on ne voie pas la différence de style entre nos vidéos et cette référence. En cas de doute, la référence a raison.
+
+Une version précédente a été rejetée parce qu'elle était trop colorée, trop vive et pas professionnelle : fond en dégradé coloré, grosses polices, couleurs partout, effets cartoon. Ne refais JAMAIS ça.
+
+### Style Finance « scène sombre néon » (obligatoire)
+
+- **Format** : 1080x1920, 30 fps, MP4 H.264. La durée suit la voix.
+- **Moteur** : Remotion en 2D (SVG + CSS), dans `finance-studio/`. Pas de HyperFrames, pas de 3D.
+- **Décor (toujours le même)** :
+  - fond presque noir (`#05070B` → `#0B111C`), avec un halo bleu nuit très doux au centre (dégradé radial `#16233A`, faible opacité) et une vignette forte sur les bords ;
+  - sol brillant : une ligne d'horizon fine (1 px, gris bleuté à environ 20 % d'opacité) à **78 % de la hauteur** ;
+  - tout objet posé sur le sol a un **reflet** dessous : le même dessin retourné, à environ 25 % d'opacité, qui s'efface en dégradé ;
+  - un léger grain. Aucun fond coloré, aucun dégradé vif.
+- **L'image est volontairement sombre.** N'éclaircis JAMAIS le fond. Le contraste vient uniquement des objets lumineux et du texte.
+- **Personnages** :
+  - le « toi » de la voix est un bonhomme bâton blanc : tête ronde pleine, corps en traits épais aux bouts arrondis, sans visage ;
+  - les autres personnes (clients, gens) ont la même silhouette, en gris `#9AA3AE` ;
+  - animations simples et lentes : pointer du bras, marcher, lever les bras, s'allonger, s'asseoir.
+- **Objets** :
+  - icônes en traits fins façon néon : line art, contour de 3-4 px, coins arrondis, sans remplissage ou avec un remplissage très léger (10-15 %) ;
+  - halo lumineux : ombre floue de la couleur du trait ;
+  - blanc par défaut. La couleur porte un sens : vert `#2ECC71` = gain ou validé ; rouge `#FF4D3D` = perte ou interdit ; or `#F5B731` = argent, prix, pièces ; bleu `#4DA3FF` = technologie, information ; rose `#FF5FA2` = fête, plaisir ;
+  - au maximum 2 à 3 couleurs à l'écran en même temps.
+- **Composition** : beaucoup de vide, 1 à 4 éléments par scène, posés sur le sol vers le centre. Jamais d'écran chargé.
+- **Texte (le cœur du style)** :
+  - en haut, centré, entre 12 % et 20 % de la hauteur, sur 1 à 4 lignes courtes ;
+  - police **monospace grasse en MAJUSCULES** (JetBrains Mono Bold ou IBM Plex Mono SemiBold), environ 34 px, lettres espacées (environ 0,12 em), blanc cassé `#E8ECF1` ;
+  - les mots apparaissent **UN PAR UN, exactement au moment où la voix les dit**, avec un petit fondu de 0,1 s. Quand une nouvelle phrase commence, la précédente s'efface en fondu ;
+  - 1 ou 2 mots-clés par phrase sont colorés avec le même code couleur que les objets ;
+  - interdits : contour noir, grosse police, sous-titres en bas, emoji, balises entre crochets (`[direct]`, `[pause]`, `[rire]`…).
+- **Rythme et transitions** :
+  - une scène par idée, souvent de 3 à 6 s ;
+  - entre deux scènes, un **fondu doux par le noir** (0,4 à 0,6 s). Pas de coupes brutales, pas de zooms rapides ;
+  - les objets apparaissent en douceur : fondu, léger glissement, tracé qui se dessine, petit rebond discret ;
+  - tous les mouvements sont lents et élégants.
+- **Animations utiles** : pièces qui tombent, barre de progression qui se remplit, croix rouge qui se dessine, coche verte, aiguille d'horloge qui tourne, jauge qui se vide, flèche de courbe qui monte ou descend.
+- **Interdits** : gags cartoon, effet « boing », logo, carte de fin « ABONNE-TOI ». La vidéo se termine sur la dernière phrase de la voix et sa scène, puis 1 s de noir.
+- **Son** : musique de fond très discrète, calme et ambiante (piano ou nappes), à 8-10 % avec ducking. Petits sons doux (clic, pièce, pop léger) à 20-30 %. Pas de whoosh agressif. Réutilise `sons/`. S'il manque un son, ajoute-le à `sons/LISTE.md` et dis-le-moi.
+- **« Prompt spécifique » de chaque script** : il donne les idées d'objets. Traduis-les TOUJOURS dans ce style, avec des icônes néon et le bonhomme. Ignore ce qui contredit ce style (« texte géant », « en or », « pulse », « split-screen ») : une comparaison devient deux objets côte à côte sur le sol.
 
 ### Commande `#finance N` (ex : `#finance 1`, `#finance 12`)
 
@@ -45,13 +59,18 @@ Vidéos « business qui semblent nuls mais rapportent » et bases de l'argent. P
 3. Calcule le timing mot à mot de la voix : avec whisper s'il est disponible, sinon par alignement avec le texte du script, sans les balises entre crochets.
 4. Découpe en scènes selon les règles ci-dessus. Réutilise les composants de `finance-studio/` et crée ceux qui manquent.
 5. Rends `out/finance-NN.mp4`. Écris `videos/finance-NN/legende.txt` avec : le hook (1 ligne), la légende prête à publier et les hashtags du script.
-6. Vérifie le rendu sur des captures d'images clés : luminosité, sous-titres lisibles, aucune balise affichée, synchronisation. Corrige ce qui ne va pas, puis fais le commit et le push sur la branche `studio-finance`.
+6. Vérifie le rendu : fais une planche de captures et compare-la aux planches de référence. Le fond doit être aussi sombre, le texte doit être en haut et apparaître mot à mot, les reflets au sol doivent être présents, les couleurs rares, et aucune balise ne doit s'afficher. Corrige ce qui ne va pas, puis fais le commit et le push sur la branche `studio-finance`.
 
-Lors de la toute première commande `#finance` :
+### Première commande `#finance` (une seule fois)
 
-1. Installe HyperFrames dans `finance-studio/`.
-2. Crée les composants de base réutilisables : fond, sous-titres, compteur animé, split-screen, carte de fin.
-3. Fais un rendu de test de 10 s pour valider le style avant la vraie vidéo.
+1. S'il y a un projet HyperFrames dans `finance-studio/`, supprime-le. Crée à la place un projet Remotion.
+2. Crée les composants réutilisables :
+   - `Scene` : fond, halo, vignette, sol, reflets, grain ;
+   - `Bonhomme` : poses animables ;
+   - `IconeNeon` : bibliothèque d'icônes (chaise, table, maison, téléphone, calendrier, pièce, billet, tirelire, globe, horloge, ordinateur, voiture, machine à laver, carte bancaire, graphique, cadeau, ballon) ;
+   - `TexteMotAMot` ;
+   - `FonduNoir`.
+3. **Test de calibrage** : refais les 10 premières secondes de la référence (« Les business qui ne semblent pas rentables… »). Mets-les côte à côte avec la référence dans `out/test-calibrage.mp4`, puis montre-moi le résultat avant de faire la vraie vidéo.
 
 ---
 

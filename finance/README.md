@@ -10,42 +10,9 @@
 
 Règle : jamais de vulgarité, jamais de promesse de gain chiffrée garantie (démonétisation + crédibilité).
 
-## 2. Analyse du style de la vidéo de référence
+## 2-3. Style vidéo
 
-**Ce qui marche :** format vertical, sous-titres en grosses majuscules synchronisés mot à mot, voix off continue, images illustratives, durée > 1 min, structure hook → comparaison → mécanisme → appel à l'action → vision.
-
-**Défauts constatés :**
-
-- Image très sombre (luminosité moyenne \~10 %) : fatigue, mauvais rendu sur téléphone au soleil.
-- Aucune vraie coupe en 98 s : uniquement des zooms lents et fondus, donc rythme monotone, décrochage vers 20-30 s.
-- Texte seul porte l'info ; les visuels sont décoratifs, pas explicatifs (pas de chiffres animés, pas de schéma).
-- Emojis/icônes collés au texte qui gênent la lecture.
-- Pas de signature visuelle (couleur, logo, personnage) : la chaîne n'est pas reconnaissable.
-- Fin molle : pas de carte « abonne-toi », pas de teaser de la vidéo suivante.
-
-## 3. Prompt général « Règles du studio Finance » pour Claude Code
-
-Coller tel quel en début de session Claude Code (dépôt branche `finance`) :
-
-```
-Tu produis des vidéos verticales 1080x1920, 30 fps, 70-110 s, en HyperFrames/Remotion, à partir d'une voix off fournie (fichier audio + texte avec timestamps). Règles fixes :
-
-IDENTITÉ : fond sombre mais lumineux (bleu nuit #0B1F3A → noir #0A0A0A en dégradé), accent or #F5C542 pour les chiffres et mots-clés, blanc pour le texte. Logo/nom de chaîne en bas à gauche en permanence, discret.
-
-RYTHME : une nouvelle scène toutes les 3 à 5 secondes maximum, calée sur les phrases de la voix off. Chaque changement = vraie coupe ou zoom rapide (0,3 s), jamais de fondu lent. Micro-mouvement constant (Ken Burns 3-5 %) sur les images statiques.
-
-TEXTE : sous-titres en majuscules, police grasse (Montserrat ExtraBold ou équivalent), 3 à 5 mots à l'écran, apparition mot à mot synchronisée avec l'audio, mot-clé en or. Centré, tiers inférieur, contour noir, jamais d'emoji dans les sous-titres.
-
-VISUEL EXPLICATIF : quand la voix cite un chiffre, un prix, un pourcentage ou une durée, afficher un compteur animé en gros au centre. Quand la voix compare deux choses, split-screen gauche/droite avec icônes. Quand la voix décrit un processus, timeline ou flèches animées. Visuels entièrement en code (formes, icônes SVG, chiffres), pas d'images générées.
-
-HUMOUR : une réaction visuelle courte (icône qui tremble, zoom comique, « boing ») sur chaque phrase marquée [rire] ou [ironique] dans la voix off.
-
-LUMINOSITÉ : luminosité moyenne de l'image ≥ 35 %, éléments principaux toujours contrastés.
-
-STRUCTURE OBLIGATOIRE : 0-3 s hook plein écran texte géant + son d'impact ; corps ; 5 dernières secondes : carte de fin « Enregistre + Abonne-toi » + teaser texte de la vidéo suivante.
-
-SON : voix off en premier plan, musique de fond lo-fi/cinématique à -18 dB, whoosh discrets sur les coupes.
-```
+Les anciennes sections 2 et 3 ont été retirées : le style décrit était trop coloré et ne correspondait pas à la référence. Les règles du style sont maintenant dans le fichier `CLAUDE.md` du dépôt (section Finance, style « scène sombre néon »), et la vidéo de référence est `finance/reference.mp4`.
 
 ## 4. Scripts (voix off prête pour Google AI Studio)
 
