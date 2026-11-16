@@ -177,6 +177,10 @@ const I = {
     svg(w, '0 0 100 100', `<circle cx="50" cy="50" r="44" fill="${V}" stroke="${N}" stroke-width="7"/>
       <path d="M28 52 L44 68 L74 34" stroke="${W}" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`),
 
+  flaque: (w = 260) =>
+    svg(w, '0 0 260 70', `<path d="M20 50 Q10 30 50 28 Q70 10 110 24 Q150 8 190 26 Q240 22 238 46 Q236 64 130 62 Q30 66 20 50 Z" fill="#7FB2F0" stroke="${N}" stroke-width="6"/>
+      <ellipse cx="90" cy="40" rx="22" ry="6" fill="${W}" opacity=".6"/>`),
+
   goutte: (w = 50) =>
     svg(w, '0 0 40 56', `<path d="M20 4 Q36 28 36 38 A16 16 0 0 1 4 38 Q4 28 20 4 Z" fill="#9CC8FF" stroke="${N}" stroke-width="4"/>`),
 

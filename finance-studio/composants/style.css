@@ -41,7 +41,7 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0B1F3
 
 /* ---- Sous-titres ---- */
 .st { z-index: 40; pointer-events: none; }
-.st .ligne { position: absolute; left: 60px; right: 60px; top: 1300px; height: 260px; display: flex; flex-wrap: wrap; align-content: center; justify-content: center; gap: 0 40px; }
+.st .ligne { position: absolute; left: 60px; right: 60px; top: 1300px; height: 260px; display: flex; flex-wrap: wrap; align-content: center; justify-content: center; gap: 0 54px; }
 .st .m { display: inline-block; font-weight: 800; font-size: 86px; line-height: 1.12; text-transform: uppercase; color: #fff;
   -webkit-text-stroke: 14px #000; paint-order: stroke fill; text-shadow: 0 8px 0 rgba(0,0,0,.55); }
 .st .m.or { color: #F5C542; }

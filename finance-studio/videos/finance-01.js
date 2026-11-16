@@ -37,16 +37,25 @@ module.exports = {
     });
 
     const S = [
-      ['qui pourrait', (t0) => {
-        const h = v.pos(280, 600, I.boiteMystere(330), { id: 'b1' }) +
-          v.pos(540, 610, '<div class="chiffre" style="font-size:230px">&gt;</div>', { id: 'b2' }) +
-          v.pos(810, 600, I.telephone(230), { id: 'b3' }) +
-          v.pos(810, 870, '<div class="etiq blanc">TON TÉLÉPHONE</div>', { id: 'b4' });
-        v.entree('#b1', t0, 'pop');
-        v.anim(`tl.fromTo('#b1',{rotation:-5},{rotation:5,duration:0.18,yoyo:true,repeat:9,ease:'sine.inOut'},${t0 + 0.4});`);
-        v.entree('#b2', v.tm('plus'), 'zoom');
-        v.entree('#b3', v.tm('téléphone') - 0.1, 'droite');
-        v.entree('#b4', v.tm('téléphone') + 0.1, 'bas');
+      ['qui pourrait', (t0, t1) => {
+        // Téléphone qui fond (gauche) vs machine à laver qui brille (droite)
+        const h = v.pos(280, 560, `<div style="position:relative">${I.telephone(250)}<div id="b1f" style="position:absolute;left:-10px;bottom:-40px">${I.flaque(270)}</div></div>`, { id: 'b1' }) +
+          v.pos(280, 880, '<div class="etiq rouge">FOND</div>', { id: 'b1l' }) +
+          v.pos(540, 580, '<div class="txt" style="font-size:90px">VS</div>', { id: 'b2' }) +
+          v.pos(800, 560, `<div style="position:relative"><div id="b3g" style="position:absolute;left:50%;top:50%;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;background:radial-gradient(circle,rgba(255,236,150,.95) 0%,rgba(245,197,66,.55) 35%,rgba(245,197,66,0) 70%)"></div><div style="position:relative">${I.machine(270)}</div></div>`, { id: 'b3' }) +
+          v.pos(800, 880, '<div class="etiq vert">BRILLE</div>', { id: 'b3l' }) +
+          [[650, 330], [960, 380], [680, 790], [950, 760]].map(([x, y], k) => v.pos(x, y, I.etoile(60), { id: `b3s${k}` })).join('');
+        v.entree('#b1', t0, 'gauche');
+        v.entree('#b3', t0 + 0.1, 'droite');
+        v.entree('#b2', t0 + 0.3, 'pop');
+        // le téléphone fond : il s'écrase vers le bas, la flaque s'étale
+        v.anim(`tl.fromTo('#b1',{scaleY:1,scaleX:1,transformOrigin:'50% 100%'},{scaleY:0.55,scaleX:1.15,duration:${(t1 - t0 - 0.6).toFixed(2)},ease:'power1.in'},${t0 + 0.5});`);
+        v.anim(`tl.fromTo('#b1f',{scaleX:0.2,opacity:0},{scaleX:1.3,opacity:1,duration:${(t1 - t0 - 0.6).toFixed(2)},ease:'power1.out'},${t0 + 0.5});`);
+        v.entree('#b1l', v.tm('plus'), 'tampon');
+        // la machine brille : halo qui pulse + étoiles
+        v.anim(`tl.fromTo('#b3g',{scale:0.8,opacity:0.6},{scale:1.15,opacity:1,duration:0.45,yoyo:true,repeat:7,ease:'sine.inOut'},${t0 + 0.2});`);
+        [0, 1, 2, 3].forEach((k) => v.entree(`#b3s${k}`, t0 + 0.4 + k * 0.15, 'pop'));
+        v.entree('#b3l', v.tm('téléphone'), 'tampon');
         return h;
       }],
       ['Et tu l\'utilises', (t0, t1) => {
@@ -149,7 +158,7 @@ module.exports = {
       }],
       ['à trois euros', (t0) => {
         const c = compteur(v, { x: 540, y: 820, de: 0, a: 24, t: v.tm('Vingt-quatre'), d: 0.6, prefixe: '=', suffixe: '€', taille: 260, legende: 'PAR JOUR', legendeT: v.tm('par jour') });
-        const h = v.pos(540, 470, `<div style="display:flex;align-items:center;gap:30px">${I.piece(170, '3')}<span class="chiffre" style="font-size:150px" id="x2">× 8</span></div>`, { id: 'x1' }) + c.html;
+        const h = v.pos(540, 470, `<div style="display:flex;align-items:center;gap:30px"><span class="chiffre" style="font-size:170px">3€</span><span class="chiffre" style="font-size:150px" id="x2">× 8</span>${I.machine(130)}</div>`, { id: 'x1' }) + c.html;
         v.entree('#x1', v.tm('trois'), 'pop');
         return h;
       }],
