@@ -35,3 +35,13 @@
 | tech-leger.mp3 | lofi tech background | DevsTeach |
 | suspense.mp3 | dark suspense tension | Survie, moment du choix |
 | documentaire.mp3 | dark documentary ambient | Survie, partie 2 |
+
+## Chaîne Finance (style « scène sombre néon »)
+Sons doux uniquement, pas de whoosh agressif. Mixage : musique 8-10 % avec ducking, effets 20-30 %.
+
+| Fichier | Mots-clés Pixabay | Usage |
+|---|---|---|
+| musiques/finance-ambient.mp3 | calm ambient piano background | Fond musical calme de toutes les vidéos Finance |
+| effets/clic-doux.mp3 | soft ui click | Apparition d'un objet, d'une icône |
+| effets/piece.mp3 | coin drop single | Pièce qui tombe, argent |
+| effets/pop-leger.mp3 | soft pop bubble | Petite apparition, coche, mot-clé |
