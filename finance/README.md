@@ -338,3 +338,112 @@ Format par vidéo : voix off avec balises d'émotion, prompt spécifique, légen
 **Prompt spécifique :** deux icônes « ami » et « argent » reliées, qui se cassent ensemble ; split « donner » (vert, flèche sans retour) vs « prêter » (rouge, pointillés) ; phrase « je ne prête pas d'argent » en texte géant ; jauge « aide annuelle » avec plafond.
 
 **Légende :** On ne prête pas. On donne, ou on refuse. #argent #amis #prêt #financepersonnelle #limites #astuce #mindset #famille
+
+
+### Script 37 — La location de matériel de bricolage
+
+**Voix off (≈80 s)**
+[intrigué] Une perceuse est utilisée en moyenne treize minutes dans toute sa vie. [pause] Et pourtant, tout le monde en achète une. [ironique] Elle passe le reste de son existence dans un placard, à attendre une étagère qui ne viendra jamais. [rire] [explicatif] La location de matériel entre voisins : perceuse, ponceuse, nettoyeur haute pression, échelle, scie sauteuse, tondeuse. [calme] Un lot d'outils de base coûte quatre à six cents euros. Chaque location rapporte dix à vingt-cinq euros la journée. [sérieux] Cinq locations par semaine, c'est plus de trois cents euros par mois, avec du matériel qui ne s'use presque pas. [posé] Le secret : une caution, une photo de l'outil avant et après, et une livraison le matin avec retour le soir. [enthousiaste] Puis tu ajoutes le service : « je viens monter ton étagère avec ma perceuse », et ton prix triple. [motivant] Enregistre cette vidéo, et compte les outils qui dorment dans le placard de ta famille. Ton stock existe peut-être déjà.
+
+**Prompt spécifique :** perceuse avec compteur « 13 min d'usage à vie » ; placard qui s'ouvre sur des outils poussiéreux ; grille d'outils avec étiquettes « 15 €/jour » ; compteur 5 locations × 15 € × 4 semaines = 300 €/mois ; icône « + montage » avec prix ×3.
+
+**Légende :** Une perceuse sert 13 minutes dans sa vie. Loue-la. #location #bricolage #business #revenupassif #idéebusiness #argent #astuce #entrepreneur
+
+### Script 38 — Acheter de l'occasion, revendre du neuf d'occasion
+
+**Voix off (≈80 s)**
+[direct] Le meilleur produit à vendre, c'est celui que quelqu'un brade parce qu'il est pressé. [pause] [explicatif] L'achat-revente. Des gens déménagent, divorcent, partent à l'étranger : ils vendent vite, donc pas cher. Meubles, électroménager, vélos, consoles, téléphones. [calme] Tu achètes un canapé cinquante euros à quelqu'un qui part demain. Tu le nettoies, tu le photographies bien, tu le revends cent cinquante une semaine plus tard. [ironique] Le canapé n'a pas changé. Seule l'urgence a changé de camp. [rire] [sérieux] La règle d'or : n'achète que ce que tu as déjà vu se vendre rapidement, au prix que tu vises. Regarde les annonces vendues, pas les annonces en ligne. [posé] Quatre bonnes affaires par mois, et c'est plusieurs centaines d'euros de marge, avec un capital de départ de deux cents euros qui tourne en boucle. [enthousiaste] Puis tu te spécialises : vélos, ou téléphones, ou meubles de designer. Le spécialiste connaît les prix, et c'est lui qui gagne. [motivant] Enregistre cette vidéo, et regarde ce soir les annonces « départ urgent » de ta ville.
+
+**Prompt spécifique :** étiquette « départ urgent » qui clignote ; canapé 50 € → nettoyage → photo → 150 € en timeline ; balance « urgence » qui change de côté ; capital 200 € qui tourne en boucle avec flèche circulaire.
+
+**Légende :** Le meilleur produit, c'est celui qu'on brade par urgence. #achatrevente #business #occasion #argent #idéebusiness #entrepreneur #astuce #revente
+
+### Script 39 — Le crédit, ton score invisible
+
+**Voix off (≈75 s)**
+[calme] Il y a une note qu'on te donne en secret. [pause] Et elle décide du prix de ta maison, de ta voiture, de ton prochain prêt. [sérieux] Ta réputation financière. [explicatif] Chaque banque regarde la même chose : est-ce que tu paies à l'heure, est-ce que tu dépasses ton découvert, est-ce que tu as trop de crédits ouverts en même temps. [ironique] Un seul découvert oublié, et la banque se souvient de toi plus longtemps que ton ex. [rire] [posé] Un bon historique te fait emprunter moins cher. Sur un prêt de vingt mille euros, deux points de taux en moins, c'est des milliers d'euros économisés. [direct] Les règles simples : aucun paiement en retard, prélèvements automatiques pour toutes les factures, jamais plus de deux crédits en même temps, et un découvert qui reste exceptionnel. [enthousiaste] Le jour où tu as besoin d'argent pour un vrai projet, c'est cette note qui dit oui, ou non. [motivant] Enregistre cette vidéo, et mets tes factures en prélèvement automatique cette semaine.
+
+**Prompt spécifique :** dossier secret avec une note qui monte ou descend ; liste de quatre règles qui se cochent ; comparaison prêt 20 000 € à 6 % vs 4 % avec écart en or ; tampon « accordé » final.
+
+**Légende :** Il y a une note secrète qui décide du prix de ton prochain prêt. #crédit #banque #financepersonnelle #argent #prêt #astuce #budget #mindset
+
+### Script 40 — Le service de ménage pour Airbnb
+
+**Voix off (≈80 s)**
+[amusé] Les propriétaires Airbnb ont un cauchemar récurrent. [pause] Un client qui arrive dans quatre heures, et un appartement en désordre. [rire] [explicatif] Le ménage entre deux locations. Les hôtes ne vivent souvent pas sur place, et ils cherchent quelqu'un de fiable, disponible le jour même. [calme] Un ménage complet, changement des draps et serviettes compris, se facture trente à soixante euros selon la taille. Une à deux heures de travail. [sérieux] Cinq appartements gérés, deux ménages par semaine chacun, c'est plus de deux mille euros par mois. [ironique] Ton client ne voit jamais ton travail. Il voit seulement les avis cinq étoiles qui en sortent. [posé] Le secret : une checklist photo envoyée après chaque ménage. L'hôte dort tranquille, et il te recommande à tous ses amis hôtes. [enthousiaste] Puis tu ajoutes la gestion des clés, l'accueil, la laverie des draps : tu deviens le partenaire indispensable. [motivant] Enregistre cette vidéo et cherche les annonces de location courte durée dans ton quartier. Chaque annonce est un client potentiel.
+
+**Prompt spécifique :** horloge « arrivée dans 4 h » qui tourne avec appartement en désordre → rangé en accéléré ; compteur 5 apparts × 2 ménages × 45 € × 4 semaines ; checklist photo envoyée par téléphone ; étoiles qui s'allument.
+
+**Légende :** Le cauchemar des hôtes Airbnb, c'est ton business. #airbnb #ménage #business #service #idéebusiness #argent #astuce #entrepreneur
+
+### Script 41 — La règle 80/20 de l'argent
+
+**Voix off (≈75 s)**
+[direct] Quatre-vingts pour cent de tes problèmes d'argent viennent de vingt pour cent de tes dépenses. [pause] [explicatif] Le principe de Pareto. Tu n'as pas besoin de surveiller chaque café. Tu as besoin de regarder les trois plus grosses lignes de ton budget : logement, transport, alimentation. [calme] Économiser cinquante centimes sur un café, c'est héroïque et inutile. Économiser cent euros sur ton loyer ou ton assurance auto, ça change ton année. [ironique] Les gens se privent de croissants et gardent l'abonnement de téléphone le plus cher du pays. [rire] [sérieux] L'exercice : écris tes cinq plus grosses dépenses du mois. Pour chacune, une seule question : est-ce que je peux la réduire de dix pour cent ? [posé] Dix pour cent sur les grosses lignes valent plus que cent sur les petites. [enthousiaste] Et tu peux garder ton café, sans culpabilité. [motivant] Enregistre cette vidéo, et fais la liste de tes cinq plus grosses dépenses ce soir.
+
+**Prompt spécifique :** camembert budget où trois parts (logement, transport, alimentation) prennent 80 % ; tasse de café minuscule « -0,50 € » vs maison « -100 € » ; liste de 5 dépenses avec « -10 % » qui s'applique ; tasse de café qui revient, souriante.
+
+**Légende :** Garde ton café. Regarde plutôt tes 3 plus grosses dépenses. #pareto #budget #argent #financepersonnelle #économiser #astuce #mindset #dépenses
+
+### Script 42 — Les tresses et la coiffure à domicile
+
+**Voix off (≈80 s)**
+[intrigué] Il y a un savoir-faire que beaucoup ont appris à la maison, et qui vaut une fortune en ville. [pause] [explicatif] La coiffure à domicile. Tresses, nattes, tissages, locks, coupes pour enfants, barbe. [calme] Une coiffure tressée peut se facturer cinquante à cent cinquante euros, parfois plus, selon la complexité. Pas besoin de salon, pas de loyer : tu vas chez la cliente, ou elle vient chez toi. [ironique] Ton seul investissement, c'est la patience. Et une bonne série à regarder pendant quatre heures. [rire] [sérieux] Trois clientes par semaine, c'est déjà mille euros par mois. [posé] Le secret, ce sont les photos avant et après sur les réseaux : chaque coiffure réussie est une publicité gratuite qui se promène dans la ville. [enthousiaste] Puis tu formes une apprentie, tu prends un pourcentage, et tu passes de coiffeuse à cheffe d'équipe. [motivant] Enregistre cette vidéo. Si quelqu'un dans ta famille sait tresser, montre-lui ce soir.
+
+**Prompt spécifique :** mains qui tressent en animation stylisée avec étiquette « 50–150 € » ; split avant/après ; compteur 3 clientes × 80 € × 4 semaines ≈ 1 000 € ; icône apprentie qui s'ajoute avec pourcentage.
+
+**Légende :** Ce savoir-faire appris à la maison vaut une fortune en ville. #coiffure #tresses #business #domicile #idéebusiness #argent #astuce #entrepreneuse
+
+### Script 43 — Le revenu actif vs passif, la vérité
+
+**Voix off (≈80 s)**
+[sérieux] Le revenu passif n'existe pas. [pause] Du moins, pas comme on te le vend. [ironique] Sur internet, tout le monde gagne de l'argent en dormant. Bizarrement, ils passent leurs journées à te vendre une formation. [rire] [explicatif] La vérité : tout revenu passif commence par beaucoup de travail actif. Une laverie, il faut la trouver, l'installer, la remplir de clients. Une chaîne vidéo, il faut publier cent vidéos avant que la cent-et-unième rapporte en dormant. [calme] Ce qu'on appelle « passif », c'est un travail fait une fois qui paie plusieurs fois. [posé] Donc la vraie question n'est pas « comment gagner sans travailler », mais « qu'est-ce que je peux construire une fois, et vendre mille fois ». [direct] Une vidéo, un cours, une machine, un local loué, un design. Pas tes heures. [enthousiaste] Ton salaire paie tes factures. Tes constructions paient ta liberté. [motivant] Enregistre cette vidéo, et écris une chose que tu pourrais construire une fois et vendre mille fois.
+
+**Prompt spécifique :** personnage qui dort sur un lit de billets barré « mythe » ; courbe : longue phase plate « travail actif » puis montée « passif » ; icône « construire 1× → vendre 1 000× » avec multiplication animée.
+
+**Légende :** Le revenu passif commence par beaucoup de travail actif. #revenupassif #vérité #argent #entrepreneur #mindset #business #astuce #liberté
+
+### Script 44 — La recharge et les petites réparations de vélos et trottinettes
+
+**Voix off (≈75 s)**
+[amusé] Les trottinettes électriques ont envahi les villes. [pause] Et elles tombent toutes en panne au même endroit. [rire] [explicatif] Pneus crevés, freins usés, câbles desserrés, batteries fatiguées. Les grandes boutiques prennent une semaine et facturent cher. [calme] Toi, avec une trousse à outils, des chambres à air et des patins de frein, moins de deux cents euros, tu répares en trente minutes, sur place ou à domicile. [sérieux] Une réparation simple se facture quinze à quarante euros, pour quelques euros de pièces. [ironique] Ton client n'a pas peur de la panne. Il a peur de marcher. [rire] [posé] Dix réparations par semaine, et tu dépasses six cents euros par mois, depuis un coin de garage. [enthousiaste] Ajoute l'entretien annuel en forfait, et les livreurs à vélo deviennent tes clients réguliers. [motivant] Enregistre cette vidéo, et regarde combien de trottinettes passent devant chez toi en une heure.
+
+**Prompt spécifique :** trottinette avec points de panne qui clignotent (pneu, frein, batterie) ; chronomètre 30 min ; compteur « 3 € de pièces → 25 € facturés » ; flotte de livreurs reliée par « forfait entretien ».
+
+**Légende :** Elles tombent toutes en panne au même endroit. Sois là. #trottinette #vélo #réparation #business #idéebusiness #argent #astuce #entrepreneur
+
+### Script 45 — Les assurances : payer pour la bonne chose
+
+**Voix off (≈75 s)**
+[calme] L'assurance, c'est le seul achat qu'on espère ne jamais utiliser. [pause] Et c'est pour ça que beaucoup paient pour les mauvaises. [explicatif] La règle : on s'assure contre ce qui pourrait te ruiner, pas contre ce qui pourrait t'agacer. [sérieux] La responsabilité civile, la santé, l'habitation, la voiture si tu en as une : ça, oui. Une catastrophe là-dessus peut te coûter des années de revenus. [ironique] L'extension de garantie à vingt euros sur un grille-pain à trente, par contre... [rire] [posé] Pour les petites pertes, ton fonds d'urgence est ton assurance. Il ne prend pas de commission. [direct] Compare chaque année : à garanties égales, les prix varient parfois du simple au double. Un appel, et tu économises. [enthousiaste] Bien assuré sur les gros risques, tu peux prendre des risques intelligents ailleurs : lancer ton business, changer de travail. [motivant] Enregistre cette vidéo, et liste tes assurances ce soir : protègent-elles contre la ruine, ou contre l'agacement ?
+
+**Prompt spécifique :** bouclier géant sur maison, santé, voiture vs petit bouclier ridicule sur un grille-pain avec étiquette 20 € ; balance « ruine / agacement » ; comparateur de deux devis identiques avec prix ×2.
+
+**Légende :** Assure-toi contre la ruine, pas contre l'agacement. #assurance #argent #financepersonnelle #protection #budget #astuce #économiser #mindset
+
+### Script 46 — Le business des anniversaires d'enfants
+
+**Voix off (≈80 s)**
+[intrigué] Il y a des parents qui paieraient n'importe quoi. [pause] Pour une seule chose : ne pas organiser l'anniversaire eux-mêmes. [rire] [explicatif] L'animation d'anniversaires d'enfants. Décoration, ballons, jeux, maquillage, petit spectacle, gâteau commandé : tu livres la fête clé en main. [calme] Un forfait de deux à trois heures se facture cent cinquante à quatre cents euros selon les options. [ironique] Vingt enfants surexcités pendant trois heures. Tu ne gagnes pas cet argent, tu le mérites. [rire] [sérieux] Quatre fêtes par mois, presque tous les week-ends de l'année, et c'est plus de mille euros. [posé] Le matériel s'achète une fois et sert à chaque fête : arche de ballons, costumes, enceinte, jeux. [enthousiaste] Et chaque fête réussie, c'est vingt parents qui repartent avec ton numéro. Le meilleur marketing du monde. [motivant] Enregistre cette vidéo, et crée trois formules simples : basique, premium, et « je ne lève pas le petit doigt ».
+
+**Prompt spécifique :** parent épuisé devant une pile de ballons → personnage animateur qui arrive ; trois cartes forfaits (150 / 250 / 400 €) ; compteur 4 fêtes × 250 € ; 20 icônes de parents qui repartent avec une carte de visite.
+
+**Légende :** Les parents paieraient tout pour ne pas l'organiser eux-mêmes. #anniversaire #événementiel #business #enfants #idéebusiness #argent #astuce #entrepreneur
+
+### Script 47 — Ta première formation en ligne
+
+**Voix off (≈80 s)**
+[direct] Tu sais déjà quelque chose que des milliers de gens sont prêts à payer pour apprendre. [pause] [explicatif] La formation en ligne. Pas besoin d'être expert mondial : il suffit d'être quelques étapes devant ton élève, et d'expliquer clairement. Cuisine, couture, Excel, montage vidéo, programmation, maquillage. [calme] Dix vidéos courtes, un document récapitulatif, une plateforme de vente. Vendue vingt à cinquante euros. [ironique] La formation ne se fatigue pas, ne demande pas de pause café, et répond pareil à minuit et à midi. [rire] [sérieux] Cent ventes à trente euros, c'est trois mille euros, pour un travail fait une seule fois. [posé] Le secret : tes vidéos gratuites sur les réseaux sont la bande-annonce. La formation, c'est le film complet. [enthousiaste] C'est exactement la machine que cette chaîne construit en ce moment. [motivant] Enregistre cette vidéo, et écris les dix étapes de ce que tu sais faire mieux que tes amis. C'est ton sommaire.
+
+**Prompt spécifique :** ampoule qui se duplique en mille ; écran avec 10 vignettes de vidéos + document ; compteur 100 ventes × 30 € = 3 000 € ; split « vidéos gratuites = bande-annonce / formation = film ».
+
+**Légende :** Ce que tu sais déjà, des milliers de gens veulent l'apprendre. #formation #enligne #revenupassif #business #compétence #argent #astuce #créateur
+
+### Script 48 — Ton plan des 90 jours
+
+**Voix off (≈90 s)**
+[calme] Tu as regardé quarante-sept vidéos sur l'argent. [pause] [ironique] Félicitations. Ton compte en banque n'a rien remarqué. [rire] [sérieux] Parce que l'information ne rapporte rien. Seule l'action rapporte. [explicatif] Voici ton plan des quatre-vingt-dix jours. Mois un : ouvre tes trois comptes, programme ton virement automatique, résilie tes abonnements inutiles. [calme] Mois deux : choisis un seul business de cette chaîne. Un seul. Celui qui demande le moins d'argent et utilise ce que tu sais déjà faire. Trouve ton premier client avant d'acheter quoi que ce soit. [posé] Mois trois : réinvestis tout ce que tu gagnes dans ce business, et note chaque euro qui entre et qui sort. [direct] Pas cinq projets. Un. Jusqu'à ce qu'il marche, ou que tu saches exactement pourquoi il ne marche pas. [enthousiaste] Dans quatre-vingt-dix jours, tu ne seras pas riche. Mais tu seras quelqu'un qui a un actif, un client, et un système. Et ça, c'est le début de tout. [motivant] Enregistre cette vidéo, écris la date d'aujourd'hui, et reviens dans quatre-vingt-dix jours nous dire en commentaire où tu en es.
+
+**Prompt spécifique :** compteur « 47 vidéos regardées » face à un compte bancaire immobile ; timeline en trois blocs Mois 1 / 2 / 3 avec actions qui se cochent ; cinq projets dont quatre s'effacent pour n'en garder qu'un ; calendrier qui s'arrête sur J+90 avec bulle « commentaire ».
+
+**Légende :** 47 vidéos regardées. Maintenant, le plan des 90 jours. #plan90jours #argent #action #entrepreneur #financepersonnelle #mindset #business #astuce
