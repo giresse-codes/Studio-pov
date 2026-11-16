@@ -11,7 +11,7 @@ Vidéos « business qui semblent nuls mais rapportent » et bases de l'argent. P
 ### Style Finance (obligatoire)
 
 - **Format** : 1080x1920, 30 fps, MP4 H.264. La durée suit la voix, en visant 70 à 110 s (minimum 60 s pour la monétisation).
-- **Moteur** : Remotion en 2D, avec des visuels 100 % en code (formes, icônes SVG, chiffres animés). Aucune image générée ou externe. Pas de @remotion/three pour cette chaîne. Les composants vont dans `src/finance/`.
+- **Moteur** : **HyperFrames**, et non Remotion, pour cette chaîne. Remotion reste réservé aux 3 chaînes POV. Les visuels sont 100 % en code : formes, icônes SVG, typographie animée, chiffres animés. Aucune image générée ou externe. Le motion design doit être riche et fluide, jamais basique : textes qui rebondissent, icônes qui entrent avec du mouvement, éléments décoratifs animés en arrière-plan. Le projet Finance va dans `finance-studio/`, avec ses composants réutilisables, séparé du projet Remotion.
 - **Identité** :
   - fond en dégradé bleu nuit `#0B1F3A` → noir `#0A0A0A` ;
   - accent or `#F5C542` pour les chiffres et les mots-clés, texte blanc ;
@@ -43,11 +43,15 @@ Vidéos « business qui semblent nuls mais rapportent » et bases de l'argent. P
 1. Lis le `### Script N` dans `finance/README.md` : voix off, prompt spécifique, légende et hashtags.
 2. Récupère la voix déposée dans `videos/finance-NN/voix.wav` (ou `.mp3`). Si elle est absente, arrête-toi et dis-le-moi.
 3. Calcule le timing mot à mot de la voix : avec whisper s'il est disponible, sinon par alignement avec le texte du script, sans les balises entre crochets.
-4. Découpe en scènes selon les règles ci-dessus. Réutilise les composants de `src/finance/` et crée ceux qui manquent.
+4. Découpe en scènes selon les règles ci-dessus. Réutilise les composants de `finance-studio/` et crée ceux qui manquent.
 5. Rends `out/finance-NN.mp4`. Écris `videos/finance-NN/legende.txt` avec : le hook (1 ligne), la légende prête à publier et les hashtags du script.
 6. Vérifie le rendu sur des captures d'images clés : luminosité, sous-titres lisibles, aucune balise affichée, synchronisation. Corrige ce qui ne va pas, puis fais le commit et le push sur la branche `studio-finance`.
 
-Lors de la toute première commande `#finance`, commence par installer Remotion s'il n'est pas déjà installé, puis crée les composants de base dans `src/finance/` : fond, sous-titres, compteur animé, split-screen, carte de fin.
+Lors de la toute première commande `#finance` :
+
+1. Installe HyperFrames dans `finance-studio/`.
+2. Crée les composants de base réutilisables : fond, sous-titres, compteur animé, split-screen, carte de fin.
+3. Fais un rendu de test de 10 s pour valider le style avant la vraie vidéo.
 
 ---
 
