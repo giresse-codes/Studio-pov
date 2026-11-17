@@ -18,7 +18,7 @@ export type NomIcone =
   | 'personne' | 'tableauCourbe' | 'contrat' | 'flecheDroite' | 'signal' | 'portefeuille'
   | 'lit' | 'camembert' | 'cible' | 'video' | 'glacon' | 'goutte' | 'verre' | 'couverts'
   | 'congelateur' | 'sachet' | 'soleil' | 'velo' | 'thermometre' | 'ampoule' | 'tshirt'
-  | 'cadenas' | 'carton' | 'livre';
+  | 'cadenas' | 'carton' | 'livre' | 'enceinte' | 'anneaux' | 'gateau' | 'mixage' | 'micro';
 
 const RONDES = new Set<NomIcone>(['piece', 'globe', 'horloge', 'coche', 'croix', 'coeur', 'reseau', 'ballon', 'cadeau', 'tirelire', 'personne', 'camembert', 'cible', 'soleil', 'velo']);
 
@@ -436,6 +436,42 @@ export const IconeNeon: React.FC<Props> = ({
       <>
         <path d="M50 20 C38 10 20 10 6 14 V88 C20 84 38 84 50 94 C62 84 80 84 94 88 V14 C80 10 62 10 50 20 Z" {...t} {...f} />
         <path d="M50 20 V94" {...t} />
+      </>
+    ),
+    enceinte: (
+      <>
+        <rect x={18} y={2} width={64} height={96} rx={8} {...t} {...f} />
+        <circle cx={50} cy={24} r={10} {...t} />
+        <circle cx={50} cy={64} r={22} {...t} />
+        <circle cx={50} cy={64} r={8} {...t} />
+      </>
+    ),
+    anneaux: (
+      <>
+        <circle cx={36} cy={60} r={26} {...t} {...f} />
+        <circle cx={64} cy={60} r={26} {...t} />
+        <path d="M58 26 L64 18 L70 26 L64 32 Z" {...t} />
+      </>
+    ),
+    gateau: (
+      <>
+        <rect x={10} y={52} width={80} height={42} rx={6} {...t} {...f} />
+        <path d="M10 66 C24 74 36 60 50 68 C64 76 76 60 90 66" {...t} />
+        <path d="M34 52 V36 M50 52 V32 M66 52 V36" {...t} />
+        <path d="M34 28 C30 24 34 18 34 18 C34 18 38 24 34 28 Z M50 24 C46 20 50 14 50 14 C50 14 54 20 50 24 Z M66 28 C62 24 66 18 66 18 C66 18 70 24 66 28 Z" {...t} />
+      </>
+    ),
+    mixage: (
+      <>
+        <rect x={4} y={30} width={92} height={56} rx={6} {...t} {...f} />
+        <path d="M20 42 V74 M40 42 V74 M60 42 V74 M80 42 V74" {...t} strokeOpacity={0.5} />
+        <path d="M14 52 H26 M34 64 H46 M54 48 H66 M74 58 H86" {...t} />
+      </>
+    ),
+    micro: (
+      <>
+        <rect x={36} y={4} width={28} height={44} rx={14} {...t} {...f} />
+        <path d="M26 36 C26 62 74 62 74 36 M50 60 V92 M34 94 H66" {...t} />
       </>
     ),
   };

@@ -32,6 +32,7 @@ export const POSES: Record<string, Pose> = {
   brasLeves: {brasG: [-148, 8], brasD: [148, -8], jambeG: [-6, 0], jambeD: [6, 0], bassin: 0, cuisse: 1, buste: 0},
   mainsHanches: {brasG: [-40, 70], brasD: [40, -70], jambeG: [-6, 0], jambeD: [6, 0], bassin: 0, cuisse: 1, buste: 0},
   reflechit: {brasG: [-10, 4], brasD: [30, 130], jambeG: [-5, 0], jambeD: [5, 0], bassin: 0, cuisse: 1, buste: 0},
+  mainsTete: {brasG: [-120, -99], brasD: [120, 99], jambeG: [-5, 0], jambeD: [5, 0], bassin: 0, cuisse: 1, buste: 0},
   assis: {brasG: [-12, 10], brasD: [12, -10], jambeG: [-8, 0], jambeD: [8, 0], bassin: 150, cuisse: 0.12, buste: 0},
 };
 
