@@ -27,16 +27,17 @@ export const Perso: React.FC<{
 };
 
 /** Icône posée au sol (avec reflet) qui apparaît à l'instant a. */
-export const ObjetSol: React.FC<IconeProps & {x: number; l: number; h: number; a: number; disparait?: number; y?: number}> = ({
+export const ObjetSol: React.FC<IconeProps & {x: number; l: number; h: number; a: number; disparait?: number; y?: number; reflet?: number}> = ({
   x,
   l,
   h,
   a,
   disparait,
   y,
+  reflet,
   ...icone
 }) => (
-  <SurSol x={x} largeur={l} hauteur={h} y={y}>
+  <SurSol x={x} largeur={l} hauteur={h} y={y} reflet={reflet}>
     <Apparait a={a} disparait={disparait} glisse={20}>
       <IconeNeon {...icone} />
     </Apparait>

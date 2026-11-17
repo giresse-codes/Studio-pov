@@ -16,9 +16,10 @@ export type NomIcone =
   | 'chaussette' | 'monnayeur' | 'immeuble' | 'panierLinge' | 'coche' | 'croix'
   | 'flecheHaut' | 'flecheBas' | 'local' | 'favori' | 'reseau' | 'coeur' | 'jauge'
   | 'personne' | 'tableauCourbe' | 'contrat' | 'flecheDroite' | 'signal' | 'portefeuille'
-  | 'lit' | 'camembert' | 'cible' | 'video';
+  | 'lit' | 'camembert' | 'cible' | 'video' | 'glacon' | 'goutte' | 'verre' | 'couverts'
+  | 'congelateur' | 'sachet' | 'soleil' | 'velo' | 'thermometre';
 
-const RONDES = new Set<NomIcone>(['piece', 'globe', 'horloge', 'coche', 'croix', 'coeur', 'reseau', 'ballon', 'cadeau', 'tirelire', 'personne', 'camembert', 'cible']);
+const RONDES = new Set<NomIcone>(['piece', 'globe', 'horloge', 'coche', 'croix', 'coeur', 'reseau', 'ballon', 'cadeau', 'tirelire', 'personne', 'camembert', 'cible', 'soleil', 'velo']);
 
 type Props = {
   nom: NomIcone;
@@ -348,6 +349,66 @@ export const IconeNeon: React.FC<Props> = ({
         <rect x={6} y={10} width={88} height={60} rx={6} {...t} {...f} />
         <path d="M50 70 V84 M30 90 H70" {...t} />
         <path d="M42 26 L64 40 L42 54 Z" fill={resoudreCouleur('bleu')} stroke={resoudreCouleur('bleu')} />
+      </>
+    ),
+    glacon: (
+      <>
+        <path d="M50 8 L90 28 V72 L50 92 L10 72 V28 Z" {...t} {...f} />
+        <path d="M10 28 L50 48 L90 28 M50 48 V92" {...t} />
+        <path d="M24 42 L24 56" {...t} strokeOpacity={0.6} />
+      </>
+    ),
+    goutte: <path d="M50 6 C66 32 82 48 82 66 C82 84 68 96 50 96 C32 96 18 84 18 66 C18 48 34 32 50 6 Z" {...t} {...f} />,
+    verre: (
+      <>
+        <path d="M14 10 H86 L50 54 Z" {...t} {...f} />
+        <path d="M50 54 V90 M30 92 H70" {...t} />
+        <circle cx={66} cy={22} r={6} {...t} />
+      </>
+    ),
+    couverts: (
+      <>
+        <circle cx={50} cy={56} r={28} {...t} {...f} />
+        <circle cx={50} cy={56} r={18} {...t} strokeOpacity={0.6} />
+        <path d="M8 20 V44 M4 20 V36 C4 42 12 42 12 36 V20 M8 44 V94" {...t} />
+        <path d="M92 94 V20 C84 26 84 44 92 48" {...t} />
+      </>
+    ),
+    congelateur: (
+      <>
+        <rect x={4} y={30} width={92} height={66} rx={6} {...t} {...f} />
+        <path d="M4 44 H96" {...t} />
+        <path d="M36 37 H64" {...t} />
+        <path d="M70 66 L76 60 M70 60 L76 66 M73 56 V70 M66 63 H80" {...t} strokeOpacity={0.7} />
+      </>
+    ),
+    sachet: (
+      <>
+        <path d="M18 20 H82 L88 94 H12 Z" {...t} {...f} />
+        <path d="M18 20 L26 8 H74 L82 20" {...t} />
+        <path d="M34 50 L46 56 L46 70 L34 64 Z M54 46 L66 52 L66 66 L54 60 Z" {...t} strokeOpacity={0.7} />
+      </>
+    ),
+    soleil: (
+      <>
+        <circle cx={50} cy={50} r={20} {...t} {...f} />
+        {[0, 45, 90, 135, 180, 225, 270, 315].map((a) => (
+          <path key={a} d={`M${50 + 30 * Math.sin((a * Math.PI) / 180)} ${50 - 30 * Math.cos((a * Math.PI) / 180)} L${50 + 42 * Math.sin((a * Math.PI) / 180)} ${50 - 42 * Math.cos((a * Math.PI) / 180)}`} {...t} />
+        ))}
+      </>
+    ),
+    velo: (
+      <>
+        <circle cx={22} cy={68} r={18} {...t} />
+        <circle cx={78} cy={68} r={18} {...t} />
+        <path d="M22 68 L40 36 H70 L78 68 M40 36 L52 68 L70 36 M34 26 H46 M70 36 L66 24 H76" {...t} />
+      </>
+    ),
+    thermometre: (
+      <>
+        <path d="M40 66 V14 C40 4 60 4 60 14 V66 C72 74 72 96 50 96 C28 96 28 74 40 66 Z" {...t} {...f} />
+        <circle cx={50} cy={80} r={9} {...plein} fillOpacity={0.9} />
+        <rect x={46} y={14 + 60 * (1 - niveau)} width={8} height={60 * niveau + 4} rx={4} {...plein} fillOpacity={0.9} />
       </>
     ),
   };
