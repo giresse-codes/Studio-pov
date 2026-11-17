@@ -18,7 +18,7 @@ export type NomIcone =
   | 'personne' | 'tableauCourbe' | 'contrat' | 'flecheDroite' | 'signal' | 'portefeuille'
   | 'lit' | 'camembert' | 'cible' | 'video' | 'glacon' | 'goutte' | 'verre' | 'couverts'
   | 'congelateur' | 'sachet' | 'soleil' | 'velo' | 'thermometre' | 'ampoule' | 'tshirt'
-  | 'cadenas' | 'carton' | 'livre' | 'enceinte' | 'anneaux' | 'gateau' | 'mixage' | 'micro';
+  | 'cadenas' | 'carton' | 'livre' | 'enceinte' | 'anneaux' | 'gateau' | 'mixage' | 'micro' | 'bulle';
 
 const RONDES = new Set<NomIcone>(['piece', 'globe', 'horloge', 'coche', 'croix', 'coeur', 'reseau', 'ballon', 'cadeau', 'tirelire', 'personne', 'camembert', 'cible', 'soleil', 'velo']);
 
@@ -474,6 +474,7 @@ export const IconeNeon: React.FC<Props> = ({
         <path d="M26 36 C26 62 74 62 74 36 M50 60 V92 M34 94 H66" {...t} />
       </>
     ),
+    bulle: <path d="M14 8 H86 C92 8 96 12 96 18 V60 C96 66 92 70 86 70 H40 L20 92 L24 70 H14 C8 70 4 66 4 60 V18 C4 12 8 8 14 8 Z" {...t} {...f} />,
   };
 
   return (
