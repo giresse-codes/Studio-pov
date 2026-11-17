@@ -132,7 +132,7 @@ export const Bonhomme: React.FC<{
   const piedG = bout(cx - 16, hancheY, p.jambeG, JAMBE, p.cuisse);
   const piedD = bout(cx + 16, hancheY, p.jambeD, JAMBE, p.cuisse);
 
-  const rot = allonge * -90;
+  const rot = allonge * 90; // allongé : tête vers la droite
   return (
     <svg
       viewBox={`0 0 ${LARGEUR_BOITE} ${HAUTEUR_BONHOMME}`}
@@ -141,7 +141,7 @@ export const Bonhomme: React.FC<{
       style={{overflow: 'visible'}}
     >
       <g
-        transform={`translate(${allonge * 60} ${-30 * allonge}) rotate(${rot} ${cx} ${HAUTEUR_BONHOMME - 40})`}
+        transform={`translate(0 ${-30 * allonge}) rotate(${rot} ${cx} ${HAUTEUR_BONHOMME - 40})`}
         fill="none"
         stroke={couleur}
         strokeLinecap="round"

@@ -15,9 +15,10 @@ export type NomIcone =
   | 'secheLinge' | 'carteBancaire' | 'graphique' | 'cadeau' | 'ballon' | 'etiquette'
   | 'chaussette' | 'monnayeur' | 'immeuble' | 'panierLinge' | 'coche' | 'croix'
   | 'flecheHaut' | 'flecheBas' | 'local' | 'favori' | 'reseau' | 'coeur' | 'jauge'
-  | 'personne' | 'tableauCourbe';
+  | 'personne' | 'tableauCourbe' | 'contrat' | 'flecheDroite' | 'signal' | 'portefeuille'
+  | 'lit' | 'camembert' | 'cible' | 'video';
 
-const RONDES = new Set<NomIcone>(['piece', 'globe', 'horloge', 'coche', 'croix', 'coeur', 'reseau', 'ballon', 'cadeau', 'tirelire', 'personne']);
+const RONDES = new Set<NomIcone>(['piece', 'globe', 'horloge', 'coche', 'croix', 'coeur', 'reseau', 'ballon', 'cadeau', 'tirelire', 'personne', 'camembert', 'cible']);
 
 type Props = {
   nom: NomIcone;
@@ -294,6 +295,59 @@ export const IconeNeon: React.FC<Props> = ({
       <>
         <circle cx={50} cy={22} r={16} {...t} {...f} />
         <path d="M20 94 C20 60 34 46 50 46 C66 46 80 60 80 94" {...t} {...f} />
+      </>
+    ),
+    contrat: (
+      <>
+        <path d="M18 4 H66 L84 22 V96 H18 Z" {...t} {...f} />
+        <path d="M66 4 V22 H84" {...t} />
+        <path d="M30 36 H72 M30 50 H72 M30 64 H60" {...t} strokeOpacity={0.7} />
+        <path d="M30 84 C38 76 42 90 50 82 S62 80 70 84" {...t} />
+      </>
+    ),
+    flecheDroite: <path d="M4 50 H92 M68 24 L94 50 L68 76" {...t} />,
+    signal: (
+      <>
+        <rect x={8} y={70} width={14} height={24} rx={3} {...t} {...f} />
+        <rect x={32} y={52} width={14} height={42} rx={3} {...t} {...f} />
+        <rect x={56} y={32} width={14} height={62} rx={3} {...t} {...f} />
+        <rect x={80} y={10} width={14} height={84} rx={3} {...t} {...f} />
+      </>
+    ),
+    portefeuille: (
+      <>
+        <path d="M14 26 L66 8 L72 26" {...t} />
+        <rect x={6} y={26} width={84} height={66} rx={10} {...t} {...f} />
+        <path d="M94 48 H70 C62 48 62 70 70 70 H94 Z" {...t} />
+        <circle cx={74} cy={59} r={3} {...plein} />
+      </>
+    ),
+    lit: (
+      <>
+        <path d="M6 30 V94 M94 60 V94 M6 78 H94 M6 60 H94" {...t} />
+        <rect x={12} y={42} width={26} height={16} rx={6} {...t} {...f} />
+        <path d="M42 60 V48 C42 44 46 42 50 42 H88 C92 42 94 46 94 50 V60" {...t} {...f} />
+      </>
+    ),
+    camembert: (
+      <>
+        <circle cx={50} cy={50} r={42} {...t} {...f} />
+        <path d="M50 50 V8 M50 50 L86 70" {...t} />
+        <path d="M50 50 V8 A42 42 0 0 1 86 70 Z" {...t} fill={c} fillOpacity={0.35 * Math.min(1, trace * 1.5)} />
+      </>
+    ),
+    cible: (
+      <>
+        <circle cx={50} cy={50} r={42} {...t} {...f} />
+        <circle cx={50} cy={50} r={27} {...t} />
+        <circle cx={50} cy={50} r={11} {...t} fill={c} fillOpacity={0.6} />
+      </>
+    ),
+    video: (
+      <>
+        <rect x={6} y={10} width={88} height={60} rx={6} {...t} {...f} />
+        <path d="M50 70 V84 M30 90 H70" {...t} />
+        <path d="M42 26 L64 40 L42 54 Z" fill={resoudreCouleur('bleu')} stroke={resoudreCouleur('bleu')} />
       </>
     ),
   };
