@@ -17,7 +17,8 @@ export type NomIcone =
   | 'flecheHaut' | 'flecheBas' | 'local' | 'favori' | 'reseau' | 'coeur' | 'jauge'
   | 'personne' | 'tableauCourbe' | 'contrat' | 'flecheDroite' | 'signal' | 'portefeuille'
   | 'lit' | 'camembert' | 'cible' | 'video' | 'glacon' | 'goutte' | 'verre' | 'couverts'
-  | 'congelateur' | 'sachet' | 'soleil' | 'velo' | 'thermometre';
+  | 'congelateur' | 'sachet' | 'soleil' | 'velo' | 'thermometre' | 'ampoule' | 'tshirt'
+  | 'cadenas' | 'carton' | 'livre';
 
 const RONDES = new Set<NomIcone>(['piece', 'globe', 'horloge', 'coche', 'croix', 'coeur', 'reseau', 'ballon', 'cadeau', 'tirelire', 'personne', 'camembert', 'cible', 'soleil', 'velo']);
 
@@ -409,6 +410,32 @@ export const IconeNeon: React.FC<Props> = ({
         <path d="M40 66 V14 C40 4 60 4 60 14 V66 C72 74 72 96 50 96 C28 96 28 74 40 66 Z" {...t} {...f} />
         <circle cx={50} cy={80} r={9} {...plein} fillOpacity={0.9} />
         <rect x={46} y={14 + 60 * (1 - niveau)} width={8} height={60 * niveau + 4} rx={4} {...plein} fillOpacity={0.9} />
+      </>
+    ),
+    ampoule: (
+      <>
+        <path d="M36 70 C36 58 22 50 22 34 C22 18 35 6 50 6 C65 6 78 18 78 34 C78 50 64 58 64 70 Z" {...t} {...f} />
+        <path d="M38 80 H62 M42 90 H58 M44 40 L50 52 L56 40" {...t} />
+      </>
+    ),
+    tshirt: <path d="M34 8 C40 16 60 16 66 8 L94 22 L84 42 L72 36 V94 H28 V36 L16 42 L6 22 Z" {...t} {...f} />,
+    cadenas: (
+      <>
+        <path d="M28 44 V28 C28 4 72 4 72 28 V44" {...t} />
+        <rect x={16} y={44} width={68} height={50} rx={8} {...t} {...f} />
+        <path d="M50 62 V76" {...t} />
+      </>
+    ),
+    carton: (
+      <>
+        <path d="M6 30 L50 12 L94 30 V78 L50 96 L6 78 Z" {...t} {...f} />
+        <path d="M6 30 L50 48 L94 30 M50 48 V96 M28 21 L72 39" {...t} />
+      </>
+    ),
+    livre: (
+      <>
+        <path d="M50 20 C38 10 20 10 6 14 V88 C20 84 38 84 50 94 C62 84 80 84 94 88 V14 C80 10 62 10 50 20 Z" {...t} {...f} />
+        <path d="M50 20 V94" {...t} />
       </>
     ),
   };
