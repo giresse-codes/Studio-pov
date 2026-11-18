@@ -219,3 +219,130 @@ export const EcranAbonne: React.FC<{debut: number; texte?: string}> = ({debut, t
     </div>
   );
 };
+
+/** Confettis (coordonnées écran) */
+export const Confettis: React.FC<{debut: number; n?: number; duree?: number}> = ({debut, n = 70, duree = 70}) => {
+  const f = useCurrentFrame();
+  const t = f - debut;
+  if (t < 0 || t > duree) return null;
+  const cols = ['#f472b6', '#facc15', '#4ade80', '#60a5fa', '#a78bfa', '#fb923c'];
+  return (
+    <div style={{position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none'}}>
+      {Array.from({length: n}).map((_, i) => {
+        const a = -Math.PI / 2 + (rand(i) - 0.5) * 2.2;
+        const v = 26 + rand(i + 3) * 30;
+        const x = 540 + Math.cos(a) * v * t;
+        const y = 1100 + Math.sin(a) * v * t + 0.9 * t * t;
+        return (
+          <div
+            key={i}
+            style={{
+              position: 'absolute',
+              left: x,
+              top: y,
+              width: 18 + rand(i + 5) * 14,
+              height: 10 + rand(i + 6) * 10,
+              background: cols[i % cols.length],
+              transform: `rotate(${t * (8 + rand(i + 2) * 20)}deg)`,
+              borderRadius: 3,
+              opacity: clamp((duree - t) / 15),
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+};
+
+/**
+ * Rappel du choix de la partie 1 (petite carte), avec l'état de chaque bouton :
+ * 'neutre' | 'faux' (barré, grisé) | 'bon' (brille, « BONNE RÉPONSE »)
+ */
+export const ChoixRappel: React.FC<{
+  debut: number;
+  fin: number;
+  vert: string;
+  rouge: string;
+  etatVert?: 'neutre' | 'faux' | 'bon';
+  etatRouge?: 'neutre' | 'faux' | 'bon';
+  depuisVert?: number;
+  depuisRouge?: number;
+  titre?: string;
+  y?: number;
+}> = ({debut, fin, vert, rouge, etatVert = 'neutre', etatRouge = 'neutre', depuisVert = 0, depuisRouge = 0, titre = 'TU AS CHOISI ?', y = 560}) => {
+  const f = useCurrentFrame();
+  if (f < debut || f > fin + 12) return null;
+  const p = pop(f, debut, 30, 10);
+  const out = prog(f, fin, 12, Easing.in(Easing.cubic));
+  const btn = (texte: string, c: string, o: string, etat: string, depuis: number) => {
+    const k = etat === 'neutre' ? 0 : pop(f, depuis, 30, 8);
+    const faux = etat === 'faux' && f >= depuis;
+    const bon = etat === 'bon' && f >= depuis;
+    return (
+      <div style={{position: 'relative'}}>
+        <div
+          style={{
+            background: faux ? '#4b5563' : `linear-gradient(180deg, ${c}, ${o})`,
+            borderRadius: 34,
+            padding: '24px 28px',
+            color: '#fff',
+            fontSize: 54,
+            fontWeight: 700,
+            boxShadow: bon ? `0 0 ${30 + 20 * Math.sin(f * 0.3)}px ${c}, 0 12px 0 ${o}` : `0 12px 0 ${faux ? '#1f2937' : o}`,
+            transform: `scale(${bon ? 1 + 0.06 * k : faux ? 1 - 0.06 * k : 1})`,
+            border: bon ? '6px solid #fff' : '6px solid rgba(255,255,255,0.4)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 20,
+          }}
+        >
+          <div style={{width: 60, height: 60, borderRadius: 30, background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0}}>
+            <div style={{width: 36, height: 36, borderRadius: 18, background: faux ? '#6b7280' : c}} />
+          </div>
+          <span style={{textDecoration: faux ? 'line-through' : undefined, textDecorationThickness: 6}}>{texte}</span>
+        </div>
+        {(faux || bon) && (
+          <div
+            style={{
+              position: 'absolute',
+              right: -10,
+              top: -34,
+              transform: `scale(${k}) rotate(${faux ? 8 : -6}deg)`,
+              background: faux ? '#111827' : '#facc15',
+              color: faux ? '#f87171' : '#111827',
+              fontSize: 40,
+              fontWeight: 700,
+              padding: '6px 20px',
+              borderRadius: 16,
+              border: `5px solid ${faux ? '#f87171' : '#111827'}`,
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {faux ? '✗ −1 HEURE' : '✓ BONNE RÉPONSE'}
+          </div>
+        )}
+      </div>
+    );
+  };
+  return (
+    <div style={{position: 'absolute', left: 60, right: 60, top: y, transform: `scale(${p * (1 - out)})`, fontFamily: FONT}}>
+      <div
+        style={{
+          background: 'linear-gradient(180deg, #1a2a66, #0f1630)',
+          border: '10px solid #f4c542',
+          borderRadius: 44,
+          padding: '34px 36px 44px',
+          boxShadow: '0 22px 0 rgba(0,0,0,0.4)',
+          textAlign: 'center',
+        }}
+      >
+        <div style={{color: '#f4c542', fontSize: 36, fontWeight: 700, letterSpacing: 5}}>★ PARTIE 1 ★</div>
+        <div style={{color: '#fff', fontSize: 84, fontWeight: 700, lineHeight: 1.05, marginTop: 8, marginBottom: 40}}>{titre}</div>
+        <div style={{display: 'flex', flexDirection: 'column', gap: 46, textAlign: 'left'}}>
+          {btn(vert, '#22c55e', '#15803d', etatVert, depuisVert)}
+          {btn(rouge, '#ef4444', '#b91c1c', etatRouge, depuisRouge)}
+        </div>
+      </div>
+    </div>
+  );
+};

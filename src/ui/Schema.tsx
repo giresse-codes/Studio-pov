@@ -241,3 +241,34 @@ export const Lien: React.FC<{longueur: number; casse?: number; progres?: number}
     </svg>
   );
 };
+
+/** Icône de navigateur (personnage-fenêtre avec des yeux) */
+export const IconeNavigateur: React.FC<{s?: number; regard?: number; perdu?: boolean}> = ({s = 300, regard = 0, perdu = false}) => {
+  const f = useCurrentFrame();
+  return (
+    <svg width={s} height={s * 0.8} viewBox="0 0 200 160">
+      <rect x={4} y={4} width={192} height={152} rx={18} fill="#e2e8f0" stroke="#0f1630" strokeWidth={6} />
+      <rect x={4} y={4} width={192} height={34} rx={16} fill="#94a3b8" />
+      {['#ef4444', '#f59e0b', '#22c55e'].map((c, i) => (
+        <circle key={c} cx={24 + i * 20} cy={21} r={7} fill={c} />
+      ))}
+      {[70, 130].map((x) => (
+        <g key={x}>
+          <ellipse cx={x} cy={92} rx={20} ry={26} fill="#fff" stroke="#0f1630" strokeWidth={5} />
+          <circle cx={x + regard * 9} cy={96} r={9} fill="#0f1630" />
+        </g>
+      ))}
+      {perdu ? (
+        <path d="M84,138 q8,-8 16,0 q8,8 16,0" stroke="#0f1630" strokeWidth={5} fill="none" strokeLinecap="round" />
+      ) : (
+        <path d="M84,134 Q100,146 116,134" stroke="#0f1630" strokeWidth={5} fill="none" strokeLinecap="round" />
+      )}
+      {perdu &&
+        [0, 1].map((i) => (
+          <text key={i} x={150 + i * 26} y={60 - i * 14 + Math.sin(f * 0.2 + i) * 4} fontFamily={FONT} fontWeight={700} fontSize={36} fill="#facc15" stroke="#0f1630" strokeWidth={2}>
+            ?
+          </text>
+        ))}
+    </svg>
+  );
+};

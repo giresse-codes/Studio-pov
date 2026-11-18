@@ -97,7 +97,7 @@ export const CarteJeu: React.FC<{
           <div style={{color: '#fff', fontWeight: 700, fontSize: 70, lineHeight: 1.08, marginTop: 22, textShadow: '0 5px 0 rgba(0,0,0,0.4)'}}>
             {titre}
           </div>
-          {detail && <div style={{color: '#4ade80', fontWeight: 600, fontSize: 44, marginTop: 16, lineHeight: 1.2}}>{detail}</div>}
+          {detail && <div style={{color: '#4ade80', fontWeight: 600, fontSize: 44, marginTop: 16, lineHeight: 1.2, whiteSpace: 'pre-line'}}>{detail}</div>}
           {/* reflet */}
           <div
             style={{

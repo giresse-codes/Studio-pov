@@ -13,6 +13,7 @@ import {HUD} from '../ui/HUD';
 import {Fichier, FondPlan, IconeMuscle, IconeOs, IconeTshirt, Lien, MaquetteSite} from '../ui/Schema';
 import {SousTitres} from '../ui/SousTitres';
 import {AppelDirect, NotifSMS, Portrait} from '../ui/Telephone';
+import {Etiquette, SiteMocheMini, TelMonde} from '../ui/Communs';
 
 /* DevsTeach 1a — « Le site est moche » */
 
@@ -66,79 +67,6 @@ const T = {
 
 const saut = (f: number, debuts: number[]) =>
   debuts.reduce((a, d) => a + (f >= d && f < d + 12 ? Math.sin(((f - d) / 12) * Math.PI) * 55 : 0), 0);
-
-/* ---------- mini site moche affiché sur l'écran du bureau ---------- */
-const SiteMocheMini: React.FC<{censure: number}> = ({censure}) => (
-  <g>
-    <rect width={300} height={186} fill="#fff" />
-    <text x={12} y={30} fontFamily={SERIF_1998} fontWeight={700} fontSize={22} fill="#000">
-      Boulangerie Marcel
-    </text>
-    <rect x={12} y={42} width={110} height={64} fill="#fff" stroke="#000" strokeWidth={2} />
-    <line x1={12} y1={42} x2={122} y2={106} stroke="#000" strokeWidth={1.5} />
-    <line x1={122} y1={42} x2={12} y2={106} stroke="#000" strokeWidth={1.5} />
-    {[0, 1, 2].map((i) => (
-      <rect key={i} x={12} y={118 + i * 16} width={260 - i * 40} height={7} fill="#000" />
-    ))}
-    <rect x={12} y={168} width={140} height={6} fill="#0000ee" />
-    {censure > 0 && (
-      <g transform={`translate(150,93) scale(${censure}) rotate(-8)`}>
-        <rect x={-150} y={-34} width={300} height={68} fill="#000" />
-        <text y={16} textAnchor="middle" fontFamily={FONT} fontWeight={700} fontSize={44} fill="#fff">
-          CENSURÉ
-        </text>
-      </g>
-    )}
-  </g>
-);
-
-/* ---------------- étiquette de valeur (pop + étincelles) ---------------- */
-const Etiquette: React.FC<{debut: number; x: number; y: number; texte: string; couleur?: string; rot?: number}> = ({debut, x, y, texte, couleur = '#111827', rot = -4}) => {
-  const f = useCurrentFrame();
-  const p = pop(f, debut, 30, 8);
-  if (p <= 0) return null;
-  return (
-    <>
-      <div
-        style={{
-          position: 'absolute',
-          left: x,
-          top: y,
-          transform: `translate(-50%,-50%) scale(${p}) rotate(${rot}deg)`,
-          background: '#ffe14d',
-          border: `6px solid ${couleur}`,
-          color: couleur,
-          fontFamily: FONT,
-          fontWeight: 700,
-          fontSize: 50,
-          padding: '8px 26px',
-          borderRadius: 18,
-          boxShadow: '0 10px 0 rgba(0,0,0,0.35)',
-          whiteSpace: 'nowrap',
-        }}
-      >
-        {texte}
-      </div>
-      <Etincelles debut={debut} x={x} y={y} r={120} />
-    </>
-  );
-};
-
-/* -------------------- téléphone qui vibre (monde) -------------------- */
-const TelMonde: React.FC<{x: number; y: number; debut: number; fin: number}> = ({x, y, debut, fin}) => {
-  const f = useCurrentFrame();
-  if (f < debut || f > fin) return null;
-  const p = pop(f, debut);
-  const r = Math.sin(f * 2.4) * 16;
-  return (
-    <g transform={`translate(${x},${y}) scale(${p}) rotate(${r})`}>
-      <circle r={50} fill="#ffe14d" stroke="#111" strokeWidth={5} />
-      <rect x={-16} y={-30} width={32} height={58} rx={7} fill="#111" />
-      <rect x={-11} y={-23} width={22} height={40} rx={3} fill="#60a5fa" />
-      <path d="M-34,-16 q-8,16 0,32 M34,-16 q8,16 0,32" stroke="#111" strokeWidth={5} fill="none" strokeLinecap="round" />
-    </g>
-  );
-};
 
 /* =============================== VIDÉO =============================== */
 export const DevsTeach1a: React.FC = () => {

@@ -36,7 +36,8 @@ export type Expr =
   | 'concentre'
   | 'consterne'
   | 'curieux'
-  | 'amuse';
+  | 'amuse'
+  | 'fache';
 
 export type Etape = {
   f: number;
@@ -177,7 +178,7 @@ type ExprDef = {
   lid: number; // paupière supérieure 0..1
   browY: number;
   browA: number; // + = intérieur relevé (inquiet)
-  mouth: 'none' | 'smile' | 'O' | 'frown' | 'flat' | 'wavy' | 'grin';
+  mouth: 'none' | 'smile' | 'O' | 'frown' | 'flat' | 'wavy' | 'grin' | 'cri';
   pupil: number;
   happy?: boolean; // yeux fermés en arc
   sweat?: boolean;
@@ -196,6 +197,7 @@ const EXPR: Record<Expr, ExprDef> = {
   consterne: {eye: 1, lid: 0.5, browY: 2, browA: 0, mouth: 'flat', pupil: 0.9},
   curieux: {eye: 1.1, lid: 0, browY: -8, browA: -4, mouth: 'none', pupil: 1},
   amuse: {eye: 1, lid: 0.2, browY: -6, browA: 6, mouth: 'smile', pupil: 1},
+  fache: {eye: 1.05, lid: 0.28, browY: 6, browA: -30, mouth: 'cri', pupil: 0.6},
 };
 
 /* ------------------------------ rendu ----------------------------- */
@@ -385,6 +387,15 @@ export const Personnage: React.FC<PersonnageProps> = ({
         {ex.mouth === 'smile' && <path d="M-13,-3 Q0,10 13,-3" stroke="#fff" strokeWidth={5.5} fill="none" strokeLinecap="round" />}
         {ex.mouth === 'grin' && <path d="M-15,-5 Q0,16 15,-5 Z" fill="#fff" />}
         {ex.mouth === 'O' && <ellipse rx={9} ry={12} fill="#fff" />}
+        {ex.mouth === 'cri' && (
+          <g>
+            <path d="M-26,-8 Q0,-14 26,-8 Q22,30 0,32 Q-22,30 -26,-8 Z" fill="#fff" />
+            <path d="M-12,20 Q0,10 12,20 Q6,28 0,28 Q-6,28 -12,20 Z" fill="#ef4444" />
+            {[-18, -6, 6, 18].map((x) => (
+              <path key={x} d={`M${x - 5},-9 L${x},0 L${x + 5},-9 Z`} fill={C.tete} />
+            ))}
+          </g>
+        )}
         {ex.mouth === 'frown' && <path d="M-12,6 Q0,-6 12,6" stroke="#fff" strokeWidth={5.5} fill="none" strokeLinecap="round" />}
         {ex.mouth === 'flat' && <line x1={-10} y1={2} x2={10} y2={2} stroke="#fff" strokeWidth={5.5} strokeLinecap="round" />}
         {ex.mouth === 'wavy' && (
