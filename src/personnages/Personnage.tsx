@@ -218,6 +218,7 @@ export type PersonnageProps = {
   accessoire?: 'cafe' | 'telephone' | 'saladier' | null;
   ombre?: boolean;
   t0?: number;
+  ecranTel?: string; // couleur de l'écran du téléphone tenu
 };
 
 const resolve = (timeline: Etape[], frame: number) => {
@@ -255,6 +256,7 @@ export const Personnage: React.FC<PersonnageProps> = ({
   accessoire = null,
   ombre = true,
   t0 = 0,
+  ecranTel = '#60a5fa',
 }) => {
   const frame = useCurrentFrame();
   const t = frame + t0;
@@ -480,7 +482,7 @@ export const Personnage: React.FC<PersonnageProps> = ({
   const phone = (h: [number, number]) => (
     <g transform={`translate(${h[0] + 6},${h[1] - 26}) rotate(${-8})`}>
       <rect x={-15} y={-28} width={30} height={54} rx={6} fill="#1f2937" stroke="#9ca3af" strokeWidth={2} />
-      <rect x={-12} y={-24} width={24} height={44} rx={3} fill="#60a5fa" opacity={0.9} />
+      <rect x={-12} y={-24} width={24} height={44} rx={3} fill={ecranTel} opacity={0.9} />
     </g>
   );
 
