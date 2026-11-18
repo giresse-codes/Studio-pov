@@ -219,3 +219,54 @@ export const TelVibre: React.FC<{debut: number; fin: number; x: number; y: numbe
     </div>
   );
 };
+
+/**
+ * Gros plan d'un téléphone mouillé : gouttes qui coulent, écran qui clignote.
+ * vivant : à partir de cette frame l'écran se rallume (heure + batterie).
+ */
+export const TelephoneMouille: React.FC<{debut: number; fin: number; vivant?: number; heure?: string; x?: number; y?: number; echelle?: number}> = ({
+  debut,
+  fin,
+  vivant,
+  heure = '14:05',
+  x = 540,
+  y = 900,
+  echelle = 1,
+}) => {
+  const f = useCurrentFrame();
+  if (f < debut || f > fin + 10) return null;
+  const p = pop(f, debut, 30, 10) * (1 - prog(f, fin, 10));
+  const t = f - debut;
+  // clignotement irrégulier
+  const on = Math.sin(t * 0.9) + Math.sin(t * 2.3) > 0.3;
+  const allume = vivant !== undefined && f >= vivant;
+  return (
+    <div style={{position: 'absolute', left: x - 260, top: y - 480, width: 520, height: 960, transform: `scale(${p * echelle}) rotate(${Math.sin(t * 0.2) * 2}deg)`, fontFamily: FONT}}>
+      <div style={{position: 'absolute', inset: 0, background: '#111827', borderRadius: 70, border: '10px solid #4b5563', boxShadow: '0 24px 0 rgba(0,0,0,0.4)'}} />
+      <div style={{position: 'absolute', left: 26, right: 26, top: 26, bottom: 26, borderRadius: 50, overflow: 'hidden', background: '#000'}}>
+        {on && !allume && (
+          <div style={{position: 'absolute', inset: 0, background: 'linear-gradient(180deg,#60a5fa,#a78bfa)'}}>
+            {[0, 1, 2, 3, 4].map((i) => (
+              <div key={i} style={{position: 'absolute', left: 0, right: 0, top: ((t * 37 + i * 173) % 900), height: 18 + i * 6, background: i % 2 ? '#fff' : '#22d3ee', opacity: 0.7}} />
+            ))}
+          </div>
+        )}
+        {allume && (
+          <div style={{position: 'absolute', inset: 0, background: on || f - vivant! > 20 ? 'linear-gradient(180deg,#1e3a8a,#7c3aed)' : '#000', color: '#fff', textAlign: 'center'}}>
+            <div style={{fontSize: 130, fontWeight: 700, marginTop: 140}}>{heure}</div>
+            <div style={{fontSize: 36, opacity: 0.8}}>samedi</div>
+            <div style={{margin: '80px auto 0', width: 150, height: 66, border: '6px solid #fff', borderRadius: 14, position: 'relative'}}>
+              <div style={{position: 'absolute', left: 6, top: 6, bottom: 6, width: 40, background: '#f87171', borderRadius: 6}} />
+            </div>
+          </div>
+        )}
+        {/* gouttes */}
+        {Array.from({length: 12}).map((_, i) => {
+          const gy = ((t * (3 + (i % 4))) + i * 97) % 1000 - 60;
+          return <div key={i} style={{position: 'absolute', left: 20 + ((i * 83) % 420), top: gy, width: 22 + (i % 3) * 8, height: 30 + (i % 3) * 10, borderRadius: '50% 50% 50% 50% / 60% 60% 40% 40%', background: 'rgba(186,230,253,0.55)', border: '3px solid rgba(255,255,255,0.7)'}} />;
+        })}
+      </div>
+      <div style={{position: 'absolute', top: 40, left: 210, width: 100, height: 26, borderRadius: 13, background: '#000'}} />
+    </div>
+  );
+};

@@ -39,3 +39,5 @@
 | tech-leger.mp3 | lofi tech background | DevsTeach |
 | suspense.mp3 | dark suspense tension | Survie, moment du choix |
 | documentaire.mp3 | dark documentary ambient | Survie, partie 2 |
+
+> Utilisés aussi par `#astuce 1a` : `ambiances/appartement.mp3`, `musiques/comique.mp3`, `effets/eau-plouf.mp3` (déjà listés ci-dessus).

@@ -215,7 +215,7 @@ export type PersonnageProps = {
   facing?: 1 | -1;
   saut?: number; // décalage vertical (sursaut), px
   tremble?: number;
-  accessoire?: 'cafe' | 'telephone' | null;
+  accessoire?: 'cafe' | 'telephone' | 'saladier' | null;
   ombre?: boolean;
   t0?: number;
 };
@@ -485,7 +485,18 @@ export const Personnage: React.FC<PersonnageProps> = ({
   );
 
   const showPhone = accessoire === 'telephone' || st.bras === 'telephone';
-  const showCafe = accessoire === 'cafe' || st.bras === 'cafe';
+  const showSaladier = accessoire === 'saladier';
+  const showCafe = !showSaladier && (accessoire === 'cafe' || st.bras === 'cafe');
+  const saladier = (h: [number, number]) => (
+    <g transform={`translate(${h[0] + 10},${h[1] - 6})`}>
+      <ellipse cx={0} cy={-18} rx={62} ry={18} fill="#fefce8" />
+      {Array.from({length: 14}).map((_, i) => (
+        <ellipse key={i} cx={-48 + i * 7.5} cy={-24 - Math.sin(i * 1.3) * 7} rx={5} ry={3} fill="#fff" stroke="#e7e5e4" strokeWidth={1} />
+      ))}
+      <path d="M-66,-18 Q-60,34 0,36 Q60,34 66,-18 Z" fill="#ef4444" />
+      <path d="M-50,0 Q0,14 50,0" stroke="#fff" strokeWidth={5} fill="none" opacity={0.6} />
+    </g>
+  );
 
   return (
     <g transform={`translate(${x + shake},${y - saut}) scale(${scale * facing},${scale})`}>
@@ -508,6 +519,7 @@ export const Personnage: React.FC<PersonnageProps> = ({
       <Limb a={shoulderF} b={elbF} w={30} c={tenue.haut} />
       <Limb a={elbF} b={handF} w={27} c={sleeveFore} />
       {showCafe && cafe(handF)}
+      {showSaladier && saladier(handF)}
       <circle cx={handF[0]} cy={handF[1]} r={17} fill={C.tete} />
       {showPhone && phone(handF)}
     </g>
