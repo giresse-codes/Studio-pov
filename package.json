@@ -1,0 +1,23 @@
+{
+  "name": "studio-pov",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "studio": "node outils/sons-dispo.mjs && remotion studio",
+    "render": "node outils/sons-dispo.mjs && remotion render",
+    "captures": "node outils/captures.mjs"
+  },
+  "dependencies": {
+    "@fontsource/fredoka": "^5.1.0",
+    "@fontsource/jetbrains-mono": "^5.1.0",
+    "@fontsource/tinos": "^5.1.0",
+    "@remotion/cli": "4.0.290",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.290"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "typescript": "5.6.3"
+  }
+}
