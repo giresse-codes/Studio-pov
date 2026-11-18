@@ -10,6 +10,10 @@
 | whoosh.mp3 | whoosh transition | Changement de scène, zoom rapide |
 | pop.mp3 | pop ui | Apparition d'un texte, d'une icône |
 | clic-bouton.mp3 | button click | Écran de choix |
+| carte.mp3 | card flip | Carte de jeu qui se retourne |
+| sparkle.mp3 | magic sparkle | Objet qui apparaît |
+| appel.mp3 | video call ringtone | Appel « EN DIRECT » |
+| compteur.mp3 | coin counter | HUD qui monte ou descend |
 | frappe-clavier.mp3 | keyboard typing | Bureau, code |
 | pas.mp3 | footsteps | Marche, déplacements |
 | pas-feuilles.mp3 | footsteps leaves forest | Marche en forêt |
