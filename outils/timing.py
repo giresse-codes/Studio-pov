@@ -22,7 +22,8 @@ if not os.path.exists(cache):
 ws = json.load(open(cache))
 
 txt = open(script, encoding="utf-8").read()
-bloc = re.search(r"## Voix off\s*```(.*?)```", txt, re.S).group(1)
+m_ = re.search(r"## Voix off\s*```(.*?)```", txt, re.S) or re.search(r"```(.*?)```", txt, re.S)  # sinon : 1er bloc de code
+bloc = m_.group(1)
 bloc = re.sub(r"\[[^\]]*\]", " ", bloc)
 toks, phr = [], []
 p = 0
