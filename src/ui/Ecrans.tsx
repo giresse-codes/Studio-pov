@@ -269,7 +269,9 @@ export const ChoixRappel: React.FC<{
   depuisRouge?: number;
   titre?: string;
   y?: number;
-}> = ({debut, fin, vert, rouge, etatVert = 'neutre', etatRouge = 'neutre', depuisVert = 0, depuisRouge = 0, titre = 'TU AS CHOISI ?', y = 560}) => {
+  labelFaux?: string;
+  labelBon?: string;
+}> = ({debut, fin, vert, rouge, etatVert = 'neutre', etatRouge = 'neutre', depuisVert = 0, depuisRouge = 0, titre = 'TU AS CHOISI ?', y = 560, labelFaux = '✗ −1 HEURE', labelBon = '✓ BONNE RÉPONSE'}) => {
   const f = useCurrentFrame();
   if (f < debut || f > fin + 12) return null;
   const p = pop(f, debut, 30, 10);
@@ -318,7 +320,7 @@ export const ChoixRappel: React.FC<{
               whiteSpace: 'nowrap',
             }}
           >
-            {faux ? '✗ −1 HEURE' : '✓ BONNE RÉPONSE'}
+            {faux ? labelFaux : labelBon}
           </div>
         )}
       </div>

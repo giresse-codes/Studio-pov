@@ -220,6 +220,7 @@ export type PersonnageProps = {
   t0?: number;
   ecranTel?: string; // couleur de l'écran du téléphone tenu
   sac?: boolean; // sac à dos (randonnée)
+  rotation?: number; // bascule autour des pieds (chute), en degrés
 };
 
 const resolve = (timeline: Etape[], frame: number) => {
@@ -259,6 +260,7 @@ export const Personnage: React.FC<PersonnageProps> = ({
   t0 = 0,
   ecranTel = '#60a5fa',
   sac = false,
+  rotation = 0,
 }) => {
   const frame = useCurrentFrame();
   const t = frame + t0;
@@ -511,7 +513,7 @@ export const Personnage: React.FC<PersonnageProps> = ({
   );
 
   return (
-    <g transform={`translate(${x + shake},${y - saut}) scale(${scale * facing},${scale})`}>
+    <g transform={`translate(${x + shake},${y - saut}) rotate(${rotation * facing}) scale(${scale * facing},${scale})`}>
       {ombre && <ellipse cx={st.base === 'assis' ? 40 : 6} cy={6} rx={st.base === 'assis' ? 110 : 80} ry={14} fill="#000" opacity={0.18} />}
       {/* bras arrière */}
       <Limb a={shoulderB} b={elbB} w={30} c={tenue.hautOmbre} />
