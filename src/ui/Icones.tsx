@@ -121,3 +121,29 @@ export const IconeBocal: React.FC<{s?: number}> = ({s = 140}) => {
     </svg>
   );
 };
+
+/** Empreintes de pas (marcher) */
+export const IconePas: React.FC<{s?: number}> = ({s = 120}) => (
+  <Rond s={s} fond="#22c55e">
+    {[
+      [42, 78, -12],
+      [72, 46, 12],
+    ].map(([x, y, r], i) => (
+      <g key={i} transform={`translate(${x},${y}) rotate(${r})`}>
+        <ellipse cx={0} cy={0} rx={10} ry={17} fill="#fff" />
+        {[-7, -2, 3, 8].map((dx, j) => (
+          <circle key={j} cx={dx} cy={-22 + Math.abs(dx) * 0.3} r={3.5} fill="#fff" />
+        ))}
+      </g>
+    ))}
+  </Rond>
+);
+
+/** Rester sur place (repère au sol) */
+export const IconeRester: React.FC<{s?: number}> = ({s = 120}) => (
+  <Rond s={s} fond="#ef4444">
+    <path d="M60,92 C40,64 34,54 34,44 A26,26 0 0,1 86,44 C86,54 80,64 60,92 Z" fill="#fff" />
+    <circle cx={60} cy={44} r={10} fill="#ef4444" />
+    <ellipse cx={60} cy={98} rx={24} ry={6} fill="#fff" opacity={0.6} />
+  </Rond>
+);

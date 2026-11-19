@@ -270,3 +270,96 @@ export const TelephoneMouille: React.FC<{debut: number; fin: number; vivant?: nu
     </div>
   );
 };
+
+/**
+ * Écran de téléphone en gros plan (Mode Survie) : batterie, réseau, et éventuellement un message envoyé.
+ *  reseauCoupe : frame où les barres de réseau tombent à zéro (avant : 1 barre)
+ *  message : bulle envoyée (texte, destinataire, frame d'apparition)
+ */
+export const TelephoneEcran: React.FC<{
+  debut: number;
+  fin: number;
+  batterie: number;
+  heure: string;
+  reseauCoupe?: number;
+  message?: {a: string; texte: string; debut: number; envoye?: string};
+  x?: number;
+  y?: number;
+  echelle?: number;
+}> = ({debut, fin, batterie, heure, reseauCoupe, message, x = 540, y = 880, echelle = 0.9}) => {
+  const f = useCurrentFrame();
+  if (f < debut || f > fin + 10) return null;
+  const p = pop(f, debut, 30, 12) * (1 - prog(f, fin, 10));
+  const coupe = reseauCoupe === undefined || f >= reseauCoupe;
+  const barres = coupe ? 0 : 1;
+  const blinkBat = Math.floor(f / 12) % 2 === 0;
+  const mp = message ? pop(f, message.debut, 30, 12) : 0;
+  return (
+    <div style={{position: 'absolute', left: x - 260, top: y - 480, width: 520, height: 960, transform: `scale(${p * echelle})`, fontFamily: FONT}}>
+      <div style={{position: 'absolute', inset: -60, borderRadius: 120, background: 'radial-gradient(circle, rgba(120,170,255,0.25), rgba(120,170,255,0) 70%)'}} />
+      <div style={{position: 'absolute', inset: 0, background: '#0b0f19', borderRadius: 70, border: '10px solid #374151', boxShadow: '0 24px 0 rgba(0,0,0,0.5)'}} />
+      <div style={{position: 'absolute', left: 26, right: 26, top: 26, bottom: 26, borderRadius: 50, overflow: 'hidden', background: 'linear-gradient(180deg,#111827,#1e293b)', color: '#e5e7eb'}}>
+        {/* barre d'état */}
+        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '22px 30px 0', fontSize: 30, fontWeight: 700}}>
+          <span>{heure}</span>
+          <span style={{display: 'flex', alignItems: 'center', gap: 14}}>
+            <span style={{display: 'flex', alignItems: 'flex-end', gap: 4}}>
+              {[0, 1, 2, 3].map((i) => (
+                <span key={i} style={{width: 8, height: 10 + i * 7, borderRadius: 2, background: i < barres ? '#e5e7eb' : '#4b5563'}} />
+              ))}
+            </span>
+            {coupe && <span style={{color: '#f87171', fontSize: 26}}>✕</span>}
+            <span style={{color: batterie <= 10 ? '#f87171' : '#e5e7eb', opacity: batterie <= 10 && !blinkBat ? 0.4 : 1}}>{batterie} %</span>
+            <span style={{width: 50, height: 24, border: '3px solid #e5e7eb', borderRadius: 6, position: 'relative', display: 'inline-block'}}>
+              <span style={{position: 'absolute', left: 2, top: 2, bottom: 2, width: `${Math.max(6, batterie * 0.42)}px`, background: batterie <= 10 ? '#ef4444' : '#22c55e', borderRadius: 2}} />
+            </span>
+          </span>
+        </div>
+        {!message && (
+          <div style={{textAlign: 'center', marginTop: 120}}>
+            <div style={{fontSize: 120, fontWeight: 700}}>{heure}</div>
+            <div style={{marginTop: 70, fontSize: 40, fontWeight: 700, color: '#f87171'}}>Aucun réseau</div>
+            <div style={{marginTop: 18, fontSize: 30, color: '#9ca3af'}}>Batterie faible : {batterie} %</div>
+            <div style={{margin: '40px auto 0', width: 200, height: 90, border: '8px solid #f87171', borderRadius: 18, position: 'relative', opacity: blinkBat ? 1 : 0.5}}>
+              <div style={{position: 'absolute', left: 8, top: 8, bottom: 8, width: 20, background: '#ef4444', borderRadius: 6}} />
+            </div>
+          </div>
+        )}
+        {message && (
+          <div style={{padding: '30px 26px'}}>
+            <div style={{textAlign: 'center', borderBottom: '2px solid #334155', paddingBottom: 20}}>
+              <div style={{width: 90, height: 90, borderRadius: 45, background: '#64748b', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 44, fontWeight: 700}}>
+                {message.a[0]}
+              </div>
+              <div style={{fontSize: 34, fontWeight: 700, marginTop: 10}}>{message.a}</div>
+            </div>
+            <div
+              style={{
+                marginTop: 60,
+                marginLeft: 50,
+                background: '#2563eb',
+                color: '#fff',
+                borderRadius: '30px 30px 6px 30px',
+                padding: '22px 26px',
+                fontSize: 38,
+                fontWeight: 600,
+                lineHeight: 1.2,
+                transform: `scale(${mp})`,
+                transformOrigin: 'right bottom',
+              }}
+            >
+              {message.texte}
+            </div>
+            <div style={{textAlign: 'right', fontSize: 26, color: '#9ca3af', marginTop: 10, opacity: mp}}>{message.envoye ?? 'Envoyé ✓'}</div>
+            {coupe && (
+              <div style={{marginTop: 50, textAlign: 'center', color: '#f87171', fontSize: 34, fontWeight: 700, opacity: clamp((f - (reseauCoupe ?? 0)) / 8)}}>
+                ✕ Réseau perdu
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+      <div style={{position: 'absolute', top: 40, left: 210, width: 100, height: 26, borderRadius: 13, background: '#000'}} />
+    </div>
+  );
+};

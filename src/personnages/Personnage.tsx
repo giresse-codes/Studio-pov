@@ -219,6 +219,7 @@ export type PersonnageProps = {
   ombre?: boolean;
   t0?: number;
   ecranTel?: string; // couleur de l'écran du téléphone tenu
+  sac?: boolean; // sac à dos (randonnée)
 };
 
 const resolve = (timeline: Etape[], frame: number) => {
@@ -257,6 +258,7 @@ export const Personnage: React.FC<PersonnageProps> = ({
   ombre = true,
   t0 = 0,
   ecranTel = '#60a5fa',
+  sac = false,
 }) => {
   const frame = useCurrentFrame();
   const t = frame + t0;
@@ -417,6 +419,13 @@ export const Personnage: React.FC<PersonnageProps> = ({
   /* ---------------- torse ---------------- */
   const torso = (
     <g transform={`translate(${hip[0]},${hip[1]}) rotate(${-lean})`}>
+      {sac && (
+        <g>
+          <rect x={-96} y={-158} width={62} height={146} rx={18} fill="#9a3412" />
+          <rect x={-104} y={-90} width={30} height={62} rx={10} fill="#7c2d12" />
+          <rect x={-90} y={-170} width={48} height={22} rx={10} fill="#7c2d12" />
+        </g>
+      )}
       <path
         d={`M-50,8 L-56,${-TORSO + 40} Q-56,${-TORSO - 4} -10,${-TORSO - 4} L18,${-TORSO - 4} Q60,${-TORSO - 4} 58,${-TORSO + 40} L52,8 Q0,20 -50,8 Z`}
         fill={tenue.haut}
@@ -455,6 +464,7 @@ export const Personnage: React.FC<PersonnageProps> = ({
           <rect x={15} y={-57} width={12} height={3} fill="#94a3b8" />
         </>
       )}
+      {sac && <path d={`M14,${-TORSO + 2} Q22,-110 18,-40`} stroke="#7c2d12" strokeWidth={10} fill="none" strokeLinecap="round" />}
       {/* ceinture / bas du haut */}
       <rect x={-52} y={0} width={106} height={22} rx={10} fill={tenue.bas} />
     </g>
