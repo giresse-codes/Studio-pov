@@ -48,9 +48,9 @@ export const EcranChoix: React.FC<{
   return (
     <div style={{position: 'absolute', inset: 0, fontFamily: POLICE, opacity: 1 - sortie}}>
       <div style={{position: 'absolute', inset: 0, background: 'rgba(8,10,30,0.55)', opacity: Math.min(1, t / 8)}} />
-      <div style={{position: 'absolute', left: 50, right: 50, top: 330, perspective: 2400}}>
+      <div style={{position: 'absolute', left: 50, right: 50, top: 410, perspective: 2400}}>
         <div style={{transform: `scale(${interpolate(s, [0, 1], [0.3, 1])}) rotateX(${rot}deg)`, background: `linear-gradient(160deg, ${C.nuit2}, ${C.nuit})`,
-          border: `12px solid ${C.or}`, borderRadius: 50, padding: '50px 44px 46px', boxShadow: `inset 0 0 0 6px ${C.orFonce}, 0 40px 80px rgba(0,0,0,0.6)`,
+          border: `12px solid ${C.or}`, borderRadius: 50, padding: '40px 40px 38px', boxShadow: `inset 0 0 0 6px ${C.orFonce}, 0 40px 80px rgba(0,0,0,0.6)`,
           backfaceVisibility: 'hidden'}}>
           <div style={{color: '#fff', fontWeight: 900, fontSize: 116, textAlign: 'center', letterSpacing: -3, lineHeight: 1, textShadow: '0 8px 0 rgba(0,0,0,0.45)'}}>
             TU FERAIS<br /><span style={{color: C.jaune}}>QUOI ?</span>

@@ -65,3 +65,22 @@ export const Musique: React.FC<{nom: NomMusique; duree: number; voix?: Segments;
     }}
   />
 );
+
+/**
+ * Voix off avec écran de choix : la voix est coupée à `pauseS` (secondes) et reprend
+ * `ajout` frames plus tard (silence ajouté pour le compte à rebours de 3 s).
+ */
+export const Voix: React.FC<{src: string; pauseS?: number; ajout?: number; fps?: number}> = ({src, pauseS, ajout = 0, fps = 30}) => {
+  if (pauseS === undefined || ajout === 0) return <Audio src={src} volume={MIX.voix} />;
+  const coupe = Math.round(pauseS * fps);
+  return (
+    <>
+      <Sequence from={0} durationInFrames={coupe} layout="none">
+        <Audio src={src} volume={MIX.voix} />
+      </Sequence>
+      <Sequence from={coupe + ajout} layout="none">
+        <Audio src={src} startFrom={coupe} volume={MIX.voix} />
+      </Sequence>
+    </>
+  );
+};

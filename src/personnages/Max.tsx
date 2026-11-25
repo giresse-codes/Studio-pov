@@ -52,8 +52,8 @@ export const Cafe: React.FC<{vapeur?: number}> = ({vapeur = 0}) => (
 
 export const Max: React.FC<{
   pose: Pose; expression?: Expression; regard?: number; regardY?: number; cligne?: number; parle?: number;
-  sens?: 1 | -1; echelle?: number; cafe?: boolean; frame?: number;
-}> = ({expression = 'panique', cafe = true, frame = 0, ...rest}) => (
+  sens?: 1 | -1; echelle?: number; cafe?: boolean; frame?: number; mainAv?: React.ReactNode;
+}> = ({expression = 'panique', cafe = true, frame = 0, mainAv, ...rest}) => (
   <Silhouette
     {...rest}
     expression={expression}
@@ -61,5 +61,6 @@ export const Max: React.FC<{
     cheveux={<CheveuxMax />}
     detailsBuste={<DetailsChemise />}
     accessoireMainAr={cafe ? <Cafe vapeur={frame} /> : undefined}
+    accessoireMainAv={mainAv}
   />
 );

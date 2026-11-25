@@ -3,3 +3,4 @@ export * from './animations';
 export * from './Toi';
 export * from './Max';
 export * from './Bobo';
+export * from './accessoires';

@@ -15,3 +15,10 @@ Utilisation : dépose la voix off dans `videos/<chaine>-<numero>/voix.wav`, puis
 - `src/personnages/` (Toi, Max, Bobo + animations), `src/decors/` (chambre-dev…), `src/ui/` (HUD, cartes, EN DIRECT, SMS, sous-titres, choix), `src/camera/`, `src/lib/` (thème, sons, polices), `src/compositions/` (une composition par vidéo)
 - `public/` : polices embarquées + liens vers `sons/` et `videos/`
 - Test de style : composition `Test` → `out/test.mp4`
+
+## Chaîne de production d'une vidéo (ex. `#devsteach 1`)
+
+1. Voix déposée dans `videos/<chaine>-<n>/voix.wav`
+2. Transcription mot à mot : `python3 outils/transcrire.py videos/<chaine>-<n>/voix.wav videos/<chaine>-<n>/whisper.json medium` (faster-whisper)
+3. Alignement sur le texte du script (balises retirées, repère de la `[pause]`) : `python3 outils/aligner.py scripts/<chaine>/<n>.md videos/<chaine>-<n>/whisper.json videos/<chaine>-<n>/mots.json`
+4. Composition `src/compositions/<Chaine><n>.tsx` (timing via `creerTiming`), rendu : `npx remotion render <chaine>-<n> out/<chaine>-<n>.mp4`

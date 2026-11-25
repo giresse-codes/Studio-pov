@@ -39,13 +39,13 @@ export const CarteOuverture: React.FC<{debut: number; fin: number; lignes: strin
 };
 
 /** Carte finale « Abonne-toi pour la suite » */
-export const CarteAbonne: React.FC<{debut: number; fin: number}> = ({debut, fin}) => {
+export const CarteAbonne: React.FC<{debut: number; fin: number; y?: number}> = ({debut, fin, y = 1060}) => {
   const f = useCurrentFrame();
   const {fps} = useVideoConfig();
   if (f < debut || f > fin) return null;
   const s = spring({frame: f - debut, fps, config: {damping: 10}});
   return (
-    <div style={{position: 'absolute', left: 0, right: 0, top: 1060, display: 'flex', justifyContent: 'center', fontFamily: POLICE}}>
+    <div style={{position: 'absolute', left: 0, right: 0, top: y, display: 'flex', justifyContent: 'center', fontFamily: POLICE}}>
       <div style={{transform: `scale(${s})`, background: C.rouge, color: '#fff', fontWeight: 900, fontSize: 64, padding: '26px 50px', borderRadius: 40,
         border: '8px solid #fff', boxShadow: '0 14px 0 rgba(0,0,0,0.35)'}}>🔔 Abonne-toi pour la suite</div>
     </div>
@@ -71,5 +71,25 @@ export const Etincelles: React.FC<{debut: number; x: number; y: number; n?: numb
         return <path key={i} d={`M${cx},${cy - r} L${cx + r * 0.3},${cy - r * 0.3} L${cx + r},${cy} L${cx + r * 0.3},${cy + r * 0.3} L${cx},${cy + r} L${cx - r * 0.3},${cy + r * 0.3} L${cx - r},${cy} L${cx - r * 0.3},${cy - r * 0.3} Z`} fill={couleur} />;
       })}
     </svg>
+  );
+};
+
+/** Étiquette de valeur / prix qui surgit avec un rebond (« 999 € », « TEXTE NOIR »…) */
+export const Etiquette: React.FC<{a: number; x: number; y: number; texte: string; fond?: string; couleur?: string; taille?: number; rot?: number; fin?: number}> = ({
+  a, x, y, texte, fond = C.jaune, couleur = C.noir, taille = 54, rot = -4, fin,
+}) => {
+  const f = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  if (f < a || (fin !== undefined && f > fin + 8)) return null;
+  const s = spring({frame: f - a, fps, config: {damping: 9, stiffness: 200}});
+  const sortie = fin !== undefined ? interpolate(f, [fin, fin + 8], [0, 1], clamp) : 0;
+  return (
+    <div style={{position: 'absolute', left: x, top: y, transform: `translate(-50%,-50%) scale(${s * (1 - sortie)}) rotate(${rot}deg)`, fontFamily: POLICE}}>
+      <div style={{position: 'relative', background: fond, color: couleur, fontWeight: 900, fontSize: taille, padding: '10px 28px 10px 44px', borderRadius: 18,
+        boxShadow: '0 8px 0 rgba(0,0,0,0.35)', whiteSpace: 'nowrap', border: '5px solid #fff'}}>
+        <span style={{position: 'absolute', left: 14, top: '50%', width: 16, height: 16, marginTop: -8, borderRadius: 8, background: '#fff'}} />
+        {texte}
+      </div>
+    </div>
   );
 };
