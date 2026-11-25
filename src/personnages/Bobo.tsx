@@ -31,8 +31,8 @@ const Taches = () => (
 
 export const Bobo: React.FC<{
   pose: Pose; expression?: Expression; regard?: number; regardY?: number; cligne?: number; parle?: number;
-  sens?: 1 | -1; echelle?: number; mainAv?: React.ReactNode;
-}> = ({expression = 'content', mainAv, ...rest}) => (
+  sens?: 1 | -1; echelle?: number; mainAv?: React.ReactNode; mainAr?: React.ReactNode;
+}> = ({expression = 'content', mainAv, mainAr, ...rest}) => (
   <Silhouette
     {...rest}
     expression={expression}
@@ -40,5 +40,6 @@ export const Bobo: React.FC<{
     cheveux={<CheveuxBobo />}
     detailsBuste={<Taches />}
     accessoireMainAv={mainAv}
+    accessoireMainAr={mainAr}
   />
 );

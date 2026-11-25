@@ -69,3 +69,21 @@ export const Casserole: React.FC<{vapeur?: number; riz?: boolean}> = ({vapeur = 
     ))}
   </g>
 );
+
+/** Couteau de cuisine (repère main) */
+export const Couteau: React.FC<{rot?: number}> = ({rot = 0}) => (
+  <g transform={`rotate(${rot})`}>
+    <rect x={-10} y={-50} width={20} height={56} rx={6} fill="#5b3b2a" />
+    <path d="M-10,-50 L-10,-160 Q4,-150 12,-50 Z" fill="#dfe4ee" stroke="#9aa3b5" strokeWidth={3} />
+  </g>
+);
+
+/** Bouteille de sauce piquante (repère main) */
+export const SaucePiquante: React.FC = () => (
+  <g transform="translate(0,-40)">
+    <rect x={-22} y={-60} width={44} height={110} rx={12} fill="#e23b2e" />
+    <rect x={-10} y={-92} width={20} height={34} rx={4} fill="#2d2d3a" />
+    <rect x={-18} y={-30} width={36} height={40} rx={6} fill="#fff" />
+    <text x={0} y={-2} textAnchor="middle" fontSize={24}>🌶️</text>
+  </g>
+);

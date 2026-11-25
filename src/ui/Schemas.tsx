@@ -604,3 +604,118 @@ export const SchemaDeuxChoix: React.FC<{debut: number; fin: number; a1: number; 
     </Panneau>
   );
 };
+
+/**
+ * Le bocal en coupe : air chaud → refroidi (vide) → l'air du dehors appuie ;
+ * puis eau chaude (le couvercle se dilate) ; puis cuillère en levier (pschitt, l'air rentre).
+ */
+export const SchemaBocal: React.FC<{
+  debut: number; fin: number; aChaud: number; aFroid: number; aVide: number; aDehors: number;
+  aEau: number; aVerre: number; aDesserre: number; aCuillere: number; aLevier: number; aPschitt: number; aOuvre: number;
+}> = (p) => {
+  const f = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const v = (a: number, d = 8) => interpolate(f, [a, a + d], [0, 1], clamp);
+  const phase = f < p.aEau ? 'vide' : f < p.aCuillere ? 'eau' : 'cuillere';
+  const titre = phase === 'vide' ? 'POURQUOI ÇA BLOQUE ?' : phase === 'eau' ? 'L’EAU CHAUDE' : 'LA CUILLÈRE';
+  // géométrie du bocal (SVG 840 x 860)
+  const jx = 250, jy = 250, jw = 340, jh = 440;
+  const refroidi = v(p.aFroid, 20);
+  const pschitt = v(p.aPschitt, 14);
+  const nAir = Math.round(26 - refroidi * 16 + pschitt * 16);
+  const dilate = phase === 'eau' ? v(p.aEau + 6, 20) : 0;
+  const ouvre = v(p.aOuvre, 10);
+  const levier = phase === 'cuillere' ? v(p.aLevier, 12) : 0;
+  const appuie = f >= p.aDehors && phase !== 'eau' && pschitt < 0.5;
+  return (
+    <Panneau debut={p.debut} fin={p.fin} titre={titre} top={420} bottom={480}>
+      <svg width={960} height={983} viewBox="0 0 840 860" style={{display: 'block', margin: '0 auto'}}>
+        {/* air du dehors qui appuie */}
+        {appuie && [0, 1, 2].map((i) => {
+          const k = v(p.aDehors);
+          const dy = Math.sin(f / 4 + i) * 6;
+          return (
+            <g key={i} opacity={k} transform={`translate(${jx + 50 + i * 120},${jy - 190 + dy})`}>
+              <rect x={-14} y={0} width={28} height={70} fill={C.jaune} />
+              <path d="M-36,64 L36,64 L0,110 Z" fill={C.jaune} />
+            </g>
+          );
+        })}
+        {appuie && <text x={420} y={36} textAnchor="middle" fontFamily={POLICE} fontWeight={900} fontSize={38} fill={C.jaune} opacity={v(p.aDehors)}>L’AIR DU DEHORS APPUIE</text>}
+        {/* eau chaude */}
+        {phase === 'eau' && Array.from({length: 10}).map((_, i) => {
+          const y = ((f * 9 + i * 37) % 170);
+          return <ellipse key={i} cx={jx + jw / 2 - 40 + (i % 3) * 40} cy={jy - 200 + y} rx={8} ry={16} fill="#5ab0ff" opacity={0.9} />;
+        })}
+        {phase === 'eau' && <text x={420} y={36} textAnchor="middle" fontFamily={POLICE} fontWeight={900} fontSize={40} fill="#ff6b4a">🔥 EAU TRÈS CHAUDE</text>}
+        {/* verre */}
+        <rect x={jx} y={jy} width={jw} height={jh} rx={40} fill="#dff5ff" opacity={0.25} stroke="#bfe8ff" strokeWidth={10} />
+        {/* cornichons */}
+        {[[60, 380], [140, 330], [230, 390], [110, 260], [260, 280], [190, 200]].map(([x, y], i) => (
+          <ellipse key={i} cx={jx + x} cy={jy + y} rx={22} ry={60} fill="#5a8a2a" opacity={0.8} transform={`rotate(${i * 25 - 40},${jx + x},${jy + y})`} />
+        ))}
+        {/* air à l'intérieur */}
+        {Array.from({length: nAir}).map((_, i) => {
+          const vit = f < p.aFroid ? 3 : 0.8;
+          const x = jx + 30 + ((i * 53 + Math.sin(f / 10 * vit + i) * 40 + f * vit * (i % 3)) % (jw - 60) + (jw - 60)) % (jw - 60);
+          const y = jy + 30 + ((i * 31 + Math.cos(f / 9 * vit + i * 2) * 30) % 140 + 140) % 140;
+          const chaud = f < p.aFroid + 10;
+          return <circle key={i} cx={x} cy={y} r={11} fill={chaud ? '#ff6b4a' : '#7fc6ff'} opacity={0.9} />;
+        })}
+        {f >= p.aVide && pschitt < 0.6 && (
+          <g opacity={v(p.aVide) * (1 - pschitt)}>
+            <rect x={jx + 70} y={jy + 50} width={200} height={70} rx={16} fill="#141418" opacity={0.75} />
+            <text x={jx + 170} y={jy + 98} textAnchor="middle" fontFamily={POLICE} fontWeight={900} fontSize={44} fill="#fff">VIDE</text>
+          </g>
+        )}
+        {f < p.aFroid + 30 && f >= p.aChaud && (
+          <text x={420} y={jy + jh + 70} textAnchor="middle" fontFamily={POLICE} fontWeight={900} fontSize={40} fill={f < p.aFroid ? '#ff6b4a' : '#7fc6ff'}>
+            {f < p.aFroid ? 'Air chaud à l’usine 🏭' : 'En refroidissant, il rétrécit ❄️'}
+          </text>
+        )}
+        {/* couvercle */}
+        <g transform={`translate(${jx + jw / 2},${jy - 6 - ouvre * 140}) rotate(${-levier * 4 - ouvre * 25}) scale(${1 + dilate * 0.1},1)`}>
+          <rect x={-jw / 2 - 26} y={-56} width={jw + 52} height={62} rx={14} fill={dilate > 0 ? interpolateCouleur('#c9cfdb', '#ff8a5c', dilate) : '#c9cfdb'} stroke="#8a92a6" strokeWidth={6} />
+          {Array.from({length: 12}).map((_, i) => <rect key={i} x={-jw / 2 - 16 + i * 32} y={-50} width={6} height={50} fill="#8a92a6" />)}
+        </g>
+        {dilate > 0.3 && (
+          <g opacity={dilate}>
+            <path d={`M${jx - 70},${jy - 30} L${jx - 20},${jy - 30} M${jx - 70},${jy - 30} l20,-14 M${jx - 70},${jy - 30} l20,14`} stroke={C.jaune} strokeWidth={10} strokeLinecap="round" fill="none" />
+            <path d={`M${jx + jw + 70},${jy - 30} L${jx + jw + 20},${jy - 30} M${jx + jw + 70},${jy - 30} l-20,-14 M${jx + jw + 70},${jy - 30} l-20,14`} stroke={C.jaune} strokeWidth={10} strokeLinecap="round" fill="none" />
+            <text x={420} y={jy + jh + 70} textAnchor="middle" fontFamily={POLICE} fontWeight={900} fontSize={40} fill="#ff8a5c">MÉTAL : se dilate beaucoup</text>
+          </g>
+        )}
+        {f >= p.aVerre && phase === 'eau' && (
+          <text x={420} y={jy + jh + 120} textAnchor="middle" fontFamily={POLICE} fontWeight={900} fontSize={40} fill="#bfe8ff" opacity={v(p.aVerre)}>VERRE : un peu</text>
+        )}
+        {f >= p.aDesserre && phase === 'eau' && (
+          <text x={420} y={jy + jh + 170} textAnchor="middle" fontFamily={POLICE} fontWeight={900} fontSize={46} fill={C.vert} opacity={v(p.aDesserre)}>→ ÇA SE DESSERRE ✓</text>
+        )}
+        {/* cuillère en levier */}
+        {phase === 'cuillere' && (
+          <g opacity={v(p.aCuillere)} transform={`translate(${jx + jw + 10},${jy - 20}) rotate(${-20 + levier * 18})`}>
+            <rect x={0} y={-8} width={230} height={16} rx={8} fill="#c9cfdb" />
+            <ellipse cx={-6} cy={0} rx={34} ry={20} fill="#c9cfdb" />
+          </g>
+        )}
+        {phase === 'cuillere' && f >= p.aPschitt && (
+          <g opacity={v(p.aPschitt) * (1 - v(p.aOuvre + 10))}>
+            {[0, 1, 2].map((i) => <path key={i} d={`M${jx + jw + 90 + i * 30},${jy - 80 - i * 20} q-30,10 -60,40`} stroke="#ffffff" strokeWidth={8} fill="none" strokeLinecap="round" />)}
+            <text x={jx + jw + 20} y={jy - 140} textAnchor="middle" fontFamily={POLICE} fontWeight={900} fontSize={64} fill="#ffffff" transform={`rotate(-10,${jx + jw + 20},${jy - 140})`}>PSCHITT !</text>
+          </g>
+        )}
+        {phase === 'cuillere' && (
+          <text x={420} y={jy + jh + 80} textAnchor="middle" fontFamily={POLICE} fontWeight={900} fontSize={42} fill={f >= p.aPschitt ? C.vert : '#fff'}>
+            {f < p.aLevier ? 'Glisse une cuillère sous le bord' : f < p.aPschitt ? 'Fais levier doucement' : 'L’air rentre, le vide disparaît ✓'}
+          </text>
+        )}
+      </svg>
+    </Panneau>
+  );
+};
+
+const interpolateCouleur = (a: string, b: string, t: number) => {
+  const pa = [1, 3, 5].map((i) => parseInt(a.slice(i, i + 2), 16));
+  const pb = [1, 3, 5].map((i) => parseInt(b.slice(i, i + 2), 16));
+  return `rgb(${pa.map((x, i) => Math.round(x + (pb[i] - x) * Math.max(0, Math.min(1, t)))).join(',')})`;
+};
