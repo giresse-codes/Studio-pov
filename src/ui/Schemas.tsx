@@ -470,3 +470,137 @@ export const SchemaPrecision: React.FC<{debut: number; fin: number; aGagne: numb
     </Panneau>
   );
 };
+
+/** Bulle de parole (repère écran) : la réplique d'un personnage rapportée en carte */
+export const BulleParole: React.FC<{a: number; fin: number; x: number; y: number; texte: string; queue?: 'gauche' | 'droite'; largeur?: number}> = ({
+  a, fin, x, y, texte, queue = 'gauche', largeur = 560,
+}) => {
+  const f = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  if (f < a || f > fin + 8) return null;
+  const s = spring({frame: f - a, fps, config: {damping: 10, stiffness: 180}});
+  const sortie = interpolate(f, [fin, fin + 8], [0, 1], clamp);
+  return (
+    <div style={{position: 'absolute', left: x, top: y, width: largeur, transform: `translate(-50%,-100%) scale(${s * (1 - sortie)})`, transformOrigin: queue === 'gauche' ? '20% 100%' : '80% 100%',
+      fontFamily: POLICE}}>
+      <div style={{background: '#fff', border: '6px solid #141418', borderRadius: 36, padding: '22px 28px', fontWeight: 900, fontSize: 46, lineHeight: 1.15, color: '#141418',
+        boxShadow: '0 10px 0 rgba(0,0,0,0.3)', textAlign: 'center'}}>{texte}</div>
+      <svg width={70} height={50} style={{position: 'absolute', bottom: -44, [queue === 'gauche' ? 'left' : 'right']: 70}}>
+        <path d={queue === 'gauche' ? 'M0,0 L60,0 L10,46 Z' : 'M10,0 L70,0 L60,46 Z'} fill="#fff" stroke="#141418" strokeWidth={6} strokeLinejoin="round" />
+        <rect x={0} y={-6} width={70} height={12} fill="#fff" />
+      </svg>
+    </div>
+  );
+};
+
+/** Liste à puces qui apparaissent une à une (icône + texte) */
+export const SchemaListe: React.FC<{debut: number; fin: number; titre: string; items: {a: number; icone: string; texte: string; couleur?: string}[]; tampon?: {a: number; texte: string}}> = ({
+  debut, fin, titre, items, tampon,
+}) => {
+  const f = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const sT = tampon ? spring({frame: f - tampon.a, fps, config: {damping: 9}}) : 0;
+  return (
+    <Panneau debut={debut} fin={fin} titre={titre} top={420} bottom={480}>
+      <div style={{display: 'flex', flexDirection: 'column', gap: 26, padding: '34px 40px'}}>
+        {items.map((it, i) => {
+          const s = spring({frame: f - it.a, fps, config: {damping: 12}});
+          return (
+            <div key={i} style={{display: 'flex', alignItems: 'center', gap: 24, opacity: f >= it.a ? 1 : 0, transform: `translateX(${(1 - s) * 250}px)`,
+              background: 'rgba(255,255,255,0.07)', borderRadius: 28, padding: '20px 24px', borderLeft: `12px solid ${it.couleur ?? C.jaune}`}}>
+              <span style={{fontSize: 80, lineHeight: 1}}>{it.icone}</span>
+              <span style={{color: '#fff', fontWeight: 900, fontSize: 48, lineHeight: 1.15}}>{it.texte}</span>
+            </div>
+          );
+        })}
+      </div>
+      {tampon && f >= tampon.a && (
+        <div style={{position: 'absolute', right: 40, bottom: 40, transform: `rotate(-12deg) scale(${sT})`, border: `10px solid ${C.rouge}`, color: C.rouge, fontWeight: 900,
+          fontSize: 90, padding: '6px 30px', borderRadius: 20, background: 'rgba(255,255,255,0.9)'}}>{tampon.texte}</div>
+      )}
+    </Panneau>
+  );
+};
+
+/** Équation en icônes : A + B = C (chaque terme apparaît à sa frame) */
+export const SchemaEquation: React.FC<{debut: number; fin: number; titre: string; termes: {a: number; icone: string; texte: string}[]; resultat: {a: number; icone: string; texte: string}}> = ({
+  debut, fin, titre, termes, resultat,
+}) => {
+  const f = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const bloc = (a: number, icone: string, texte: string, rouge?: boolean) => {
+    const s = spring({frame: f - a, fps, config: {damping: 10}});
+    return (
+      <div style={{opacity: f >= a ? 1 : 0, transform: `scale(${s})`, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
+        background: rouge ? 'rgba(255,71,87,0.2)' : 'rgba(255,255,255,0.08)', border: rouge ? `5px solid ${C.rouge}` : 'none', borderRadius: 30, padding: '24px 30px', minWidth: 220}}>
+        <span style={{fontSize: 120, lineHeight: 1}}>{icone}</span>
+        <span style={{color: rouge ? C.rouge : '#fff', fontWeight: 900, fontSize: 44, textAlign: 'center'}}>{texte}</span>
+      </div>
+    );
+  };
+  const op = (a: number, t: string) => <span style={{color: C.jaune, fontWeight: 900, fontSize: 100, opacity: f >= a ? 1 : 0}}>{t}</span>;
+  return (
+    <Panneau debut={debut} fin={fin} titre={titre} top={420} bottom={480}>
+      <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, padding: '40px 30px'}}>
+        <div style={{display: 'flex', alignItems: 'center', gap: 20}}>
+          {bloc(termes[0].a, termes[0].icone, termes[0].texte)}
+          {op(termes[1].a, '+')}
+          {bloc(termes[1].a, termes[1].icone, termes[1].texte)}
+        </div>
+        {op(resultat.a, '=')}
+        {bloc(resultat.a, resultat.icone, resultat.texte, true)}
+      </div>
+    </Panneau>
+  );
+};
+
+/** Étapes numérotées en icônes (grille 2 colonnes) */
+export const SchemaEtapes: React.FC<{debut: number; fin: number; titre: string; etapes: {a: number; icone: string; texte: string}[]}> = ({debut, fin, titre, etapes}) => {
+  const f = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  return (
+    <Panneau debut={debut} fin={fin} titre={titre} top={420} bottom={480}>
+      <div style={{display: 'flex', flexWrap: 'wrap', gap: 20, padding: '30px 30px', justifyContent: 'center'}}>
+        {etapes.map((e, i) => {
+          const s = spring({frame: f - e.a, fps, config: {damping: 10}});
+          return (
+            <div key={i} style={{width: e === etapes[etapes.length - 1] && etapes.length % 2 ? '96%' : '47%', opacity: f >= e.a ? 1 : 0, transform: `scale(${s})`,
+              background: 'rgba(255,255,255,0.08)', borderRadius: 28, padding: '18px 16px', display: 'flex', alignItems: 'center', gap: 14, position: 'relative'}}>
+              <div style={{position: 'absolute', top: -14, left: -10, width: 54, height: 54, borderRadius: 27, background: C.or, color: C.nuit, fontWeight: 900, fontSize: 34,
+                display: 'flex', alignItems: 'center', justifyContent: 'center'}}>{i + 1}</div>
+              <span style={{fontSize: 72, lineHeight: 1, marginLeft: 20}}>{e.icone}</span>
+              <span style={{color: '#fff', fontWeight: 900, fontSize: 38, lineHeight: 1.12}}>{e.texte}</span>
+            </div>
+          );
+        })}
+      </div>
+    </Panneau>
+  );
+};
+
+/** Deux choix illustrés (icône + texte), sans code */
+export const SchemaDeuxChoix: React.FC<{debut: number; fin: number; a1: number; a2: number; icone1: string; texte1: string; icone2: string; texte2: string; titre?: string}> = ({
+  debut, fin, a1, a2, icone1, texte1, icone2, texte2, titre = '2 OPTIONS',
+}) => {
+  const f = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const carte = (a: number, icone: string, texte: string, couleur: string) => {
+    const s = spring({frame: f - a, fps, config: {damping: 11}});
+    return (
+      <div style={{opacity: f >= a ? 1 : 0, transform: `scale(${s})`, border: `6px solid ${couleur}`, borderRadius: 32, padding: '26px 30px', background: 'rgba(255,255,255,0.07)',
+        display: 'flex', alignItems: 'center', gap: 26}}>
+        <span style={{fontSize: 130, lineHeight: 1}}>{icone}</span>
+        <span style={{color: '#fff', fontWeight: 900, fontSize: 54, lineHeight: 1.12}}>{texte}</span>
+      </div>
+    );
+  };
+  return (
+    <Panneau debut={debut} fin={fin} titre={titre} top={420} bottom={480}>
+      <div style={{display: 'flex', flexDirection: 'column', gap: 40, padding: '44px 40px'}}>
+        {carte(a1, icone1, texte1, C.vert)}
+        <div style={{textAlign: 'center', color: C.jaune, fontWeight: 900, fontSize: 60, opacity: f >= a2 ? 1 : 0}}>OU</div>
+        {carte(a2, icone2, texte2, C.rouge)}
+      </div>
+    </Panneau>
+  );
+};

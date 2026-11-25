@@ -20,3 +20,52 @@ export const Pancarte: React.FC<{lignes: string[]; couleur?: string; echelle?: n
     ))}
   </g>
 );
+
+/** Saladier de riz (repère : fond du saladier) */
+export const SaladierRiz: React.FC<{echelle?: number; telephone?: boolean}> = ({echelle = 1, telephone}) => (
+  <g transform={`scale(${echelle})`}>
+    {telephone && (
+      <g transform="translate(6,-62) rotate(12)">
+        <rect x={-20} y={-40} width={40} height={74} rx={8} fill="#2d2d3a" />
+        <rect x={-15} y={-34} width={30} height={60} rx={4} fill="#5ad1ff" />
+      </g>
+    )}
+    <ellipse cx={0} cy={-52} rx={78} ry={18} fill="#fffaf0" />
+    {Array.from({length: 18}).map((_, i) => (
+      <ellipse key={i} cx={-60 + (i % 9) * 15} cy={-56 + Math.floor(i / 9) * 8} rx={5} ry={2.5} fill="#e9e1cf" transform={`rotate(${i * 20},${-60 + (i % 9) * 15},${-56 + Math.floor(i / 9) * 8})`} />
+    ))}
+    <path d="M-82,-52 Q-76,0 0,0 Q76,0 82,-52 Z" fill="#5ac8c8" />
+    <path d="M-70,-36 Q0,-24 70,-36" stroke="#ffffff" strokeWidth={6} fill="none" opacity={0.6} />
+  </g>
+);
+
+/** Téléphone posé à plat (vu de côté, écran qui peut clignoter) */
+export const TelephoneAPlat: React.FC<{allume?: boolean; rot?: number}> = ({allume = true, rot = 0}) => (
+  <g transform={`rotate(${rot})`}>
+    <rect x={-70} y={-12} width={140} height={20} rx={8} fill="#2d2d3a" />
+    <rect x={-64} y={-14} width={128} height={6} rx={3} fill={allume ? '#5ad1ff' : '#1b1c25'} />
+  </g>
+);
+
+/** Fourchette (repère : centre) */
+export const Fourchette: React.FC<{rot?: number}> = ({rot = 0}) => (
+  <g transform={`rotate(${rot})`}>
+    <rect x={-80} y={-5} width={110} height={10} rx={5} fill="#c9cfdb" />
+    <rect x={30} y={-14} width={20} height={28} rx={6} fill="#c9cfdb" />
+    {[-12, -4, 4, 12].map((dy) => <rect key={dy} x={48} y={dy - 2} width={36} height={4} rx={2} fill="#c9cfdb" />)}
+  </g>
+);
+
+/** Casserole (repère : fond, posée sur la plaque) */
+export const Casserole: React.FC<{vapeur?: number; riz?: boolean}> = ({vapeur = 0, riz}) => (
+  <g>
+    {riz && <ellipse cx={0} cy={-96} rx={80} ry={14} fill="#fffaf0" />}
+    <rect x={-90} y={-100} width={180} height={100} rx={10} fill="#9aa3b5" />
+    <rect x={-90} y={-100} width={180} height={14} rx={6} fill="#c9cfdb" />
+    <rect x={90} y={-86} width={110} height={16} rx={8} fill="#2d2d3a" />
+    {vapeur > 0 && [0, 1, 2].map((i) => (
+      <path key={i} d={`M${-40 + i * 40},-120 q-14,-22 0,-44 q14,-22 0,-44`} stroke="#ffffff" strokeWidth={6} fill="none" opacity={0.55}
+        transform={`translate(0,${-((vapeur * 1.5 + i * 15) % 30)})`} strokeLinecap="round" />
+    ))}
+  </g>
+);
