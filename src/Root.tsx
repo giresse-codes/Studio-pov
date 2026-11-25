@@ -4,6 +4,7 @@ import {DUREE_TEST, Test} from './compositions/Test';
 import {DevsTeach1, DUREE_DEVSTEACH_1} from './compositions/DevsTeach1';
 import {DevsTeach2, DUREE_DEVSTEACH_2} from './compositions/DevsTeach2';
 import {DevsTeach3, DUREE_DEVSTEACH_3} from './compositions/DevsTeach3';
+import {DevsTeach4, DUREE_DEVSTEACH_4} from './compositions/DevsTeach4';
 import {chargerPolices} from './lib/polices';
 import {FPS, H, W} from './lib/theme';
 
@@ -16,5 +17,6 @@ export const Racine: React.FC = () => (
     <Composition id="devsteach-1" component={DevsTeach1} durationInFrames={DUREE_DEVSTEACH_1} fps={FPS} width={W} height={H} />
     <Composition id="devsteach-2" component={DevsTeach2} durationInFrames={DUREE_DEVSTEACH_2} fps={FPS} width={W} height={H} />
     <Composition id="devsteach-3" component={DevsTeach3} durationInFrames={DUREE_DEVSTEACH_3} fps={FPS} width={W} height={H} />
+    <Composition id="devsteach-4" component={DevsTeach4} durationInFrames={DUREE_DEVSTEACH_4} fps={FPS} width={W} height={H} />
   </>
 );

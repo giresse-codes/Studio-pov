@@ -331,3 +331,52 @@ export const SchemaBazar: React.FC<{debut: number; fin: number; aPile: number; a
     </Panneau>
   );
 };
+
+/** Trois liens qui marchent : page interne, lien externe dans un nouvel onglet, téléphone */
+export const SchemaTroisLiens: React.FC<{
+  debut: number; fin: number; aBalise: number; aDestination: number; aContact: number; aInsta: number; aBlank: number; aTel: number; aAppel: number;
+}> = ({debut, fin, aBalise, aDestination, aContact, aInsta, aBlank, aTel, aAppel}) => {
+  const f = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const v = (a: number) => interpolate(f, [a, a + 6], [0, 1], clamp);
+  const bloc = (a: number, contenu: React.ReactNode, etiquette: React.ReactNode, couleur: string) => {
+    const s = spring({frame: f - a, fps, config: {damping: 12}});
+    return (
+      <div style={{opacity: f >= a ? 1 : 0, transform: `translateX(${(1 - s) * 300}px)`, border: `5px solid ${couleur}`, borderRadius: 28, padding: '18px 22px',
+        background: 'rgba(255,255,255,0.06)'}}>
+        <div style={{background: '#0b0d1f', borderRadius: 16, padding: '14px 18px', fontFamily: POLICE_CODE, fontWeight: 700, fontSize: 38, color: '#e6e8ff',
+          whiteSpace: 'pre', lineHeight: 1.45}}>{contenu}</div>
+        <div style={{marginTop: 12, display: 'flex', gap: 14, flexWrap: 'wrap'}}>{etiquette}</div>
+      </div>
+    );
+  };
+  const tag = (a: number, t: string, fond: string = C.jaune) => (
+    <span style={{opacity: v(a), transform: `scale(${0.6 + v(a) * 0.4})`, background: fond, color: C.noir, fontWeight: 900, fontSize: 38, padding: '8px 18px', borderRadius: 12,
+      display: 'inline-block'}}>{t}</span>
+  );
+  const rose = '#ff79c6', bleu = '#8be9fd', jaune = '#f1fa8c';
+  return (
+    <Panneau debut={debut} fin={fin} titre="DES LIENS QUI MARCHENT" top={420} bottom={480}>
+      <div style={{display: 'flex', flexDirection: 'column', gap: 34, padding: '30px 30px'}}>
+        {bloc(aBalise, (
+          <>
+            <span style={{color: rose, background: f >= aBalise && f < aDestination ? 'rgba(255,121,198,0.25)' : 'transparent'}}>{'<a'}</span>{' '}
+            <span style={{color: bleu, background: f >= aDestination && f < aContact ? 'rgba(139,233,253,0.25)' : 'transparent'}}>href</span>=
+            <span style={{color: jaune, opacity: v(aContact)}}>"contact.html"</span><span style={{color: rose}}>{'>'}</span>Contact<span style={{color: rose}}>{'</a>'}</span>
+          </>
+        ), <>{tag(aBalise, 'a = un lien')}{tag(aDestination, 'href = destination 📍')}</>, C.vert)}
+        {bloc(aInsta, (
+          <>
+            <span style={{color: rose}}>{'<a'}</span> <span style={{color: bleu}}>href</span>=<span style={{color: jaune}}>"https://instagram.com/…"</span>{'\n   '}
+            <span style={{opacity: v(aBlank)}}><span style={{color: bleu}}>target</span>=<span style={{color: jaune}}>"_blank"</span></span><span style={{color: rose}}>{'>'}</span>Insta<span style={{color: rose}}>{'</a>'}</span>
+          </>
+        ), <>{tag(aInsta, 'adresse complète https://')}{tag(aBlank, 'nouvel onglet ↗', C.vert)}</>, '#5a9bff')}
+        {bloc(aTel, (
+          <>
+            <span style={{color: rose}}>{'<a'}</span> <span style={{color: bleu}}>href</span>=<span style={{color: jaune}}>"tel:0123456789"</span><span style={{color: rose}}>{'>'}</span>Appeler<span style={{color: rose}}>{'</a>'}</span>
+          </>
+        ), <>{tag(aTel, 'BONUS ⭐')}{tag(aAppel, '📞 1 clic = ça appelle', C.vert)}</>, C.or)}
+      </div>
+    </Panneau>
+  );
+};
