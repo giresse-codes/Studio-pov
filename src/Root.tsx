@@ -2,6 +2,7 @@ import React from 'react';
 import {Composition, continueRender, delayRender} from 'remotion';
 import {DUREE_TEST, Test} from './compositions/Test';
 import {DevsTeach1, DUREE_DEVSTEACH_1} from './compositions/DevsTeach1';
+import {DevsTeach2, DUREE_DEVSTEACH_2} from './compositions/DevsTeach2';
 import {chargerPolices} from './lib/polices';
 import {FPS, H, W} from './lib/theme';
 
@@ -12,5 +13,6 @@ export const Racine: React.FC = () => (
   <>
     <Composition id="Test" component={Test} durationInFrames={DUREE_TEST} fps={FPS} width={W} height={H} />
     <Composition id="devsteach-1" component={DevsTeach1} durationInFrames={DUREE_DEVSTEACH_1} fps={FPS} width={W} height={H} />
+    <Composition id="devsteach-2" component={DevsTeach2} durationInFrames={DUREE_DEVSTEACH_2} fps={FPS} width={W} height={H} />
   </>
 );

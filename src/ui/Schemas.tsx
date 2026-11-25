@@ -143,3 +143,107 @@ export const SchemaDeuxPistes: React.FC<{debut: number; fin: number; aPiste2: nu
     </Panneau>
   );
 };
+
+/** « Tes yeux » vs « Google » : ce que voit l'humain / ce que lit le robot */
+export const SchemaYeuxGoogle: React.FC<{debut: number; fin: number; aYeux: number; aGoogle: number; aPetit: number}> = ({debut, fin, aYeux, aGoogle, aPetit}) => {
+  const f = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const s1 = spring({frame: f - aYeux, fps, config: {damping: 12}});
+  const s2 = spring({frame: f - aGoogle, fps, config: {damping: 12}});
+  const petit = interpolate(f, [aPetit, aPetit + 10], [1, 0.45], clamp);
+  const bloc: React.CSSProperties = {flex: 1, borderRadius: 30, padding: '24px 22px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16};
+  return (
+    <Panneau debut={debut} fin={fin} titre="CE QUE CHACUN VOIT" top={420} bottom={500}>
+      <div style={{display: 'flex', gap: 24, padding: '30px 34px'}}>
+        <div style={{...bloc, background: 'rgba(255,255,255,0.08)', transform: `scale(${s1})`, opacity: f >= aYeux ? 1 : 0}}>
+          <div style={{fontSize: 90}}>👀</div>
+          <div style={{color: C.jaune, fontWeight: 900, fontSize: 46}}>TES YEUX</div>
+          <div style={{background: '#fff4e6', borderRadius: 20, width: '100%', height: 360, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <div style={{color: '#3b2418', fontWeight: 900, fontSize: 92, lineHeight: 0.95, textAlign: 'center'}}>CAFÉ<br />PANAME</div>
+          </div>
+          <div style={{color: C.vert, fontWeight: 900, fontSize: 40}}>« Un titre ! »</div>
+        </div>
+        <div style={{...bloc, background: 'rgba(255,255,255,0.08)', transform: `scale(${s2})`, opacity: f >= aGoogle ? 1 : 0}}>
+          <div style={{fontSize: 90}}>🤖</div>
+          <div style={{color: C.jaune, fontWeight: 900, fontSize: 46}}>GOOGLE</div>
+          <div style={{background: '#0b0d1f', borderRadius: 20, width: '100%', height: 360, display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontFamily: POLICE_CODE, fontWeight: 700}}>
+            <div style={{transform: `scale(${petit})`, textAlign: 'center'}}>
+              <div style={{color: '#ff79c6', fontSize: 50}}>{'<p>'}</div>
+              <div style={{color: '#e6e8ff', fontSize: 40}}>Café Paname</div>
+              <div style={{color: '#ff79c6', fontSize: 50}}>{'</p>'}</div>
+            </div>
+          </div>
+          <div style={{color: C.rouge, fontWeight: 900, fontSize: 40, opacity: f >= aPetit ? 1 : 0}}>« Un paragraphe. »</div>
+        </div>
+      </div>
+    </Panneau>
+  );
+};
+
+/** Hiérarchie des titres h1 > h2 > h3 (+ bénéfices) */
+export const SchemaHierarchie: React.FC<{debut: number; fin: number; aH1: number; aSeul: number; aH2: number; aH3: number; aGoogle: number; aLecteur: number}> = ({
+  debut, fin, aH1, aSeul, aH2, aH3, aGoogle, aLecteur,
+}) => {
+  const f = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const ligne = (a: number, balise: string, texte: string, retrait: number, taille: number, couleur: string) => {
+    const s = spring({frame: f - a, fps, config: {damping: 12}});
+    return (
+      <div style={{display: 'flex', alignItems: 'center', gap: 22, marginLeft: retrait, opacity: f >= a ? 1 : 0, transform: `translateX(${(1 - s) * 200}px)`}}>
+        <div style={{background: couleur, color: '#fff', fontFamily: POLICE_CODE, fontWeight: 700, fontSize: 44, padding: '8px 20px', borderRadius: 16, minWidth: 110, textAlign: 'center'}}>{balise}</div>
+        <div style={{color: '#fff', fontWeight: 900, fontSize: taille, lineHeight: 1}}>{texte}</div>
+      </div>
+    );
+  };
+  const badge = (a: number, texte: string) => {
+    const s = spring({frame: f - a, fps, config: {damping: 10}});
+    return <div style={{transform: `scale(${f >= a ? s : 0})`, background: C.vert, color: C.noir, fontWeight: 900, fontSize: 40, padding: '14px 24px', borderRadius: 22}}>{texte}</div>;
+  };
+  const seul = spring({frame: f - aSeul, fps, config: {damping: 9}});
+  return (
+    <Panneau debut={debut} fin={fin} titre="LES TITRES" top={420} bottom={500}>
+      <div style={{display: 'flex', flexDirection: 'column', gap: 34, padding: '40px 46px'}}>
+        <div style={{position: 'relative'}}>
+          {ligne(aH1, 'h1', 'Titre principal', 0, 72, '#e8642c')}
+          <div style={{position: 'absolute', right: 0, top: -30, transform: `rotate(8deg) scale(${f >= aSeul ? seul : 0})`, background: C.jaune, color: C.noir,
+            fontWeight: 900, fontSize: 36, padding: '8px 18px', borderRadius: 14}}>☝️ 1 SEUL / PAGE</div>
+        </div>
+        {ligne(aH2, 'h2', 'Grandes parties', 70, 58, '#2f6fe0')}
+        {ligne(aH3, 'h3', 'Sous-parties', 140, 46, '#8a4fff')}
+        {ligne(aH3 + 6, 'h3', 'Sous-parties', 140, 46, '#8a4fff')}
+        <div style={{display: 'flex', gap: 20, justifyContent: 'center', marginTop: 20, flexWrap: 'wrap'}}>
+          {badge(aGoogle, '🤖 Google ✓')}
+          {badge(aLecteur, '🔊 Lecteurs d’écran ✓')}
+        </div>
+      </div>
+    </Panneau>
+  );
+};
+
+/** Deux options de code côte à côte (avant le choix) */
+export const SchemaDeuxOptions: React.FC<{debut: number; fin: number; a1: number; a2: number; titre1: string; code1: string[]; titre2: string; code2: string[]}> = ({
+  debut, fin, a1, a2, titre1, code1, titre2, code2,
+}) => {
+  const f = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const opt = (a: number, titre: string, code: string[], couleur: string) => {
+    const s = spring({frame: f - a, fps, config: {damping: 12}});
+    return (
+      <div style={{opacity: f >= a ? 1 : 0, transform: `scale(${s})`, border: `5px solid ${couleur}`, borderRadius: 30, padding: '22px 26px', background: 'rgba(255,255,255,0.06)'}}>
+        <div style={{color: couleur, fontWeight: 900, fontSize: 50, marginBottom: 14}}>{titre}</div>
+        <div style={{background: '#0b0d1f', borderRadius: 18, padding: '16px 20px', fontFamily: POLICE_CODE, fontWeight: 700, fontSize: 38, color: '#e6e8ff', whiteSpace: 'pre', lineHeight: 1.4}}>
+          {code.map((l, i) => <div key={i}>{l}</div>)}
+        </div>
+      </div>
+    );
+  };
+  return (
+    <Panneau debut={debut} fin={fin} titre="2 OPTIONS" top={420} bottom={500}>
+      <div style={{display: 'flex', flexDirection: 'column', gap: 34, padding: '34px 40px'}}>
+        {opt(a1, titre1, code1, C.vert)}
+        {opt(a2, titre2, code2, C.rouge)}
+      </div>
+    </Panneau>
+  );
+};
