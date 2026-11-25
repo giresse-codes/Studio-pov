@@ -380,3 +380,93 @@ export const SchemaTroisLiens: React.FC<{
     </Panneau>
   );
 };
+
+/** Petit bouton coloré (HTML) pour les schémas CSS */
+const BoutonDemo: React.FC<{texte: string; couleur: string; taille?: number; s?: number}> = ({texte, couleur, taille = 36, s = 1}) => (
+  <span style={{display: 'inline-block', background: couleur, color: '#fff', fontWeight: 900, fontSize: taille, padding: '12px 24px', borderRadius: 18,
+    boxShadow: '0 6px 0 rgba(0,0,0,0.3)', transform: `scale(${s})`}}>{texte}</span>
+);
+
+/** Une classe : HTML class="…" + CSS .classe → seul le bouton ciblé change */
+export const SchemaClasse: React.FC<{debut: number; fin: number; aHTML: number; aCSS: number; aVert: number; classe?: string}> = ({debut, fin, aHTML, aCSS, aVert, classe = 'btn-acheter'}) => {
+  const f = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const v = (a: number) => interpolate(f, [a, a + 6], [0, 1], clamp);
+  const sV = spring({frame: f - aVert, fps, config: {damping: 8}});
+  const code: React.CSSProperties = {background: '#0b0d1f', borderRadius: 18, padding: '16px 22px', fontFamily: POLICE_CODE, fontWeight: 700, fontSize: 38, color: '#e6e8ff', whiteSpace: 'pre', lineHeight: 1.45};
+  return (
+    <Panneau debut={debut} fin={fin} titre="LA CLASSE" top={420} bottom={480}>
+      <div style={{display: 'flex', flexDirection: 'column', gap: 26, padding: '28px 36px'}}>
+        <div style={{opacity: v(aHTML)}}>
+          <div style={{color: '#e8642c', fontWeight: 900, fontSize: 40, marginBottom: 8}}>HTML</div>
+          <div style={code}><span style={{color: '#ff79c6'}}>{'<button'}</span> <span style={{color: '#8be9fd', background: 'rgba(62,224,122,0.2)'}}>class</span>=<span style={{color: '#50fa7b'}}>"{classe}"</span><span style={{color: '#ff79c6'}}>{'>'}</span>{'\n  Acheter'}<span style={{color: '#ff79c6'}}>{'</button>'}</span></div>
+        </div>
+        <div style={{opacity: v(aCSS)}}>
+          <div style={{color: '#5a9bff', fontWeight: 900, fontSize: 40, marginBottom: 8}}>CSS</div>
+          <div style={code}><span style={{color: '#50fa7b', background: 'rgba(62,224,122,0.2)'}}>.{classe}</span>{' {\n  '}<span style={{color: '#8be9fd'}}>background</span>: <span style={{color: '#50fa7b'}}>green</span>{';\n}'}</div>
+        </div>
+        <div style={{display: 'flex', gap: 18, justifyContent: 'center', marginTop: 10}}>
+          <BoutonDemo texte="Menu" couleur="#ff9f1a" />
+          <BoutonDemo texte="Réserver" couleur="#ff9f1a" />
+          <BoutonDemo texte="Acheter" couleur={f >= aVert ? '#1faa55' : '#ff9f1a'} s={f >= aVert ? 1 + (1 - sV) * 0.3 : 1} />
+        </div>
+      </div>
+    </Panneau>
+  );
+};
+
+/** Point (classe, plusieurs éléments) ou dièse (id, un seul élément) */
+export const SchemaPointDiese: React.FC<{debut: number; fin: number; aPoint: number; aDiese: number}> = ({debut, fin, aPoint, aDiese}) => {
+  const f = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const carte = (a: number, signe: string, nom: string, texte: string, contenu: React.ReactNode, couleur: string) => {
+    const s = spring({frame: f - a, fps, config: {damping: 12}});
+    return (
+      <div style={{flex: 1, opacity: f >= a ? 1 : 0, transform: `scale(${s})`, border: `5px solid ${couleur}`, borderRadius: 30, padding: '26px 20px', background: 'rgba(255,255,255,0.06)',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18}}>
+        <div style={{fontFamily: POLICE_CODE, fontWeight: 700, fontSize: 84, color: couleur, lineHeight: 1}}>{signe}</div>
+        <div style={{color: '#fff', fontWeight: 900, fontSize: 52}}>{nom}</div>
+        <div style={{color: C.vert, fontWeight: 800, fontSize: 36, textAlign: 'center'}}>{texte}</div>
+        <div style={{display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center'}}>{contenu}</div>
+      </div>
+    );
+  };
+  return (
+    <Panneau debut={debut} fin={fin} titre="POINT OU DIÈSE ?" top={420} bottom={480}>
+      <div style={{display: 'flex', gap: 24, padding: '34px 34px'}}>
+        {carte(aPoint, '.btn', 'classe', 'à plein d’éléments', <>{[0, 1, 2, 3].map((i) => <BoutonDemo key={i} texte="btn" couleur="#1faa55" taille={28} />)}</>, C.vert)}
+        {carte(aDiese, '#logo', 'id', 'un seul élément unique', <BoutonDemo texte="👑 logo" couleur="#8a4fff" taille={32} />, '#b48cff')}
+      </div>
+    </Panneau>
+  );
+};
+
+/** La règle la plus précise gagne */
+export const SchemaPrecision: React.FC<{debut: number; fin: number; aGagne: number; aClasse: number}> = ({debut, fin, aGagne, aClasse}) => {
+  const f = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const sG = spring({frame: f - aGagne, fps, config: {damping: 9}});
+  const k = interpolate(f, [aGagne, aGagne + 10], [0, 1], clamp);
+  const regle = (sel: string, val: string, couleur: string, gagnant: boolean, precision: string) => (
+    <div style={{display: 'flex', alignItems: 'center', gap: 22, opacity: gagnant ? 1 : 1 - k * 0.55, transform: `scale(${gagnant ? 1 + k * 0.06 : 1 - k * 0.06})`,
+      border: `5px solid ${gagnant && k > 0.5 ? C.or : 'transparent'}`, borderRadius: 26, padding: '16px 20px', background: 'rgba(255,255,255,0.06)'}}>
+      <div style={{flex: 1, fontFamily: POLICE_CODE, fontWeight: 700, fontSize: 40, color: '#e6e8ff', whiteSpace: 'pre'}}>
+        <span style={{color: gagnant ? '#50fa7b' : '#ffb86c'}}>{sel}</span>{' { '}<span style={{color: couleur}}>{val}</span>{' }'}
+        <div style={{fontFamily: "'Inter Studio', sans-serif", fontWeight: 900, fontSize: 32, color: '#c9d0ff', marginTop: 6}}>{precision}</div>
+      </div>
+      {gagnant && <div style={{fontSize: 90, transform: `scale(${f >= aGagne ? sG : 0})`}}>🏆</div>}
+      {!gagnant && <div style={{fontSize: 70, opacity: k}}>❌</div>}
+    </div>
+  );
+  return (
+    <Panneau debut={debut} fin={fin} titre="QUI GAGNE ?" top={420} bottom={480}>
+      <div style={{display: 'flex', flexDirection: 'column', gap: 28, padding: '34px 36px'}}>
+        {regle('button', 'orange', '#ff9f1a', false, 'tous les boutons')}
+        {regle('.btn-acheter', 'green', '#50fa7b', true, 'UN bouton précis')}
+        <div style={{textAlign: 'center', marginTop: 10, opacity: interpolate(f, [aClasse, aClasse + 8], [0, 1], clamp)}}>
+          <span style={{background: C.jaune, color: C.noir, fontWeight: 900, fontSize: 50, padding: '12px 28px', borderRadius: 20}}>PLUS PRÉCIS = GAGNE</span>
+        </div>
+      </div>
+    </Panneau>
+  );
+};
