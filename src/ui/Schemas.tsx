@@ -247,3 +247,87 @@ export const SchemaDeuxOptions: React.FC<{debut: number; fin: number; a1: number
     </Panneau>
   );
 };
+
+/**
+ * Le chemin d'un fichier = un GPS : arborescence + repère qui se déplace.
+ * Étapes : départ (index.html) → « à côté » (rien) → entre dans images/ → photo trouvée → ../ remonte.
+ */
+export const SchemaChemin: React.FC<{
+  debut: number; fin: number; aCote: number; aRien: number; aImages: number; aTrouve: number; aRemonte: number; titre?: string;
+}> = ({debut, fin, aCote, aRien, aImages, aTrouve, aRemonte, titre = 'LE CHEMIN = UN GPS'}) => {
+  const f = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const H = 118;
+  const rows = [
+    {ic: '📁', nom: 'site/', ind: 0},
+    {ic: '📄', nom: 'index.html', ind: 1},
+    {ic: '❓', nom: '(à côté)', ind: 1, fantome: true},
+    {ic: '📁', nom: 'images/', ind: 1},
+    {ic: '🖼️', nom: 'photo.jpg', ind: 2},
+  ];
+  // position du repère (index de ligne, fractionnaire)
+  const etapes: [number, number][] = [[debut, 1], [aCote, 2], [aImages, 3], [aTrouve, 4], [aRemonte, 0]];
+  let pos = 1;
+  for (const [a, r] of etapes) pos = pos + (r - pos) * interpolate(f, [a, a + 10], [0, 1], {...clamp});
+  const rien = f >= aRien && f < aImages;
+  const trouve = f >= aTrouve;
+  const sR = spring({frame: f - aRemonte, fps, config: {damping: 12}});
+  const codeImages = interpolate(f, [aImages, aImages + 8], [0, 1], clamp);
+  return (
+    <Panneau debut={debut} fin={fin} titre={titre} top={420} bottom={500}>
+      <div style={{position: 'relative', margin: '30px 40px 0', height: H * rows.length}}>
+        {rows.map((r, i) => (
+          <div key={i} style={{position: 'absolute', top: i * H, left: r.ind * 90, height: H, display: 'flex', alignItems: 'center', gap: 18,
+            opacity: r.fantome ? (f >= aCote ? 0.9 : 0) : 1}}>
+            <span style={{fontSize: 64}}>{r.ic}</span>
+            <span style={{fontFamily: POLICE_CODE, fontWeight: 700, fontSize: 52, color: r.fantome ? '#8890b8' : i === 4 && trouve ? C.vert : '#fff',
+              fontStyle: r.fantome ? 'italic' : 'normal'}}>{r.nom}</span>
+            {r.fantome && rien && <span style={{color: C.rouge, fontWeight: 900, fontSize: 56}}>❌ RIEN</span>}
+            {i === 4 && trouve && <span style={{color: C.vert, fontWeight: 900, fontSize: 56}}>✓</span>}
+          </div>
+        ))}
+        {/* repère GPS */}
+        <div style={{position: 'absolute', right: 30, top: pos * H + 10, fontSize: 80, transform: `rotate(${Math.sin(f / 5) * 8}deg)`}}>📍</div>
+        {/* ../ : remonte d'un dossier */}
+        {f >= aRemonte && (
+          <div style={{position: 'absolute', left: 200, top: 0.5 * H, height: 3 * H, display: 'flex', alignItems: 'center', transform: `scale(${sR})`, transformOrigin: 'left center'}}>
+            <svg width={90} height={3 * H} style={{position: 'absolute', left: 230}}>
+              <path d={`M20,${3 * H - 20} C80,${3 * H - 40} 80,40 20,20`} stroke={C.jaune} strokeWidth={10} fill="none" strokeLinecap="round" />
+              <path d="M20,20 L44,8 M20,20 L40,40" stroke={C.jaune} strokeWidth={10} strokeLinecap="round" />
+            </svg>
+            <div style={{position: 'absolute', left: 330, background: C.jaune, color: C.noir, fontWeight: 900, fontSize: 38, padding: '8px 18px', borderRadius: 14, whiteSpace: 'nowrap',
+              fontFamily: POLICE_CODE}}>../ = remonte</div>
+          </div>
+        )}
+      </div>
+      {/* le code */}
+      <div style={{margin: '26px 40px', background: '#0b0d1f', borderRadius: 22, padding: '20px 26px', border: `4px solid ${codeImages > 0.5 ? C.vert : C.rouge}`,
+        fontFamily: POLICE_CODE, fontWeight: 700, fontSize: 46, color: '#e6e8ff', whiteSpace: 'nowrap'}}>
+        <span style={{color: '#ff79c6'}}>{'<img '}</span><span style={{color: '#8be9fd'}}>src</span>=<span style={{color: '#f1fa8c'}}>"</span>
+        <span style={{color: C.vert, display: 'inline-block', maxWidth: codeImages * 260, overflow: 'hidden', verticalAlign: 'bottom'}}>images/</span>
+        <span style={{color: '#f1fa8c'}}>photo.jpg"</span><span style={{color: '#ff79c6'}}>{'>'}</span>
+      </div>
+    </Panneau>
+  );
+};
+
+/** 200 photos en vrac à côté de index.html : le bazar */
+export const SchemaBazar: React.FC<{debut: number; fin: number; aPile: number; aDeuxCents: number}> = ({debut, fin, aPile, aDeuxCents}) => {
+  const f = useCurrentFrame();
+  const n = Math.floor(interpolate(f, [aPile, aDeuxCents + 6], [6, 200], clamp));
+  const ic = ['🖼️', '📷', '🌄', '🏞️'];
+  return (
+    <Panneau debut={debut} fin={fin} titre="TOUT EN VRAC…" top={420} bottom={500}>
+      <div style={{display: 'flex', flexWrap: 'wrap', gap: 6, padding: '24px 34px', justifyContent: 'center'}}>
+        {Array.from({length: n}).map((_, i) => (
+          i === 87 ? (
+            <div key={i} style={{fontFamily: POLICE_CODE, fontWeight: 700, fontSize: 22, background: '#e8642c', color: '#fff', padding: '6px 8px', borderRadius: 8}}>index.html</div>
+          ) : <span key={i} style={{fontSize: 38, transform: `rotate(${((i * 37) % 30) - 15}deg)`}}>{ic[i % 4]}</span>
+        ))}
+      </div>
+      <div style={{position: 'absolute', bottom: 30, left: 0, right: 0, textAlign: 'center', opacity: f >= aDeuxCents ? 1 : 0}}>
+        <span style={{background: C.rouge, color: '#fff', fontWeight: 900, fontSize: 64, padding: '12px 30px', borderRadius: 24}}>200 PHOTOS 😵</span>
+      </div>
+    </Panneau>
+  );
+};
