@@ -1,9 +1,9 @@
-# Plan des 90 vidéos
+# Plan des 45 vidéos
 
-15 histoires × 2 parties par chaîne. Partie `a` = situation + choix. Partie `b` = bonne réponse + explication.
+Une histoire = une seule vidéo complète (45 s à 1 min 30) : hook, situation, « Tu ferais quoi ? », réponse et explication, accroche vers l'épisode suivant. Scripts : `scripts/<chaine>/<numero>.md`.
 
 ## DevsTeach (ordre d'apprentissage, avec Max)
-1. Le site est moche : HTML, CSS, JS — à quoi sert chacun
+1. Le site est moche : HTML, CSS, JS
 2. Max veut un titre géant : les balises HTML
 3. Les images ne s'affichent pas : les chemins de fichiers
 4. Le lien qui mène nulle part : les liens `<a>`
@@ -20,21 +20,21 @@
 15. Max découvre l'IA : bien coder avec l'IA
 
 ## Astuces (avec Bobo)
-1. Téléphone tombé dans l'eau : pourquoi le riz est un mythe
-2. Bocal impossible à ouvrir : le vide d'air et la dilatation
-3. Bouche en feu à cause du piment : le lait plutôt que l'eau
-4. Batterie à 1 % : ce qui vide vraiment un téléphone
-5. Avocat dur comme une pierre : l'éthylène
-6. Wi-Fi qui rame : interférences et emplacement de la box
-7. Chewing-gum dans les cheveux : le gras qui dissout
-8. Tache d'huile avant un entretien : comment agit le savon
-9. Boisson chaude, invités dans 5 min : glace + sel
-10. Coupure de courant, frigo plein : combien de temps ça tient
-11. Moustique la nuit : comment il te trouve
-12. Lunettes embuées : la condensation
-13. Clé cassée dans la serrure : comment marche une serrure
-14. Ampoule cassée dans la douille : en sécurité
-15. Le micro-ondes fait des étincelles : pourquoi le métal
+1. Téléphone tombé dans l'eau
+2. Bocal impossible à ouvrir
+3. Bouche en feu à cause du piment
+4. Batterie à 1 %
+5. Avocat dur comme une pierre
+6. Wi-Fi qui rame
+7. Chewing-gum dans les cheveux
+8. Tache d'huile avant un entretien
+9. Boisson chaude, invités dans 5 min
+10. Coupure de courant, frigo plein
+11. Moustique la nuit
+12. Lunettes embuées
+13. Clé cassée dans la serrure
+14. Ampoule cassée dans la douille
+15. Le micro-ondes fait des étincelles
 
 ## Mode Survie
 1. Perdu en forêt à la tombée de la nuit

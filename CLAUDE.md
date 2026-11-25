@@ -10,7 +10,7 @@ Tu es le studio vidéo de mes 3 chaînes TikTok / YouTube Shorts francophones (p
 | `#astuce` | Astuces | Galères du quotidien + explication de COMMENT ÇA MARCHE | Très drôle | **Toi** + **Bobo**, colocataire maladroit |
 | `#survie` | Mode Survie | Situations extrêmes, ambiance documentaire sombre et tendue | Grave, PAS d'humour | **Toi**, seul |
 
-Le plan des 90 vidéos (15 histoires × 2 parties par chaîne) est dans `scripts/PLAN.md`.
+Le plan des 45 vidéos (15 histoires par chaîne, **une vidéo complète par histoire**) est dans `scripts/PLAN.md`.
 
 ## Le style (obligatoire) — « vie simulée façon jeu vidéo 2D »
 
@@ -31,8 +31,12 @@ Animation **2D vectorielle flat**, comme un jeu de simulation de vie vu de côt�
 - **Objets qui apparaissent** avec un petit rebond et des étincelles (`pop`), étiquettes de prix ou de valeur au-dessus des objets (« 999 € », « 9 % »).
 - **Sous-titres** en bas de l'écran, mot à mot, synchronisés à la voix, police grasse blanche avec contour noir, mot clé en jaune. Les balises entre crochets du script (`[complice]`, `[grave]`…) sont des indications de jeu pour la voix : ne JAMAIS les afficher.
 - **Transitions** : zoom rapide d'une zone à l'autre de la pièce, changement de pièce par un glissement latéral, et pour les ellipses une carte plein écran `9 MINUTES PLUS TARD`.
-- **Fin de partie 1** : carte de jeu géante `TU FERAIS QUOI ?` avec 2 gros boutons (🟢 vert / 🔴 rouge, textes dans le script), puis `Écris-le en commentaire 👇 pour la partie 2`.
-- **Partie 2** : rappel rapide de la partie 1 + résultat du choix, puis la bonne réponse expliquée avec des cartes, des schémas animés et du code à l'écran pour DevsTeach. Fin : `Abonne-toi pour la prochaine situation`.
+- **Déroulé de chaque vidéo (une seule vidéo complète par histoire, 45 s à 1 min 30)** :
+  1. **Hook** dans les 2 premières secondes : la 1re phrase du script, gros texte à l'écran + action forte (zoom, sursaut, objet qui tombe).
+  2. **Situation** : la galère, avec le HUD qui s'emballe.
+  3. **« Tu ferais quoi ? »** : à la balise `[pause]` du script, carte de jeu géante `TU FERAIS QUOI ?` avec les 2 boutons (🟢 vert / 🔴 rouge, textes dans « Choix ») et un compte à rebours de 3 secondes, petit texte `Réponds en commentaire 👇`.
+  4. **Réponse et explication** : le bon bouton s'allume (son `ding`), le mauvais se grise ; puis l'explication avec des cartes, des schémas animés et du code à l'écran pour DevsTeach (ce qu'il faut afficher est indiqué dans « Choix »).
+  5. **Accroche finale** : la phrase `[teaser]` + carte `Abonne-toi pour la suite`.
 - Le visuel suit EXACTEMENT la voix : chaque phrase = une action visible à l'écran. Quand la voix dit « tu », c'est le personnage **Toi** qui agit.
 - **Humour visuel** sur `#devsteach` et `#astuce` (réactions exagérées, chutes, objets qui volent, Bobo qui fait n'importe quoi en arrière-plan) — jamais sur `#survie`.
 - Ambiance `#survie` : mêmes personnages et même style, mais palette sombre et froide, nuit, brume, peu de lumière, HUD qui passe à l'orange puis au rouge.
@@ -58,11 +62,11 @@ Mixage : voix 100 %, effets 40-60 %, ambiance 15-20 %, musique 10-15 % avec bais
 
 ## Commandes
 
-Quand j'écris `#devsteach 1a`, `#astuce 1a`, `#survie 1b`… (numéro de l'histoire + `a` = partie 1, `b` = partie 2) :
+Quand j'écris `#devsteach 1`, `#astuce 4`, `#survie 12`… (numéro de l'histoire) :
 
-1. Lis le script correspondant dans `scripts/<chaine>/<numero>.md` (voix off, choix, hook, légende, hashtags).
+1. Lis le script correspondant dans `scripts/<chaine>/<numero>.md` (style de voix, voix off, choix et bonne réponse, bandeau, hook, légende, hashtags).
 2. Récupère la voix off que je dépose dans `videos/<chaine>-<numero>/voix.wav` (ou .mp3).
-3. Calcule le timing mot à mot de la voix (whisper si disponible, sinon alignement avec le texte du script, sans les balises entre crochets).
+3. Calcule le timing mot à mot de la voix (whisper si disponible, sinon alignement avec le texte du script, sans les balises entre crochets). Repère le moment de la balise `[pause]` : c'est là que se place l'écran de choix (prolonge-le de 3 secondes si la voix n'y laisse pas de silence).
 4. Découpe en scènes, réutilise ou crée les décors et personnages nécessaires, puis anime directement. Le « Bandeau » du script devient la carte d'ouverture (jour, heure, lieu).
 5. Rends `out/<chaine>-<numero>.mp4` et écris `videos/<chaine>-<numero>/legende.txt` : hook (1 ligne), légende prête à publier, hashtags.
 6. Vérifie le rendu (captures d'images clés), corrige ce qui ne va pas, puis commit et push.
