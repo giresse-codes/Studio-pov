@@ -19,9 +19,9 @@ export type NomIcone =
   | 'lit' | 'camembert' | 'cible' | 'video' | 'glacon' | 'goutte' | 'verre' | 'couverts'
   | 'congelateur' | 'sachet' | 'soleil' | 'velo' | 'thermometre' | 'ampoule' | 'tshirt'
   | 'cadenas' | 'carton' | 'livre' | 'enceinte' | 'anneaux' | 'gateau' | 'mixage' | 'micro' | 'bulle'
-  | 'distributeur' | 'pin' | 'haltere' | 'canette';
+  | 'distributeur' | 'pin' | 'haltere' | 'canette' | 'tournevis' | 'batterie' | 'eclair';
 
-const RONDES = new Set<NomIcone>(['piece', 'globe', 'horloge', 'coche', 'croix', 'coeur', 'reseau', 'ballon', 'cadeau', 'tirelire', 'personne', 'camembert', 'cible', 'soleil', 'velo', 'haltere']);
+const RONDES = new Set<NomIcone>(['piece', 'globe', 'horloge', 'coche', 'croix', 'coeur', 'reseau', 'ballon', 'cadeau', 'tirelire', 'personne', 'camembert', 'cible', 'soleil', 'velo', 'haltere', 'eclair']);
 
 type Props = {
   nom: NomIcone;
@@ -509,6 +509,21 @@ export const IconeNeon: React.FC<Props> = ({
         <path d="M38 40 C46 48 54 32 62 40 M38 56 C46 64 54 48 62 56" {...t} strokeOpacity={0.6} />
       </>
     ),
+    tournevis: (
+      <>
+        <rect x={40} y={4} width={20} height={40} rx={8} {...t} {...f} />
+        <path d="M44 16 V32 M56 16 V32" {...t} strokeOpacity={0.6} />
+        <path d="M50 44 V84 M44 84 H56 L50 96 Z" {...t} />
+      </>
+    ),
+    batterie: (
+      <>
+        <rect x={8} y={26} width={76} height={48} rx={8} {...t} {...f} />
+        <path d="M84 40 H92 V60 H84" {...t} />
+        <rect x={16} y={34} width={36} height={32} rx={3} {...plein} fillOpacity={0.7} />
+      </>
+    ),
+    eclair: <path d="M58 4 L22 56 H48 L40 96 L78 40 H52 Z" {...t} {...f} />,
   };
 
   return (

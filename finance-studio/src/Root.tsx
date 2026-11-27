@@ -9,6 +9,7 @@ import {Finance04, DUREE_F04} from './videos/Finance04';
 import {Finance05, DUREE_F05} from './videos/Finance05';
 import {Finance06, DUREE_F06} from './videos/Finance06';
 import {Finance07, DUREE_F07} from './videos/Finance07';
+import {Finance08, DUREE_F08} from './videos/Finance08';
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -20,5 +21,6 @@ export const RemotionRoot: React.FC = () => (
     <Composition id="finance-05" component={Finance05} durationInFrames={Math.round(DUREE_F05 * FPS)} fps={FPS} width={W} height={H} />
     <Composition id="finance-06" component={Finance06} durationInFrames={Math.round(DUREE_F06 * FPS)} fps={FPS} width={W} height={H} />
     <Composition id="finance-07" component={Finance07} durationInFrames={Math.round(DUREE_F07 * FPS)} fps={FPS} width={W} height={H} />
+    <Composition id="finance-08" component={Finance08} durationInFrames={Math.round(DUREE_F08 * FPS)} fps={FPS} width={W} height={H} />
   </>
 );
