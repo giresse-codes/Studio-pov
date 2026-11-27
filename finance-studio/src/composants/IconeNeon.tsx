@@ -18,9 +18,10 @@ export type NomIcone =
   | 'personne' | 'tableauCourbe' | 'contrat' | 'flecheDroite' | 'signal' | 'portefeuille'
   | 'lit' | 'camembert' | 'cible' | 'video' | 'glacon' | 'goutte' | 'verre' | 'couverts'
   | 'congelateur' | 'sachet' | 'soleil' | 'velo' | 'thermometre' | 'ampoule' | 'tshirt'
-  | 'cadenas' | 'carton' | 'livre' | 'enceinte' | 'anneaux' | 'gateau' | 'mixage' | 'micro' | 'bulle';
+  | 'cadenas' | 'carton' | 'livre' | 'enceinte' | 'anneaux' | 'gateau' | 'mixage' | 'micro' | 'bulle'
+  | 'distributeur' | 'pin' | 'haltere' | 'canette';
 
-const RONDES = new Set<NomIcone>(['piece', 'globe', 'horloge', 'coche', 'croix', 'coeur', 'reseau', 'ballon', 'cadeau', 'tirelire', 'personne', 'camembert', 'cible', 'soleil', 'velo']);
+const RONDES = new Set<NomIcone>(['piece', 'globe', 'horloge', 'coche', 'croix', 'coeur', 'reseau', 'ballon', 'cadeau', 'tirelire', 'personne', 'camembert', 'cible', 'soleil', 'velo', 'haltere']);
 
 type Props = {
   nom: NomIcone;
@@ -475,6 +476,39 @@ export const IconeNeon: React.FC<Props> = ({
       </>
     ),
     bulle: <path d="M14 8 H86 C92 8 96 12 96 18 V60 C96 66 92 70 86 70 H40 L20 92 L24 70 H14 C8 70 4 66 4 60 V18 C4 12 8 8 14 8 Z" {...t} {...f} />,
+    distributeur: (
+      <>
+        <rect x={12} y={2} width={76} height={96} rx={6} {...t} {...f} />
+        <rect x={20} y={10} width={44} height={60} rx={3} {...t} />
+        <path d="M20 30 H64 M20 50 H64" {...t} strokeOpacity={0.6} />
+        <path d="M28 18 V26 M40 18 V26 M52 18 V26 M28 38 V46 M40 38 V46 M52 38 V46 M28 58 V66 M40 58 V66 M52 58 V66" {...t} strokeOpacity={0.8} />
+        <rect x={70} y={14} width={12} height={8} rx={2} {...t} />
+        <path d="M72 32 H80 M72 40 H80" {...t} />
+        <rect x={20} y={78} width={44} height={12} rx={3} {...t} />
+      </>
+    ),
+    pin: (
+      <>
+        <path d="M50 96 C36 74 18 58 18 38 C18 18 32 6 50 6 C68 6 82 18 82 38 C82 58 64 74 50 96 Z" {...t} {...f} />
+        <circle cx={50} cy={38} r={12} {...t} />
+      </>
+    ),
+    haltere: (
+      <>
+        <path d="M24 50 H76" {...t} />
+        <rect x={10} y={28} width={14} height={44} rx={4} {...t} {...f} />
+        <rect x={76} y={28} width={14} height={44} rx={4} {...t} {...f} />
+        <path d="M4 40 V60 M96 40 V60" {...t} />
+      </>
+    ),
+    canette: (
+      <>
+        <path d="M30 14 H70 L74 22 V84 L70 92 H30 L26 84 V22 Z" {...t} {...f} />
+        <path d="M26 22 H74 M26 84 H74" {...t} />
+        <path d="M40 8 H60" {...t} />
+        <path d="M38 40 C46 48 54 32 62 40 M38 56 C46 64 54 48 62 56" {...t} strokeOpacity={0.6} />
+      </>
+    ),
   };
 
   return (
