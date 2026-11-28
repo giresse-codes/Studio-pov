@@ -19,7 +19,8 @@ export type NomIcone =
   | 'lit' | 'camembert' | 'cible' | 'video' | 'glacon' | 'goutte' | 'verre' | 'couverts'
   | 'congelateur' | 'sachet' | 'soleil' | 'velo' | 'thermometre' | 'ampoule' | 'tshirt'
   | 'cadenas' | 'carton' | 'livre' | 'enceinte' | 'anneaux' | 'gateau' | 'mixage' | 'micro' | 'bulle'
-  | 'distributeur' | 'pin' | 'haltere' | 'canette' | 'tournevis' | 'batterie' | 'eclair' | 'banque';
+  | 'distributeur' | 'pin' | 'haltere' | 'canette' | 'tournevis' | 'batterie' | 'eclair' | 'banque'
+  | 'canape' | 'aspirateur' | 'nettoyeur' | 'flacon' | 'bidon';
 
 const RONDES = new Set<NomIcone>(['piece', 'globe', 'horloge', 'coche', 'croix', 'coeur', 'reseau', 'ballon', 'cadeau', 'tirelire', 'personne', 'camembert', 'cible', 'soleil', 'velo', 'haltere', 'eclair']);
 
@@ -528,6 +529,43 @@ export const IconeNeon: React.FC<Props> = ({
       <>
         <path d="M6 32 L50 6 L94 32 Z" {...t} {...f} />
         <path d="M10 92 H90 M14 82 H86 M18 38 V78 M38 38 V78 M62 38 V78 M82 38 V78" {...t} />
+      </>
+    ),
+    canape: (
+      <>
+        <path d="M14 40 V30 C14 22 20 18 28 18 H72 C80 18 86 22 86 30 V40" {...t} {...f} />
+        <path d="M4 50 C4 42 14 40 16 50 V62 H84 V50 C86 40 96 42 96 50 V80 H4 Z" {...t} {...f} />
+        <path d="M10 80 V92 M90 80 V92 M50 62 V80" {...t} />
+      </>
+    ),
+    aspirateur: (
+      <>
+        <rect x={8} y={50} width={46} height={36} rx={14} {...t} {...f} />
+        <circle cx={20} cy={88} r={6} {...t} />
+        <circle cx={44} cy={88} r={6} {...t} />
+        <path d="M50 56 C70 50 74 30 80 14 M80 14 L92 18 M76 12 L94 8" {...t} />
+      </>
+    ),
+    nettoyeur: (
+      <>
+        <rect x={10} y={40} width={44} height={46} rx={8} {...t} {...f} />
+        <circle cx={22} cy={90} r={6} {...t} />
+        <path d="M54 56 C70 56 70 30 82 28 L94 22 M82 28 L86 40" {...t} />
+        <path d="M18 54 H46" {...t} strokeOpacity={0.6} />
+      </>
+    ),
+    flacon: (
+      <>
+        <path d="M36 28 H64 L70 40 V92 H30 V40 Z" {...t} {...f} />
+        <path d="M42 28 V16 H58 V28 M58 16 L74 10 V20" {...t} />
+        <path d="M38 56 H62 M38 68 H56" {...t} strokeOpacity={0.6} />
+      </>
+    ),
+    bidon: (
+      <>
+        <path d="M16 22 H70 L84 36 V92 H16 Z" {...t} {...f} />
+        <path d="M30 22 V10 H48 V22 M60 22 C72 22 72 40 84 40" {...t} />
+        <path d="M30 58 C36 50 42 66 50 58 S64 52 70 58" {...t} strokeOpacity={0.6} />
       </>
     ),
   };
