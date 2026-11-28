@@ -87,3 +87,43 @@ export const SaucePiquante: React.FC = () => (
     <text x={0} y={-2} textAnchor="middle" fontSize={24}>🌶️</text>
   </g>
 );
+
+/** Verre (repère main ou table : fond du verre) ; contenu eau / lait / vide */
+export const Verre: React.FC<{contenu?: 'eau' | 'lait' | 'vide'; niveau?: number; echelle?: number}> = ({contenu = 'eau', niveau = 0.8, echelle = 1}) => {
+  const h = 90, w = 56;
+  const c = contenu === 'lait' ? '#ffffff' : '#7fc6ff';
+  return (
+    <g transform={`scale(${echelle}) translate(0,-${h})`}>
+      {contenu !== 'vide' && <path d={`M${-w / 2 + 4 + (1 - niveau) * 3},${h * (1 - niveau)} L${w / 2 - 4 - (1 - niveau) * 3},${h * (1 - niveau)} L${w / 2 - 8},${h - 4} L${-w / 2 + 8},${h - 4} Z`} fill={c} opacity={contenu === 'lait' ? 0.95 : 0.7} />}
+      <path d={`M${-w / 2},0 L${w / 2},0 L${w / 2 - 6},${h} L${-w / 2 + 6},${h} Z`} fill="#ffffff" opacity={0.25} stroke="#dff2ff" strokeWidth={4} />
+      <rect x={-w / 2 + 8} y={10} width={6} height={h - 24} rx={3} fill="#fff" opacity={0.6} />
+    </g>
+  );
+};
+
+/** Taco (repère main) */
+export const Taco: React.FC<{croque?: boolean}> = ({croque}) => (
+  <g transform="translate(0,-30)">
+    <path d="M-60,20 Q0,-70 60,20 Z" fill="#f5c542" />
+    <path d="M-48,10 Q0,-50 48,10" stroke="#4fae5e" strokeWidth={12} fill="none" />
+    <path d="M-40,14 Q0,-30 40,14" stroke="#e74c3c" strokeWidth={8} fill="none" />
+    {croque && <circle cx={52} cy={0} r={22} fill="#14141800" stroke="none" />}
+    {croque && <path d="M40,-10 a14,14 0 0,0 0,28 a14,14 0 0,0 0,-28" fill="#bfe3d0" />}
+  </g>
+);
+
+/** Flammes animées (repère : base des flammes), pour une bouche en feu */
+export const Flammes: React.FC<{frame: number; echelle?: number}> = ({frame, echelle = 1}) => (
+  <g transform={`scale(${echelle})`}>
+    {[-36, 0, 36].map((dx, i) => {
+      const h = 90 + Math.sin(frame / 2 + i * 2) * 22;
+      return (
+        <g key={i} transform={`translate(${dx},0)`}>
+          <path d={`M-26,0 Q-30,${-h * 0.5} 0,${-h} Q30,${-h * 0.5} 26,0 Z`} fill="#ff4a1c" />
+          <path d={`M-15,0 Q-16,${-h * 0.4} 0,${-h * 0.7} Q16,${-h * 0.4} 15,0 Z`} fill="#ffb21c" />
+          <path d={`M-7,0 Q-6,${-h * 0.25} 0,${-h * 0.4} Q6,${-h * 0.25} 7,0 Z`} fill="#fff3a8" />
+        </g>
+      );
+    })}
+  </g>
+);

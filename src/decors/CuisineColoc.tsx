@@ -267,9 +267,14 @@ export const CuisineColoc: React.FC<Props> = ({frame, jour = 1, fondEvier, surTa
       <path d="M-80,280 Q0,180 80,280 Z" fill="#f5c542" />
       <ellipse cx={0} cy={280} rx={80} ry={12} fill="#fff6d8" opacity={0.6} />
     </g>
+    <LumiereNuit nuit={1 - jour} largeur={2400} hauteur={1920} soleil={{x: 1530, y: 700, jour}} lumieres={[
+      {x: 440, y: 520, r: 620, couleur: '#ffd59a', force: 0.7},
+      {x: 1100, y: 1000, r: 420, couleur: '#ffcf7a', force: 0.35},
+      {x: 2200, y: 1100, r: 300, couleur: '#bfe4ff', force: 0.25},
+    ]} />
     <Guirlande frame={frame} />
-    {children}
-    <LumiereNuit nuit={1 - jour} largeur={2400} hauteur={1920} lumieres={[]} soleil={{x: 1530, y: 700, jour}} />
+    {/* personnages : au-dessus de l'éclairage, légèrement teintés la nuit (les yeux restent blancs) */}
+    <g style={{filter: `brightness(${1 - (1 - jour) * 0.12}) saturate(${1 - (1 - jour) * 0.1})`}}>{children}</g>
     <Coupe />
   </svg>
 );

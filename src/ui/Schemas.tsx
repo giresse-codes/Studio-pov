@@ -719,3 +719,94 @@ const interpolateCouleur = (a: string, b: string, t: number) => {
   const pb = [1, 3, 5].map((i) => parseInt(b.slice(i, i + 2), 16));
   return `rgb(${pa.map((x, i) => Math.round(x + (pb[i] - x) * Math.max(0, Math.min(1, t)))).join(',')})`;
 };
+
+/**
+ * La capsaïcine dans la bouche : gouttes d'huile (orange) ; l'eau les étale partout (le feu s'étend) ;
+ * le lait (caséine) les attrape et les emporte, comme un savon.
+ */
+export const SchemaCapsaicine: React.FC<{
+  debut: number; fin: number; aHuile: number; aEau: number; aEtend: number; aLait: number; aCaseine: number; aAttrape: number; aSavon: number;
+}> = (p) => {
+  const f = useCurrentFrame();
+  const v = (a: number, d = 10) => interpolate(f, [a, a + d], [0, 1], clamp);
+  const phaseLait = f >= p.aLait;
+  const titre = phaseLait ? 'LE LAIT 🥛' : 'L’EAU 💧';
+  const W = 840, H = 820;
+  // bouche : zone ovale
+  const bx = 70, by = 170, bw = 700, bh = 420;
+  const etale = phaseLait ? 1 : v(p.aEau, 40);
+  const attrape = v(p.aAttrape, 40);
+  const N = 14;
+  const gouttes = Array.from({length: N}).map((_, i) => {
+    // position de départ : groupées au centre ; étalées : partout
+    const x0 = bx + bw / 2 - 90 + (i % 5) * 45, y0 = by + bh / 2 + 40 + Math.floor(i / 5) * 40;
+    const x1 = bx + 60 + ((i * 97) % (bw - 120)), y1 = by + 60 + ((i * 61) % (bh - 120));
+    let x = x0 + (x1 - x0) * etale + Math.sin(f / 6 + i) * 4;
+    let y = y0 + (y1 - y0) * etale + Math.cos(f / 7 + i) * 4;
+    // la caséine emporte la goutte vers le bas à droite (avalée)
+    const k = Math.max(0, Math.min(1, attrape * 1.6 - (i / N) * 0.6));
+    x = x + (bx + bw + 60 - x) * k;
+    y = y + (by + bh + 40 - y) * k;
+    return {x, y, k};
+  });
+  const feux = phaseLait ? Math.round((1 - attrape) * 8) : Math.round(2 + v(p.aEtend, 20) * 8);
+  return (
+    <Panneau debut={p.debut} fin={p.fin} titre={titre} top={420} bottom={480}>
+      <svg width={960} height={937} viewBox={`0 0 ${W} ${H}`} style={{display: 'block', margin: '0 auto'}}>
+        {/* bouche */}
+        <ellipse cx={bx + bw / 2} cy={by + bh / 2} rx={bw / 2} ry={bh / 2} fill="#7a1f2b" />
+        <ellipse cx={bx + bw / 2} cy={by + bh / 2 + 80} rx={bw / 2 - 90} ry={bh / 2 - 110} fill="#e2566a" />
+        <path d={`M${bx + bw / 2},${by + bh / 2 - 20} L${bx + bw / 2},${by + bh / 2 + 150}`} stroke="#c23b52" strokeWidth={8} />
+        {/* dents */}
+        {Array.from({length: 8}).map((_, i) => <rect key={i} x={bx + 150 + i * 52} y={by + 8} width={44} height={50} rx={10} fill="#fff" />)}
+        {/* feux */}
+        {Array.from({length: feux}).map((_, i) => (
+          <text key={i} x={bx + 110 + ((i * 131) % (bw - 220))} y={by + 140 + ((i * 89) % (bh - 160))} fontSize={54} textAnchor="middle"
+            transform={`rotate(${Math.sin(f / 3 + i) * 8})`} style={{transformBox: 'fill-box', transformOrigin: 'center'}}>🔥</text>
+        ))}
+        {/* eau */}
+        {!phaseLait && f >= p.aEau && Array.from({length: 18}).map((_, i) => (
+          <ellipse key={i} cx={bx + 40 + ((i * 53 + f * 4) % (bw - 80))} cy={by + 70 + ((i * 47) % (bh - 140))} rx={18} ry={12} fill="#7fc6ff" opacity={0.55 * v(p.aEau)} />
+        ))}
+        {/* lait + caséine */}
+        {phaseLait && (
+          <g>
+            <ellipse cx={bx + bw / 2} cy={by + bh / 2} rx={bw / 2 - 30} ry={bh / 2 - 30} fill="#ffffff" opacity={0.35 * v(p.aLait)} />
+            {f >= p.aCaseine && gouttes.map((g, i) => {
+              const k0 = v(p.aCaseine + i * 2, 10);
+              const ouvre = Math.abs(Math.sin(f / 3 + i)) * 30;
+              return (
+                <g key={`c${i}`} transform={`translate(${g.x - 34 + (1 - k0) * -120},${g.y})`} opacity={k0}>
+                  <path d={`M0,0 L${24 * Math.cos((ouvre * Math.PI) / 180)},${-24 * Math.sin((ouvre * Math.PI) / 180)} A24,24 0 1,0 ${24 * Math.cos((ouvre * Math.PI) / 180)},${24 * Math.sin((ouvre * Math.PI) / 180)} Z`}
+                    fill="#f5f0e0" stroke="#c9b98a" strokeWidth={3} transform="scale(-1,1)" />
+                </g>
+              );
+            })}
+          </g>
+        )}
+        {/* gouttes de capsaïcine (huile) */}
+        {gouttes.map((g, i) => (
+          <g key={i} opacity={(1 - g.k) * v(p.aHuile - 30)}>
+            <circle cx={g.x} cy={g.y} r={16} fill="#ff9f1a" stroke="#c96a00" strokeWidth={3} />
+            <circle cx={g.x - 5} cy={g.y - 5} r={5} fill="#fff" opacity={0.7} />
+          </g>
+        ))}
+        {/* légendes */}
+        <g>
+          <circle cx={120} cy={70} r={18} fill="#ff9f1a" stroke="#c96a00" strokeWidth={3} />
+          <text x={150} y={84} fontFamily={POLICE} fontWeight={900} fontSize={40} fill="#fff">capsaïcine = comme de l’huile</text>
+        </g>
+        {!phaseLait && f >= p.aEau && (
+          <text x={W / 2} y={by + bh + 110} textAnchor="middle" fontFamily={POLICE} fontWeight={900} fontSize={46} fill={C.rouge} opacity={v(p.aEau)}>
+            {f < p.aEtend ? 'L’eau l’étale partout…' : 'LE FEU S’ÉTEND 🔥🔥'}
+          </text>
+        )}
+        {phaseLait && (
+          <text x={W / 2} y={by + bh + 110} textAnchor="middle" fontFamily={POLICE} fontWeight={900} fontSize={44} fill={f >= p.aSavon ? C.vert : '#fff'}>
+            {f < p.aCaseine ? 'Du gras + une protéine…' : f < p.aSavon ? 'La caséine attrape la capsaïcine' : 'Elle l’emporte, comme un savon 🧼'}
+          </text>
+        )}
+      </svg>
+    </Panneau>
+  );
+};
