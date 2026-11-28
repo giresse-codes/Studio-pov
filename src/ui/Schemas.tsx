@@ -810,3 +810,32 @@ export const SchemaCapsaicine: React.FC<{
     </Panneau>
   );
 };
+
+/** Classement avec barres (ce qui consomme le plus) */
+export const SchemaClassement: React.FC<{debut: number; fin: number; titre: string; items: {a: number; icone: string; texte: string; valeur: number}[]}> = ({debut, fin, titre, items}) => {
+  const f = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const couleurs = [C.rouge, '#ff7a3a', C.orange, C.jaune];
+  return (
+    <Panneau debut={debut} fin={fin} titre={titre} top={420} bottom={480}>
+      <div style={{display: 'flex', flexDirection: 'column', gap: 30, padding: '36px 40px'}}>
+        {items.map((it, i) => {
+          const s = spring({frame: f - it.a, fps, config: {damping: 14}});
+          const larg = interpolate(f, [it.a, it.a + 18], [0, it.valeur], clamp);
+          return (
+            <div key={i} style={{opacity: f >= it.a ? 1 : 0, transform: `translateX(${(1 - s) * 200}px)`}}>
+              <div style={{display: 'flex', alignItems: 'center', gap: 18, marginBottom: 10}}>
+                <span style={{width: 60, height: 60, borderRadius: 30, background: C.or, color: C.nuit, fontWeight: 900, fontSize: 38, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>{i + 1}</span>
+                <span style={{fontSize: 60}}>{it.icone}</span>
+                <span style={{color: '#fff', fontWeight: 900, fontSize: 50}}>{it.texte}</span>
+              </div>
+              <div style={{height: 34, borderRadius: 17, background: 'rgba(255,255,255,0.1)', overflow: 'hidden'}}>
+                <div style={{width: `${larg * 100}%`, height: '100%', borderRadius: 17, background: couleurs[i % 4]}} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </Panneau>
+  );
+};

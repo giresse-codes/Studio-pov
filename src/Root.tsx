@@ -9,6 +9,7 @@ import {DevsTeach5, DUREE_DEVSTEACH_5} from './compositions/DevsTeach5';
 import {Astuce1, DUREE_ASTUCE_1} from './compositions/Astuce1';
 import {Astuce2, DUREE_ASTUCE_2} from './compositions/Astuce2';
 import {Astuce3, DUREE_ASTUCE_3} from './compositions/Astuce3';
+import {Astuce4, DUREE_ASTUCE_4} from './compositions/Astuce4';
 import {chargerPolices} from './lib/polices';
 import {FPS, H, W} from './lib/theme';
 
@@ -26,5 +27,6 @@ export const Racine: React.FC = () => (
     <Composition id="astuce-1" component={Astuce1} durationInFrames={DUREE_ASTUCE_1} fps={FPS} width={W} height={H} />
     <Composition id="astuce-2" component={Astuce2} durationInFrames={DUREE_ASTUCE_2} fps={FPS} width={W} height={H} />
     <Composition id="astuce-3" component={Astuce3} durationInFrames={DUREE_ASTUCE_3} fps={FPS} width={W} height={H} />
+    <Composition id="astuce-4" component={Astuce4} durationInFrames={DUREE_ASTUCE_4} fps={FPS} width={W} height={H} />
   </>
 );
