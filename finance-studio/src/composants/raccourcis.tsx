@@ -75,7 +75,7 @@ export const Prix: React.FC<{x: number; y: number; texte: string; a: number; tai
 }) => {
   const largeurTexte = texte.length * taille * 0.66;
   const l = Math.max(240, largeurTexte / 0.46);
-  const h = taille * 3.4;
+  const h = Math.max(taille * 3.4, l * 0.55); // garde les proportions d'une étiquette
   return (
     <>
       <ObjetAir x={x} y={y} l={l} h={h} a={a} nom="etiquette" couleur={couleur} epaisseur={5} remplissage={0.12} />

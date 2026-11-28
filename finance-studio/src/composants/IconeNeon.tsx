@@ -19,7 +19,7 @@ export type NomIcone =
   | 'lit' | 'camembert' | 'cible' | 'video' | 'glacon' | 'goutte' | 'verre' | 'couverts'
   | 'congelateur' | 'sachet' | 'soleil' | 'velo' | 'thermometre' | 'ampoule' | 'tshirt'
   | 'cadenas' | 'carton' | 'livre' | 'enceinte' | 'anneaux' | 'gateau' | 'mixage' | 'micro' | 'bulle'
-  | 'distributeur' | 'pin' | 'haltere' | 'canette' | 'tournevis' | 'batterie' | 'eclair';
+  | 'distributeur' | 'pin' | 'haltere' | 'canette' | 'tournevis' | 'batterie' | 'eclair' | 'banque';
 
 const RONDES = new Set<NomIcone>(['piece', 'globe', 'horloge', 'coche', 'croix', 'coeur', 'reseau', 'ballon', 'cadeau', 'tirelire', 'personne', 'camembert', 'cible', 'soleil', 'velo', 'haltere', 'eclair']);
 
@@ -524,6 +524,12 @@ export const IconeNeon: React.FC<Props> = ({
       </>
     ),
     eclair: <path d="M58 4 L22 56 H48 L40 96 L78 40 H52 Z" {...t} {...f} />,
+    banque: (
+      <>
+        <path d="M6 32 L50 6 L94 32 Z" {...t} {...f} />
+        <path d="M10 92 H90 M14 82 H86 M18 38 V78 M38 38 V78 M62 38 V78 M82 38 V78" {...t} />
+      </>
+    ),
   };
 
   return (
