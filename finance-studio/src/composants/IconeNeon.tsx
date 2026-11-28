@@ -20,7 +20,8 @@ export type NomIcone =
   | 'congelateur' | 'sachet' | 'soleil' | 'velo' | 'thermometre' | 'ampoule' | 'tshirt'
   | 'cadenas' | 'carton' | 'livre' | 'enceinte' | 'anneaux' | 'gateau' | 'mixage' | 'micro' | 'bulle'
   | 'distributeur' | 'pin' | 'haltere' | 'canette' | 'tournevis' | 'batterie' | 'eclair' | 'banque'
-  | 'canape' | 'aspirateur' | 'nettoyeur' | 'flacon' | 'bidon';
+  | 'canape' | 'aspirateur' | 'nettoyeur' | 'flacon' | 'bidon'
+  | 'alerte' | 'bouclier' | 'hopital' | 'basket';
 
 const RONDES = new Set<NomIcone>(['piece', 'globe', 'horloge', 'coche', 'croix', 'coeur', 'reseau', 'ballon', 'cadeau', 'tirelire', 'personne', 'camembert', 'cible', 'soleil', 'velo', 'haltere', 'eclair']);
 
@@ -566,6 +567,32 @@ export const IconeNeon: React.FC<Props> = ({
         <path d="M16 22 H70 L84 36 V92 H16 Z" {...t} {...f} />
         <path d="M30 22 V10 H48 V22 M60 22 C72 22 72 40 84 40" {...t} />
         <path d="M30 58 C36 50 42 66 50 58 S64 52 70 58" {...t} strokeOpacity={0.6} />
+      </>
+    ),
+    alerte: (
+      <>
+        <path d="M50 8 L94 88 H6 Z" {...t} {...f} />
+        <path d="M50 36 V62" {...t} />
+        <circle cx={50} cy={75} r={3.5} {...plein} />
+      </>
+    ),
+    bouclier: (
+      <>
+        <path d="M50 4 L88 18 V46 C88 70 72 86 50 96 C28 86 12 70 12 46 V18 Z" {...t} {...f} />
+        <path d="M32 50 L45 63 L70 36" {...t} />
+      </>
+    ),
+    hopital: (
+      <>
+        <rect x={6} y={6} width={88} height={88} rx={14} {...t} {...f} />
+        <path d="M40 22 H60 V40 H78 V60 H60 V78 H40 V60 H22 V40 H40 Z" {...t} />
+      </>
+    ),
+    basket: (
+      <>
+        <path d="M6 70 V44 C18 44 28 34 32 24 H52 C54 36 66 46 84 52 C92 54 96 60 96 70 Z" {...t} {...f} />
+        <path d="M4 80 H96 V70 H4 Z" {...t} />
+        <path d="M40 36 L48 42 M38 46 L48 52 M36 56 L48 60" {...t} strokeOpacity={0.6} />
       </>
     ),
   };
